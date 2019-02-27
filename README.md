@@ -1,4 +1,4 @@
-Student 1: Yaoyang Liu, EID: yl27488, GitLab: 
+Student 1: Yaoyang Liu, EID: yl27488, GitLab: GitStore
 Student 2: Yige Wang, EID: yw6926, GitLab: yiiigww
 Student 3: Wenyuan Wu, EID: ww6767, GitLab: LuculentDig
 Student 4: Pengdi Xia, EID: px353, GitLab: xftnr
@@ -11,11 +11,11 @@ link to GitLab pipelines:
 link to website: 
 
 estimated completion time for each member: (hours: 30)
-Yaoyang: 0.5
-Yige: 
+Yaoyang: 10
+Yige: 15
 Wenyuan: 15
-Pengdi: 
-Shijing: 
+Pengdi: 10
+Shijing: 8
 
 actual completion time for each member (hours: )
 Yaoyang:
