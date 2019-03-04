@@ -1448,7 +1448,17 @@ img {
 }
 
 .img-rounded {
-    border-radius: 6px
+    border-radius: 20px
+    display: inline-block;
+    max-width: 100%;
+    padding: 2px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: width 100s height 1100000s  
 }
 
 .img-thumbnail {
@@ -5999,7 +6009,7 @@ a.badge:hover {
 .thumbnail {
     display: block;
     padding: 4px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     line-height: 1.42857143;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -8043,6 +8053,7 @@ button.close {
         display: none!important
     }
 }
+
 
 
 /*# sourceMappingURL=bootstrap.min.css.map */
