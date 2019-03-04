@@ -20,18 +20,18 @@
 
   <body>
     <nav class="navbar navbar-inverse">
-        
+
       <div class="container">
-          
+
         <!-- Brand and toggle get grouped for better mobile display -->
         <a class="navbar-brand" href="index.html">Home</a>
-          
+
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         </div><!-- /.navbar-collapse -->
-          
+
       </div><!-- /.container-fluid -->
-        
+
     </nav>
 
     <!-- JUMBOTRON -->
@@ -39,47 +39,41 @@
       <div class="container">
         <h1>Meet the team</h1>
 <!--        <p>Yaoyang Liu, Pengdi Xia, Shijing Zhong, Wenyuan Wu, Yige Wang</p>-->
-          
-          <p id="name0"></p>
-          <p id="gitid0"></p>
-          <img src='bootstrap/img/ww.jpeg' alt="Rubber Duck" >
 
-          <p id="name1"></p>
-          <p id="gitid1"></p>
-          <img src='bootstrap/img/sz.HEIC' alt="Rubber Duck" >
+          <img src='bootstrap/img/ww.jpg' width="128" height="128">
+          <p id='name0' ></p>
 
-          <p id="name2"></p>
-          <p id="gitid2"></p>
-          <img src='bootstrap/img/yl.jpg' alt="Rubber Duck" >
+          <img src='bootstrap/img/sz.jpg' width="128" height="128">
+          <p id='name1'></p>
 
+          <img src='bootstrap/img/yl.jpg' width="128" height="128">
+          <p id='name2'></p>
+
+          <img src='bootstrap/img/yw.jpg'width="128" height="128" >
           <p id="name3"></p>
-          <p id="gitid3"></p>
-          <img src='bootstrap/img/yw.jpeg' alt="Rubber Duck" >
 
-          <p id="name4"></p>
-          <p id="gitid4"></p>
-          <img src='bootstrap/img/px.png' alt="Rubber Duck" >
-          
+          <img src='bootstrap/img/px.jpg' width="128" height="128">
+          <p id='name4'></p>
+
+          <img src='bootstrap/img/bug.jpg' width="128" height="128">
           <p> Rubber Duck </p>
-          <img src='bootstrap/img/bug.jpg' alt="Rubber Duck" >
-        
+
       </div>
     </div>
-      
+
       <script>
         $.getJSON('https://gitlab.com/api/v4/projects/11032527/users', function(data) {
             //data is the JSON string
             var i;
-            for (i = 0; i < data.length; i++) { 
+            for (i = 0; i < data.length; i++) {
 //              console.log(data[i]["name"], " ", data[i]["username"])
                 document.getElementById("name"+i).innerHTML = data[i]["name"];
-                document.getElementById("gitid"+i).innerHTML = data[i]["username"];
 //                document.write(data[i]["name"], " ", data[i]["username"], "<br>")
             }
             return data
         });
       </script>
-      
+
   </body>
-  
+
 </html>
