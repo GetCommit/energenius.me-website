@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-      
+
     <script src = "https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <style>
@@ -90,7 +90,7 @@
         <ul class="navbar-nav mr-auto">
 
           <li class="nav-item">
-            <a class="nav-link" href="energy/energy.html">Enery Category</a>
+            <a class="nav-link" href="energy/energy.html">Energy Category</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="production_usage/production_usage.html">Production and Usage</a>
@@ -109,7 +109,7 @@
         </form>
       </div>
     </nav>
-      
+
 
 
     <!-- JUMBOTRON -->
@@ -117,16 +117,16 @@
         <div class = "container">
             <h1 class = "jumbotron-deading">Energenius</h1>
             <p class = "lead text-muted">
-                "The energy decision for each resident is critical to the environment, economics and even security for the whole society. Nowadays with relatively abundant energy resource, the public rarely realizes the impact of excessive use of specific energy before it is too late. 
-                Our website aims to provide clean data to help each person to make a better decision on their energy consumptions. We will quantify the environmental impact of most new and traditional energies, and advise the public on using and saving energy for different purposes. With the educational mission, the website will provide insights into the development of future energy to inspire more civic engagement and achieve energy reform. 
+                "The energy decision for each resident is critical to the environment, economics and even security for the whole society. Nowadays with relatively abundant energy resource, the public rarely realizes the impact of excessive use of specific energy before it is too late.
+                Our website aims to provide clean data to help each person to make a better decision on their energy consumptions. We will quantify the environmental impact of most new and traditional energies, and advise the public on using and saving energy for different purposes. With the educational mission, the website will provide insights into the development of future energy to inspire more civic engagement and achieve energy reform.
                 The future quality of life is dependent on today’s energy use. Improving public awareness of energy reform is essential for building a better future ."
             </p>
             <p>
                 <a href="https://gitlab.com/LuculentDig/energiziousness" class="btn btn-primary my-2">See Source Code</a>
             </p>
-        </div>  
+        </div>
     </section>
-    
+
 <!--    ?add team-->
     <div class="row">
       <div class="column">
@@ -135,9 +135,9 @@
           <div class="container">
             <h2>Pengdi Xia </h2>
             <p class = "title">GitLab: xftnr</p>
-            <p><small> I am senior computer science student. I am also currently pursuing a master degree in 
+            <p><small> I am senior computer science student. I am also currently pursuing a master degree in
                 Information Technology and Management at McCombs
-                </small></p>   
+                </small></p>
             <p id = 'Pengdi Xiai'></p>
             <p id = 'Pengdi Xiac'></p>
             <p>Number of unit tests: 0</p>
@@ -153,7 +153,7 @@
           <div class="container">
             <h2>Shijing Zhong</h2>
             <p class="title">GitLab: garysnake</p>
-            <p><small> I am an Integrated Master student at CSEM and a Christian. And I love music.  
+            <p><small> I am an Integrated Master student at CSEM and a Christian. And I love music.
             </small></p>
             <p id = 'Shijing Zhongi'></p>
             <p id = 'Shijing Zhongc'></p>
@@ -171,7 +171,7 @@
           <div class="container">
             <h2>Wenyuan Wu</h2>
             <p class="title">GitLab: LuculentDig</p>
-            <p><small> 
+            <p><small>
                 I am a super senior at UT. I love playing phone games and solving Rubik's Cube.
             </small></p>
             <p id = 'Wenyuan Wui'></p>
@@ -183,7 +183,7 @@
           </div>
         </div>
       </div>
-        
+
       <div class="column">
         <div class="card">
           <img src="bootstrap/img/yw.jpg" alt="Yige" style="width:100%" width = "200" height = "450">
@@ -201,7 +201,7 @@
           </div>
         </div>
       </div>
-        
+
       <div class="column">
         <div class="card">
           <img src="bootstrap/img/yl.jpg" alt="Yaoyang" style="width:100%" width = "200" height = "450">
@@ -219,7 +219,7 @@
           </div>
         </div>
       </div>
-        
+
       <div class="column">
         <div class="card">
           <img src="bootstrap/img/bug.jpg" alt="duck" style="width:100%" width = "200" height = "450">
@@ -230,10 +230,10 @@
           </div>
         </div>
       </div>
-    </div>        
+    </div>
 
 
-      
+
       <script>
         //issues
         $.getJSON('https://gitlab.com/api/v4/projects/11032527/issues', function(data) {
@@ -250,13 +250,13 @@
             for (i = 0; i < data.length; i++) {
                 name_map[data[i]['author']['name']] +=1
             }
-            
+
             for(var key in name_map) {
                 document.getElementById(key+'i').innerHTML = "Number of Issues: "+name_map[key];
             }
-            
+
         });
-          
+
         //number of commits
         $.getJSON('https://gitlab.com/api/v4/projects/11032527/repository/commits', function(data) {
             //data is the JSON string
@@ -270,24 +270,24 @@
             for (i = 0; i < data.length; i++) {
                 name_map2[data[i]['author_name']] +=1
             }
-            
+
             for(var key in name_map2) {
                 document.getElementById(key+'c').innerHTML = "Number of Commits: "+name_map2[key];
             }
         });
       </script>
-    
-    
+
+
     <footer class="text-muted">
       <div class="container">
         <p class="float-right">
           <a href="#">Back to top</a>
         </p>
-    
+
       </div>
     </footer>
-    
-    
+
+
 
 
   </body>
