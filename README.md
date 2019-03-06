@@ -12,18 +12,18 @@ link to GitLab pipelines:
 
 link to website: 
 
-estimated completion time for each member: (hours: 30)
-Yaoyang: 10
-Yige: 15
-Wenyuan: 15
-Pengdi: 10
-Shijing: 8
+estimated completion time for each member: (hours: 30)<br/>
+Yaoyang: 10<br/>
+Yige: 15<br/>
+Wenyuan: 15<br/>
+Pengdi: 10<br/>
+Shijing: 8<br/>
 
-actual completion time for each member (hours: 50)
-Yaoyang: 18
-Yige: 20
-Wenyuan: 18
-Pengdi: 19
-Shijing: 19
+actual completion time for each member (hours: 50)<br/>
+Yaoyang: 18<br/>
+Yige: 20<br/>
+Wenyuan: 18<br/>
+Pengdi: 19<br/>
+Shijing: 19<br/>
 
 comments: So far we have 14 static webpage hosted on GCP servers. We are also able to pull commit and other stats dynamically from GitLab
