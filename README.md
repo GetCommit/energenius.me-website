@@ -6,11 +6,11 @@ Student 3: Wenyuan Wu, EID: ww6767, GitLab: LuculentDig<br/>
 Student 4: Pengdi Xia, EID: px353, GitLab: xftnr<br/>
 Student 5: Shijing Zhong, EID: SZ6539，GitLab: garysnake<br/>
 
-Git SHA: 
+Git SHA: 4d37e6b10f894e15e8d9bce2e46555b8131597f6
 
-link to GitLab pipelines: 
+link to GitLab pipelines: https://gitlab.com/LuculentDig/energiziousness/pipelines
 
-link to website: 
+link to website: https://www.energenius.me/
 
 estimated completion time for each member: (hours: 30)<br/>
 Yaoyang: 10<br/>
