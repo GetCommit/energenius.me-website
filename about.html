@@ -217,7 +217,7 @@
             <p id = 'Yaoyang Liuc'></p>
             <p>Number of Unit Tests: 0</p>
 
-            <p> Responsibilities: Project architect. monitoring all aspects of the project.</p>
+            <p> Responsibilities: Project architect. Monitoring all aspects of the project.</p>
 <!--            <p><button class="button">Contact</button></p>-->
           </div>
         </div>
@@ -245,10 +245,16 @@
 </div>
 
       <script>
-        //issues
-        $.getJSON('https://gitlab.com/api/v4/projects/11032527/issues', function(data) {
+        //issues 15 17
+        //https://gitlab.com/api/v4/projects/11032527/issues?state=opened
+        //https://gitlab.com/api/v4/projects/11032527/issues?scope=all&state=all&page=${i}&per_page=100
+//        var num_page;
+//        $.getJSON('https://gitlab.com/api/v4/projects/11032527/issues?per_page=100', function(data){
+//        console.log(data)
+//        });
+          
+        $.getJSON('https://gitlab.com/api/v4/projects/11032527/issues?per_page=100', function(data) {
             //data is the JSON string
-
             name_map = {};
             name_map['Pengdi Xia'] = 0
             name_map['Shijing Zhong'] = 0
@@ -258,7 +264,10 @@
 
             var i;
             for (i = 0; i < data.length; i++) {
-                name_map[data[i]['author']['name']] +=1
+                // fixed console null error by adding if statement
+                if(data[i]['author']['name'] in name_map){
+                    name_map[data[i]['author']['name']] +=1;
+                }
             }
 
             for(var key in name_map) {
@@ -268,7 +277,7 @@
         });
 
         //number of commits
-        $.getJSON('https://gitlab.com/api/v4/projects/11032527/repository/commits', function(data) {
+        $.getJSON('https://gitlab.com/api/v4/projects/11032527/repository/commits?per_page=100', function(data) {
             //data is the JSON string
             name_map2 = {};
             name_map2['Pengdi Xia'] = 0
@@ -278,7 +287,10 @@
             name_map2['Yige Wang'] = 0
             var i;
             for (i = 0; i < data.length; i++) {
-                name_map2[data[i]['author_name']] +=1
+                // fixed console error by adding if statement
+                if(data[i]['author_name'] in name_map2){
+                    name_map2[data[i]['author_name']] +=1
+                }
             }
 
             for(var key in name_map2) {
@@ -297,7 +309,15 @@
                 <li>Brackets</li>
             </ul>
         </div>
-        
+
+        <div class = "container">
+            <h1 class = "jumbotron-deading">API Used</h1>
+            <ul>
+                <li>Energy Information <a href="https://www.eia.gov/opendata/">https://www.eia.gov/opendata/</a> <a href="https://openei.org/services/">https://openei.org/services/</a></li>
+                <li>Production and Country Information <a href="https://en.wikipedia.org/api/rest_v1/">https://en.wikipedia.org/api/rest_v1/</a></li>
+            </ul>
+        </div>
+
     <footer class="text-muted">
       <div class="container">
         <p class="float-right">
