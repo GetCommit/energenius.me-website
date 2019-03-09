@@ -245,58 +245,113 @@
 </div>
 
       <script>
-        //issues 15 17
-        //https://gitlab.com/api/v4/projects/11032527/issues?state=opened
-        //https://gitlab.com/api/v4/projects/11032527/issues?scope=all&state=all&page=${i}&per_page=100
-//        var num_page;
-//        $.getJSON('https://gitlab.com/api/v4/projects/11032527/issues?per_page=100', function(data){
-//        console.log(data)
-//        });
-          
-        $.getJSON('https://gitlab.com/api/v4/projects/11032527/issues?per_page=100', function(data) {
-            //data is the JSON string
-            name_map = {};
-            name_map['Pengdi Xia'] = 0
-            name_map['Shijing Zhong'] = 0
-            name_map['Wenyuan Wu'] = 0
-            name_map['Yaoyang Liu'] = 0
-            name_map['Yige Wang'] = 0
-
-            var i;
-            for (i = 0; i < data.length; i++) {
-                // fixed console null error by adding if statement
-                if(data[i]['author']['name'] in name_map){
-                    name_map[data[i]['author']['name']] +=1;
+        // Hard-coded num pages for now
+        var num_issue_pages = 2;
+        var page;
+        name_map = {};
+        name_map['Pengdi Xia'] = 0
+        name_map['Shijing Zhong'] = 0
+        name_map['Wenyuan Wu'] = 0
+        name_map['Yaoyang Liu'] = 0
+        name_map['Yige Wang'] = 0
+        
+        for(page = 1; page < num_issue_pages; page++){
+            // Use async to store data globally
+            $.ajax({url: 'https://gitlab.com/api/v4/projects/11032527/issues?per_page=100&page='+page, 
+            async: false,
+            dataType: 'json',
+            success: function(data) {
+                var i;
+                for (i = 0; i < data.length; i++) {
+                    // fixed console null error by adding if statement
+                    if(data[i]['author']['name'] in name_map){
+                        name_map[data[i]['author']['name']] +=1;
+                    }
                 }
-            }
-
-            for(var key in name_map) {
-                document.getElementById(key+'i').innerHTML = "Number of Issues: "+name_map[key];
-            }
-
-        });
+                console.log(name_map); 
+            }});
+            console.log(name_map); 
+        }
+        for(var key in name_map) {
+            document.getElementById(key+'i').innerHTML = "Number of Issues: "+name_map[key];
+        }
+          
+//        $.getJSON('https://gitlab.com/api/v4/projects/11032527/issues?per_page=100', function(data) {
+//            //data is the JSON string
+//            name_map = {};
+//            name_map['Pengdi Xia'] = 0
+//            name_map['Shijing Zhong'] = 0
+//            name_map['Wenyuan Wu'] = 0
+//            name_map['Yaoyang Liu'] = 0
+//            name_map['Yige Wang'] = 0
+//
+//            var i;
+//            for (i = 0; i < data.length; i++) {
+//                // fixed console null error by adding if statement
+//                if(data[i]['author']['name'] in name_map){
+//                    name_map[data[i]['author']['name']] +=1;
+//                }
+//            }
+//
+//            for(var key in name_map) {
+//                document.getElementById(key+'i').innerHTML = "Number of Issues: "+name_map[key];
+//            }
+//
+//        });
 
         //number of commits
-        $.getJSON('https://gitlab.com/api/v4/projects/11032527/repository/commits?per_page=100', function(data) {
-            //data is the JSON string
-            name_map2 = {};
-            name_map2['Pengdi Xia'] = 0
-            name_map2['Shijing Zhong'] = 0
-            name_map2['Wenyuan Wu'] = 0
-            name_map2['Yaoyang Liu'] = 0
-            name_map2['Yige Wang'] = 0
-            var i;
-            for (i = 0; i < data.length; i++) {
-                // fixed console error by adding if statement
-                if(data[i]['author_name'] in name_map2){
-                    name_map2[data[i]['author_name']] +=1
+        // Hard-coded number of pages
+        var num_commit_pages = 2;
+        var page;
+        name_map2 = {};
+        name_map2['Pengdi Xia'] = 0
+        name_map2['Shijing Zhong'] = 0
+        name_map2['Wenyuan Wu'] = 0
+        name_map2['Yaoyang Liu'] = 0
+        name_map2['Yige Wang'] = 0
+        
+        for(page = 1; page < num_commit_pages; page++){
+            // Use async to store data globally
+            $.ajax({url: 'https://gitlab.com/api/v4/projects/11032527/repository/commits?per_page=100&page='+page, 
+            async: false,
+            dataType: 'json',
+            success: function(data) {
+                var i;
+                for (i = 0; i < data.length; i++) {
+                    // fixed console null error by adding if statement
+                    if(data[i]['author_name'] in name_map2){
+                        name_map2[data[i]['author_name']] +=1;
+                    }
                 }
-            }
-
-            for(var key in name_map2) {
-                document.getElementById(key+'c').innerHTML = "Number of Commits: "+name_map2[key];
-            }
-        });
+                console.log(name_map2); 
+            }});
+            console.log(name_map2); 
+        }
+        for(var key in name_map) {
+            document.getElementById(key+'c').innerHTML = "Number of Commits: "+name_map2[key];
+        }
+        
+//        $.getJSON('https://gitlab.com/api/v4/projects/11032527/repository/commits?per_page=100&page=1', function(data) {
+//            //data is the JSON string
+//            name_map2 = {};
+//            name_map2['Pengdi Xia'] = 0
+//            name_map2['Shijing Zhong'] = 0
+//            name_map2['Wenyuan Wu'] = 0
+//            name_map2['Yaoyang Liu'] = 0
+//            name_map2['Yige Wang'] = 0
+//            var i;
+//            for (i = 0; i < data.length; i++) {
+//                console.log(data.length)
+//                // fixed console error by adding if statement
+//                if(data[i]['author_name'] in name_map2){
+//                    name_map2[data[i]['author_name']] +=1
+//                }
+//            }
+//
+//            for(var key in name_map2) {
+//                document.getElementById(key+'c').innerHTML = "Number of Commits: "+name_map2[key];
+//            }
+//        });
       </script>
         <div class = "container">
             <h1 class = "jumbotron-deading">Tools Used</h1>
