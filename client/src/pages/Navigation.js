@@ -15,54 +15,22 @@ import Footer from './footer'
 export default class Navigation extends Component {
   render(){
     return (
-      <Navbar default to collapseOnSelect>
+      <Nav class="navbar navbar-dark bg-dark">
+      <Navbar default to collapseOnSelect >
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
         <Navbar.Brand href="/">Energenius</Navbar.Brand>
         <Navbar.Collapse>
-          <Nav>
+          <Nav >
            <Nav.Link href="/">Home</Nav.Link>
            <Nav.Link href='/energy'>Energy Category</Nav.Link>
            <Nav.Link href="/production">Production and Usage</Nav.Link>
-           <Nav.Link href="/country">Country of Consumtion</Nav.Link>
+           <Nav.Link href="/country">Country of Consumption</Nav.Link>
            <Nav.Link href="/about">About Us</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-  
-    //   <Navbar default collapseOnSelect>
-    //     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
-       
-    //     <Navbar.Header>
-    //       <Navbar.Brand>
-    //        <Link to='/'>Energenius</Link>
-    //       </Navbar.Brand>
-    //       <Navbar.Toggle />
-    //     </Navbar.Header>
-        
-    //     <Navbar.Collapse>
-          
-    //       <Nav pullRight>
-    //         <NavItem eventKey={1} componentClass={Link} to="/">
-    //           Home
-    //         </NavItem>
-    //         <NavItem eventKey={2} componentClass={Link} to="/energy">
-    //           Energy Category
-    //         </NavItem>
-    //         <NavItem eventKey={3} componentClass={Link} to="/production">
-    //           Production and Usage
-    //         </NavItem>
-    //         <NavItem eventKey={4} componentClass={Link} to="/country">
-    //           Country of Consumption
-    //         </NavItem>
-    //         <NavItem eventKey={5} componentClass={Link} to="/about">
-    //           About Us
-    //         </NavItem>
-    //       </Nav>
-    //     </Navbar.Collapse>
-
-    // </Navbar>
-  
+      </Nav>
     )
-    
+
   }
 }
