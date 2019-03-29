@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-// import { Container, Nav, NavItem, NavLink, Navbar, NavbarBrand, NavbarToggler, Collapse } from 'reactstrap';
+import { Container, Nav, NavItem, NavLink, Navbar, NavbarBrand, NavbarToggler, Collapse } from 'reactstrap';
 
 
 import Navigation from './pages/Navigation'
@@ -28,17 +28,16 @@ class App extends Component {
         <div>
         <Navigation />
         <Switch>
-          <Route path="/energy" component={Energy}/>
-          <Route exact path="/" component={Home}/>
+          <Route exact path="/" component={Home}/> 
 
+          <Route exact path="/energy" component={Energy}/>
+          <Route exact path="/energy/:id" component={EnergyInstance}/>
 
-          <Route path="/energy/:id" component={EnergyInstance}/>
+          <Route exact path="/production" component={Production}/>
+          <Route exact path="/production/:id" component={ProductionInstance}/>
 
-          <Route path="/production" component={Production}/>
-          <Route path="/production/:id" component={ProductionInstance}/>
-
-          <Route path="/country" component={Country}/>
-          <Route path="/country/:id" component={CountryInstance}/>
+          <Route exact path="/country" component={Country}/>
+          <Route exact path="/country/:id" component={CountryInstance}/>
 
           <Route exact path="/about" component={About}/>
 
