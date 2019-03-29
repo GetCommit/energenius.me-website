@@ -7,12 +7,13 @@ class EnergyInstance extends Component {
     constructor (props) {
       super(props)
       this.states={}
+      this.title = this.id
       this.id = this.props.match.params;
-
+      this.img = this.id['id']
     }
     componentDidMount (){
         fetch(
-            'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsentences=10&titles='+this.id['id']
+            'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsentences=10&origin=*&titles='+this.id['id']
         )
             .then(response => response.json())
             .then(data => {
@@ -56,9 +57,8 @@ class EnergyInstance extends Component {
             <div class="row">
 
                     <div class="col-md-8 blog-main">
-                        <h2 class="blog-post-title">Solar Energy</h2>
+                        <h2 class="blog-post-title">{this.title}</h2>
                         <p>{this.states['result']}</p>
-                        <img src={require('../../img/energy/solar/solar3.jpg')} width="50%" height="50%" />
 
 
                     </div>
@@ -66,23 +66,23 @@ class EnergyInstance extends Component {
                     <aside class="col-md-4 blog-sidebar">
                         <div class="p-4">
                         {/* <img class="img-rounded" src="../bootstrap/img/country/china/china1.png" width = "300"> */}
-                        <img src={require('../../img/energy/solar/solar1.jpg')} width="80%" height="80%" />
+                        <img src={require('../../img/energy/API/'+this.img+'.jpg')} width="80%" height="80%" />
 
                         </div>
 
                         <div class="p-4">
                         <h4 class="font-italic">Production & Usage</h4>
                         <ol class="list-unstyled mb-0">
-                            <li><Link to={'/country/'+'1'}>Residential</Link></li>
+                            <li><Link to={'/production/'+'Biomass_heating_system'}>Residential</Link></li>
                         </ol>
                         </div>
 
                         <div class="p-4">
                         <h4 class="font-italic">Country of Consumption</h4>
                         <ol class="list-unstyled">
-                            <li><Link to={'/country/'+'1'}>China</Link></li>
-                            <li><Link to={'/country/'+'2'}>United States</Link></li>
-                            <li><Link to={'/country/'+'3'}>Australia</Link></li>
+                            <li><Link to={'/country/'+'Energy_policy_of_China'}>China</Link></li>
+                            <li><Link to={'/country/'+'Energy_in_the_United_States'}>United States</Link></li>
+                            <li><Link to={'/country/'+'Energy_in_Australia'}>Australia</Link></li>
 
                         </ol>
                         </div>

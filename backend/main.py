@@ -37,7 +37,9 @@ def default_json_serializer(obj):
         return millis
     raise TypeError('Not sure how to serialize %s' % (obj,))
 
-
+# project function from the class
+def project(t,r):
+    return ({a : d[a] for a in t if a in d} for d in r)
 # front-end request
 # ------------------ do not need all instance page anymore
 # class AllInstancePageRequest(webapp2.RequestHandler):
@@ -60,8 +62,10 @@ class EnergyAPI(webapp2.RequestHandler):
         energyname = self.request.get('name')
         if energyname == "all":
             energy_query = Energy.query()
+        elif energyname == "list":
+            energy_query = Energy.query(projection=[Energy.Name])
         else:
-            energy_query = Energy.query(Energy.energyName == energyname)
+            energy_query = Energy.query(Energy.Name == energyname)
 
         # template_values = {
         #     'energyname': energy_query.energyname,
@@ -81,9 +85,11 @@ class ProductionAPI(webapp2.RequestHandler):
     def get(self):
         producationname = self.request.get('name')
         if producationname == "all":
-            production_query = Production.query()
+            production_query = ProductionAndUse.query()
+        elif producationname == "list":
+            production_query = ProductionAndUse.query(projection=[ProductionAndUse.Name])
         else:
-            production_query = Production.query(Production.puName == producationname)
+            production_query = ProductionAndUse.query(ProductionAndUse.Name == producationname)
 
          # template_values = {
          #     'producationname': production_query.producationname,
@@ -102,8 +108,10 @@ class CountryAPI(webapp2.RequestHandler):
         countryname = self.request.get('name')
         if countryname == "all":
             country_query = Country.query()
+        elif countryname == "list":
+            country_query = Country.query(projection=[Country.Name])
         else:
-            country_query = Country.query(Country.countryName == countryname)
+            country_query = Country.query(Country.Name == countryname)
 
          # template_values = {
          #     'countryname': country_query.countryname,
@@ -122,13 +130,14 @@ class Addcountry(webapp2.RequestHandler):
         self.response.write(template.render())
     def post(self):
         post_country = Country()
-        post_country.countryName = self.request.get('countryname')
-        post_country.totalProduction = float(self.request.get('totalproduction'))
-        post_country.totalUsage = float(self.request.get('totalusage'))
-        post_country.shorageDay = float(self.request.get('shorageDay'))
-        post_country.rankRenewableEnergy = int(self.request.get('rankRenewableEnergy'))
-        post_country.region = self.request.get('region')
-        post_country.population = float(self.request.get('population'))
+        post_country.Name = self.request.get('countryname')
+        post_country.Total_Production = float(self.request.get('totalproduction'))
+        post_country.Total_Usage = float(self.request.get('totalusage'))
+        post_country.Energy_Shortage = float(self.request.get('shorageDay'))
+        post_country.Renewable_Energy_Rank = int(self.request.get('rankRenewableEnergy'))
+        post_country.Region = self.request.get('region')
+        post_country.Population = float(self.request.get('population'))
+        post_country.API = self.request.get("api")
         post_country.put()
         self.redirect('/api/add/country')
 
@@ -138,12 +147,13 @@ class Addenergy(webapp2.RequestHandler):
         self.response.write(template.render())
     def post(self):
         post_energy = Energy()
-        post_energy.energyName = self.request.get('energyname')
-        post_energy.energyType = self.request.get('energytype')
-        post_energy.energyMajorUse = self.request.get('energyMajorUse')
-        post_energy.consumptionUSRank = int(self.request.get('consumptionUSRank'))
-        post_energy.electricalGenerRank = int(self.request.get('electricalGenerRank'))
-        post_energy.topProduceCountry = self.request.get('topProduceCountry')
+        post_energy.Name = self.request.get('energyname')
+        post_energy.Type = self.request.get('energytype')
+        post_energy.Major_Use = self.request.get('energyMajorUse')
+        post_energy.Consumption_Rank_in_US = int(self.request.get('consumptionUSRank'))
+        post_energy.Electrical_Generating_Rank = int(self.request.get('electricalGenerRank'))
+        post_energy.Top_Producing_Country = self.request.get('topProduceCountry')
+        post_energy.API = self.request.get("api")
         post_energy.put()
         self.redirect('/api/add/energy')
 
@@ -153,12 +163,13 @@ class Addproduction(webapp2.RequestHandler):
         self.response.write(template.render())
     def post(self):
         post_prod = ProductionAndUse()
-        post_prod.puName = self.request.get('producationname')
-        post_prod.puType = self.request.get('puType')
-        post_prod.yearOfInvention = int(self.request.get('yearofinvention'))
-        post_prod.puRelatedEnergy = self.request.get('puRelatedEnergy')
-        post_prod.carbon = float(self.request.get('carbon'))
-        post_prod.usageField = self.request.get('usageField')
+        post_prod.Name = self.request.get('producationname')
+        post_prod.Type = self.request.get('puType')
+        post_prod.Year_of_Invention = int(self.request.get('yearofinvention'))
+        post_prod.Related_Energy = self.request.get('puRelatedEnergy')
+        post_prod.Carbon_Emission = int(self.request.get('carbon'))
+        post_prod.Usage_Field = self.request.get('usageField')
+        post_prod.API = self.request.get("api")
         post_prod.put()
         self.redirect('/api/add/production')
 

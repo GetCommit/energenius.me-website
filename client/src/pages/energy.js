@@ -73,6 +73,12 @@ class Energy extends Component {
 
     constructor(props) {
       super(props);
+
+      this.sates={}
+      
+
+
+
       this.energies = {
                     'Solar Energy':[
                         'energy/solar/solar1.jpg',
@@ -198,6 +204,32 @@ class Energy extends Component {
 
       this.handlePageChange = this.handlePageChange.bind(this)
     }
+
+    // fetch above data from API
+
+    componentDidMount (){
+      fetch(
+          'https://www.energenius.me/api/energy?name=all'
+      )
+          .then(response => response.json())
+          .then(data => {
+
+              // var v = data['query']['pages'];
+              // var keys = Object.keys(v);
+              // this.states['result'] = data['query']['pages'][keys[0]]['extract'];
+              console.log(data)
+              console.log("HELLO WORLD")
+          //   process the data
+          this.setState({})
+          })
+          .catch(e => {
+              console.log(e)
+          })
+      }
+
+
+
+
 
     handlePageChange(pageNumber){
       const start_idx = (pageNumber - 1) * 3;

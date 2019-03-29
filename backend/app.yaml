@@ -10,25 +10,36 @@ handlers:
 - url: /api/(.*)
   script: main.app
 
+
 - url: /static/js/(.*)
   static_files: www/static/js/\1
   upload: www/static/js/(.*)
+  http_headers:
+      Access-Control-Allow-Origin: "*"
 
 - url: /static/css/(.*)
   static_files: www/static/css/\1
   upload: www/static/css/(.*)
+  http_headers:
+      Access-Control-Allow-Origin: "*"
 
 - url: /static/media/(.*)
   static_files: www/static/media/\1
   upload: www/static/media/(.*)
+  http_headers:
+      Access-Control-Allow-Origin: "*"
 
 - url: /(.*\.(json|ico))$
   static_files: www/\1
   upload: www/.*\.(json|ico)$
+  http_headers:
+      Access-Control-Allow-Origin: "*"
 
 - url: /
   static_files: www/index.html
   upload: www/index.html
+  http_headers:
+      Access-Control-Allow-Origin: "*"
 
 # - url: /(.*)
 #   static_files: www/\1
@@ -40,6 +51,8 @@ handlers:
 - url: /.*
   static_files: www/index.html
   upload: www/index.html
+  http_headers:
+      Access-Control-Allow-Origin: "*"
 # - url: /.*
 #   script: main.app
 

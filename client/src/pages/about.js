@@ -155,8 +155,6 @@ componentDidMount (){
     })
 
 
-
-
   fetch('https://gitlab.com/api/v4/projects/11032527/issues?per_page=100&page=1')
     .then(issues => issues.json())
     .then(issues => {
@@ -178,10 +176,6 @@ componentDidMount (){
   // Final Render
   render () {
     let components = []
-    let site_message =
-      'Our site is meant to help people find the right spot to live. There are many factors involved in determining where to live, and we believe there should be a good congregation of data about different locations that is essential to know before moving.'
-    let data_message =
-      'Our data is based off of three models: public transportation, cities, and jobs. We have found that the quality of life of living in a certain area has many different factors, so we linked each of these data points together to create our website. ';
       for (let mem in this.state.memData) {
       components.push(
         <div id={mem} className='col-xl-4 col-md-6 mb-4'>

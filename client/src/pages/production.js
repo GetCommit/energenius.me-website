@@ -82,7 +82,7 @@
                         "CO2 emmision (million metric tons)":'1472',
                         "Year of Invention":'1865',
                         "Usage Field invovle":'Industrial',
-                        'API':'XXX'
+                        'API':'Hydraulic_fracturing'
                       }
                   ],
 
@@ -94,7 +94,7 @@
                         "CO2 emmision (million metric tons)":'0',
                         "Year of Invention":'1928',
                         "Usage Field invovle":'Electric power',
-                        'API':'XXX'
+                        'API':'Radioactive_tracer'
                       }
                   ],
 
@@ -106,7 +106,7 @@
                         "CO2 emmision (million metric tons)":'0',
                         "Year of Invention":'XXX',
                         "Usage Field invovle":'Residential',
-                        'API':'XXX'
+                        'API':'Biomass_heating_system'
                       }
 
                   ],
@@ -118,7 +118,7 @@
                       "CO2 emmision (million metric tons)":'1318',
                       "Year of Invention":'XXX',
                       "Usage Field invovle":'Electric power',
-                      'API':'XXX'
+                      'API':'Coal_mining'
                     }
                 ],
 
@@ -142,7 +142,7 @@
                       "CO2 emmision (million metric tons)":'0',
                       "Year of Invention":'1839',
                       "Usage Field invovle":'Residential',
-                      'API':'XXX'
+                      'API':'Solar_lamp'
                     }
                 ],
 
@@ -155,7 +155,7 @@
                     "CO2 emmision (million metric tons)":'0',
                     "Year of Invention":'1888',
                     "Usage Field invovle":'Electric power',
-                    'API':'XXX'
+                    'API':'Wind_turbine'
                   }
                 ],
 
@@ -167,7 +167,7 @@
                       "CO2 emmision (million metric tons)":'X',
                       "Year of Invention":'9',
                       "Usage Field invovle":'Electric power',
-                      'API':'Solar_energy'
+                      'API':'Enhanced_geothermal_system'
                     }
                 ],
 
@@ -179,7 +179,7 @@
                     "CO2 emmision (million metric tons)":'0',
                     "Year of Invention":'1831',
                     "Usage Field invovle":'Electric power',
-                    'API':'Solar_energy'
+                    'API':'Hydroelectricity'
                   }
                 ],
 
@@ -222,7 +222,7 @@
                     <CssBaseline />
                     {this.usingKeys.map(card => (
                       <Grid item key={"card"}>
-                          <Link to={'/energy/'+this.productions[card][1]['API']}>
+                          <Link to={'/production/'+this.productions[card][1]['API']}>
                           <Card className={classes.card}>
                               <CardMedia
                               className={classes.cardMedia}
@@ -238,10 +238,10 @@
                               <Typography>
                                   <ul>
                                       <li><b>Type: </b>{this.productions[card][1]['Type']}</li>
-                                      <li><b>Major Uses: </b>{this.productions[card][1]['Energy related']}</li>
-                                      <li><b>Consumption Rank in US: </b>{this.productions[card][1]['CO2 emmision (million metric tons)']}</li>
-                                      <li><b>Rank by electrical generating: </b>{this.productions[card][1]['Year of Invention']}</li>
-                                      <li><b>Top Producing country: </b>{this.productions[card][1]['Usage Field invovle']}</li>
+                                      <li><b>Energy related: </b>{this.productions[card][1]['Energy related']}</li>
+                                      <li><b>CO2 emmision (million metric tons): </b>{this.productions[card][1]['CO2 emmision (million metric tons)']}</li>
+                                      <li><b>Year of Invention: </b>{this.productions[card][1]['Year of Invention']}</li>
+                                      <li><b>Usage Field invovle: </b>{this.productions[card][1]['Usage Field invovle']}</li>
 
                                   </ul>
                               </Typography>

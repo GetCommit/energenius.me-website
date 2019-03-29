@@ -75,12 +75,12 @@
           'China':[
             'country/china/china1.png',
             {
-              "Total Electricity Production":'5,883.00 bn kWh',
-              "Total Electricity Usage":'5,564.00 bn kWh',
-              "Energy Shortage":'0',
-              "Rank by Renewable Energy Development":'1928',
-              "Region":'Electric power',
-              'API':'XXX'
+              "Total Production":'5,883.00 bn kWh',
+              "Energy Shortage":'0 days/year',
+              "Rank by Renewable Energy Development":'2',
+              "Region":'Asia',
+              "Population":"1386 Million",
+              'API':'Energy_policy_of_China'
               }
 
 
@@ -89,96 +89,96 @@
           'United States':[
               'country/usa/usa1.png',
               {
-                "Total Electricity Production":'Coal',
-                "Total Electricity Usage":'Nuclear Power',
-                "Energy Shortage":'0',
-                "Rank by Renewable Energy Development":'1928',
-                "Region":'Electric power',
-                'API':'XXX'
+                "Total Production":'4,095.00 bn kWh',
+                "Energy Shortage":'0 days/year',
+                "Rank by Renewable Energy Development":'6',
+                "Region":'North America',
+                "Population":"327.2 Million",
+                'API':'Energy_in_the_United_States'
               }
           ],
 
           'Australia':[
               'country/australia/australia1.png',
               {
-                "Type":'Usage',
-                "Energy related":'Biomass',
-                "CO2 emmision (million metric tons)":'0',
-                "Year of Invention":'XXX',
-                "Usage Field invovle":'Residential',
-                'API':'XXX'
+                "Total Production":'243.00 bn kWh',
+                "Energy Shortage":'0 days/year',
+                "Rank by Renewable Energy Development":'7',
+                "Region":'Pacific',
+                "Population":"24.6 Million",
+                'API':'Energy_in_Australia'
               }
 
           ],
           'Zambia':[
-            'production_usage/coalmining/coalmine1.jpg',
+            'country/zambia/zambia1.jpg',
             {
-              "Type":'Production',
-              "Energy related":'Coal',
-              "CO2 emmision (million metric tons)":'1318',
-              "Year of Invention":'XXX',
-              "Usage Field invovle":'Electric power',
-              'API':'XXX'
+              "Total Production":'11.55 bn kWh',
+              "Energy Shortage":'30 days/year',
+              "Rank by Renewable Energy Development":'1',
+              "Region":'Africa',
+              "Population":"17.09 Million",
+              'API':'Zambia'
             }
         ],
 
         'Germany':[
-          'production_usage/offshore_drilling/offshore1.jpg',
+          'country/germany/germany1.jpg',
           {
-            "Type":'Production',
-            "Energy related":'Petroleum',
-            "CO2 emmision (million metric tons)":'2338',
-            "Year of Invention":'1891',
-            "Usage Field invovle":'Transportation',
-            'API':'Offshore_drilling'
+            "Total Production":'612.80 bn kWh',
+            "Energy Shortage":'0.23 days/year',
+            "Rank by Renewable Energy Development":'3',
+            "Region":'Europe',
+            "Population":"82.79 Million",
+            'API':'Renewable_energy_in_Germany'
           }
         ],
 
         'Haiti':[
-          'production_usage/lightning/lightning1.jpg',
-            {
-              "Type":'Usage',
-              "Energy related":'Solar Energy',
-              "CO2 emmision (million metric tons)":'0',
-              "Year of Invention":'1839',
-              "Usage Field invovle":'Residential',
-              'API':'XXX'
+          'country/haiti/haiti1.jpg',
+          {
+              "Total Production":'1.02 bn kWh',
+              "Energy Shortage":'0 days/year',
+              "Rank by Renewable Energy Development":'4',
+              "Region":'Latin America',
+              "Population":"10.98 Million",
+              'API':'Electricity_sector_in_Haiti'
             }
         ],
 
 
         'Kuwait':[
-          'production_usage/wind_turbine/windturbine1.jpg',
+          'country/kuwait/kuwait1.jpg',
           {
-            "Type":'Production',
-            "Energy related":'Wind Power',
-            "CO2 emmision (million metric tons)":'0',
-            "Year of Invention":'1888',
-            "Usage Field invovle":'Electric power',
-            'API':'XXX'
+            "Total Production":'65.95 bn kWh',
+            "Energy Shortage":'0 days/year',
+            "Rank by Renewable Energy Development":'5',
+            "Region":'Middle East',
+            "Population":"4.137 Million",
+            'API':'Energy_in_Kuwait'
           }
         ],
 
         'India':[
-          'production_usage/wind_turbine/windturbine1.jpg',
+          'country/india/india1.jpg',
           {
-            "Type":'Production',
-            "Energy related":'Wind Power',
-            "CO2 emmision (million metric tons)":'0',
-            "Year of Invention":'1888',
-            "Usage Field invovle":'Electric power',
-            'API':'XXX'
+            "Total Production":'1387 bn kWh',
+            "Energy Shortage":'67.15 days/year',
+            "Rank by Renewable Energy Development":'2',
+            "Region":'Asia',
+            "Population":"1339 Million",
+            'API':'Energy_in_India'
           }
         ],
         'Japan':[
-          'production_usage/wind_turbine/windturbine1.jpg',
+          'country/japan/japan1.jpg',
           {
-            "Type":'Production',
-            "Energy related":'Wind Power',
-            "CO2 emmision (million metric tons)":'0',
-            "Year of Invention":'1888',
-            "Usage Field invovle":'Electric power',
-            'API':'XXX'
+            "Total Production":'1020.00 bn kWh',
+            "Energy Shortage":'0 days/year',
+            "Rank by Renewable Energy Development":'2',
+            "Region":'Aisa',
+            "Population":"126.8 Million",
+            'API':'Energy_in_Japan'
           }
         ]
     };
@@ -219,7 +219,7 @@
                     <CssBaseline />
                     {this.usingKeys.map(card => (
                       <Grid item key={"card"}>
-                          <Link to={'/energy/'+this.countries[card][1]['API']}>
+                          <Link to={'/country/'+this.countries[card][1]['API']}>
                           <Card className={classes.card}>
                               <CardMedia
                               className={classes.cardMedia}
@@ -235,11 +235,11 @@
                               <Typography>
                                   <ul>
 
-                                      <li><b>Type: </b>{this.countries[card][1]['Type']}</li>
-                                      <li><b>Major Uses: </b>{this.countries[card][1]['Major Uses']}</li>
-                                      <li><b>Consumption Rank in US: </b>{this.countries[card][1]['Consumption Rank in US']}</li>
-                                      <li><b>Rank by electrical generating: </b>{this.countries[card][1]['Rank by electrical generating']}</li>
-                                      <li><b>Top Producing country: </b>{this.countries[card][1]['Top Producing country']}</li>
+                                      <li><b>Total Production: </b>{this.countries[card][1]['Total Production']}</li>
+                                      <li><b>Energy Shortage: </b>{this.countries[card][1]['Energy Shortage']}</li>
+                                      <li><b>Rank by Renewable Energy Development: </b>{this.countries[card][1]['Rank by Renewable Energy Development']}</li>
+                                      <li><b>Region: </b>{this.countries[card][1]['Region']}</li>
+                                      <li><b>Population: </b>{this.countries[card][1]['Population']}</li>
 
                                   </ul>
                               </Typography>
