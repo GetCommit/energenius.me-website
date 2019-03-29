@@ -14,6 +14,7 @@ function execCommand(command) {
   console.log(result.toString());
 }
 
+
 function buildDeployCommand(yamlFile) {
   var args = ['gcloud app deploy'];
   buildAppEngineArgs(args);
