@@ -67,179 +67,41 @@ const styles = theme => ({
 
   // testing reading from directory
 
-
-
 class Energy extends Component {
 
     constructor(props) {
       super(props);
-
-      this.sates={}
-      
-
-
-
-      this.energies = {
-                    'Solar Energy':[
-                        'energy/solar/solar1.jpg',
-                        {
-                          "Type":'Reneable Energy',
-                          "Major Uses":'Residential',
-                          "Consumption Rank in US":'8',
-                          "Rank by electrical generating":'2',
-                          "Top Producing country":'China',
-                          'API':'Solar_energy'
-                        }
-
-
-                    ],
-
-                    'Nuclear Energy':[
-                        'energy/nuclear/nuclear1.jpg',
-                        {
-                          "Type":'Non-Renewable Energy',
-                          "Major Uses":'Electric power',
-                          "Consumption Rank in US":'4',
-                          "Rank by electrical generating":'5',
-                          "Top Producing country":'US',
-                          'API':'Nuclear_power'
-                        }
-                    ],
-
-                     'Natural Gas':[
-                        'energy/natural_gas/natural_gas1.jpg',
-                        {
-                          "Type":'Non-Renewable Energy',
-                          "Major Uses":'Industrial',
-                          "Consumption Rank in US":'2',
-                          "Rank by electrical generating":'7',
-                          "Top Producing country":'US',
-                          'API':'Natural_gas'
-                        }
-
-                     ],
-                    'Coal':[
-                      'energy/coal/coal1.jpg',
-                      {
-                        "Type":'Non-Renewable Energy',
-                        "Major Uses":'Electric power',
-                        "Consumption Rank in US":'3',
-                        "Rank by electrical generating":'6',
-                        "Top Producing country":'Australia',
-                        'API':'Coal'
-                      }
-                  ],
-
-                   'Petroleum':[
-                    'energy/petroleum/petroleum1.jpg',
-                    {
-                      "Type":'Non-Renewable Energy',
-                      "Major Uses":'Transportation',
-                      "Consumption Rank in US":'1',
-                      "Rank by electrical generating":'9',
-                      "Top Producing country":'US',
-                      'API':'Petroleum'
-                    }
-                 ],
-
-                  'Biomass':[
-                      'energy/biomass/biomass1.jpg',
-                      {
-                        "Type":'Reneable Energy',
-                        "Major Uses":'Residential',
-                        "Consumption Rank in US":'5',
-                        "Rank by electrical generating":'8',
-                        "Top Producing country":'US',
-                        'API':'Biomass'
-                      }
-                  ],
-
-
-                  'Hydropower':[
-                    'energy/hydropower/hydropower1.jpg',
-                    {
-                      "Type":'Reneable Energy',
-                      "Major Uses":'Electric power',
-                      "Consumption Rank in US":'6',
-                      "Rank by electrical generating":'4',
-                      "Top Producing country":'China',
-                      'API':'Hydropower'
-                    }
-                ],
-
-                    'Geothermal Energy':[
-                      'energy/geothermal/geothermal1.jpg',
-                      {
-                        "Type":'Reneable Energy',
-                        "Major Uses":'Electric power',
-                        "Consumption Rank in US":'9',
-                        "Rank by electrical generating":'3',
-                        "Top Producing country":'US',
-                        'API':'Geothermal_energy'
-                      }
-                  ],
-
-                  'Wind Power':[
-                    'energy/windpower/windpower1.jpg',
-                    {
-                      "Type":'Reneable Energy',
-                      "Major Uses":'Electric power',
-                      "Consumption Rank in US":'7',
-                      "Rank by electrical generating":'1',
-                      "Top Producing country":'France',
-                      'API':'Wind_power'
-                    }
-                ],
-
-
-            };
-      this.keys = Object.keys(this.energies);
-      this.usingKeys = this.keys.slice(0, 3);
-
       this.tmp_props = props;
 
       this.state = {
-        activePage: 1
+          activePage: 1,
+          info: undefined,
+          shownIdx: [0, 1, 2]
       };
 
-      this.handlePageChange = this.handlePageChange.bind(this)
+      this.handlePageChange = this.handlePageChange.bind(this);
     }
 
-    // fetch above data from API
-
-    componentDidMount (){
-      fetch(
-          'https://www.energenius.me/api/energy?name=all'
-      )
+    componentDidMount() {
+      document.title = "Energy";
+      fetch('http://www.energenius.me/api/energy?name=all')
           .then(response => response.json())
-          .then(data => {
+          .then(data => this.setState({info: data}));
+    }
 
-              // var v = data['query']['pages'];
-              // var keys = Object.keys(v);
-              // this.states['result'] = data['query']['pages'][keys[0]]['extract'];
-              console.log(data)
-              console.log("HELLO WORLD")
-          //   process the data
-          this.setState({})
-          })
-          .catch(e => {
-              console.log(e)
-          })
-      }
-
-
-
-
-
-    handlePageChange(pageNumber){
-      const start_idx = (pageNumber - 1) * 3;
-      this.usingKeys = this.keys.slice(start_idx, start_idx + 3);
-      console.log(`active page is ${pageNumber}`);
-      this.setState({activePage: pageNumber});
+    handlePageChange(pageNumber) {
+     const start_idx = (pageNumber - 1) * 3;
+     console.log(`active page is ${pageNumber}`);
+     this.setState({activePage: pageNumber,
+         shownIdx: [start_idx, start_idx + 1, start_idx + 2]});
     }
 
     render() {
-    const { classes } = this.tmp_props;
+        if (this.state.info === undefined) {
+            return (<div>Loading</div>)
+        }
+
+      const { classes } = this.tmp_props;
 
       return (
           <React.Fragment>
@@ -254,29 +116,29 @@ class Energy extends Component {
 
                 <Grid container spacing={40}>
                   <CssBaseline />
-                  {this.usingKeys.map(card => (
+                  {this.state.shownIdx.map(idx => (
                     <Grid item key={"card"}>
-                        <Link to={'/energy/'+this.energies[card][1]['API']}>
+                        <Link to={'/energy/'+this.state.info[idx]['API']}>
                         <Card className={classes.card}>
                             <CardMedia
                             className={classes.cardMedia}
 
-                            image={require('../img/'+this.energies[card][0])}
+                            image={require('../img/energy/cover_photo/'+this.state.info[idx]['API']+'.jpg')}
 
-                            title="Image title"
+                            title={this.state.info[idx]['Name']+" Image"}
                             />
                             <CardContent className={classes.cardContent}>
                             <Typography gutterBottom variant="h5" component="h2">
-                                {card}
+                                {this.state.info[idx]['Name']}
                             </Typography>
                             <Typography>
                                 <ul>
 
-                                    <li><b>Type: </b>{this.energies[card][1]['Type']}</li>
-                                    <li><b>Major Uses: </b>{this.energies[card][1]['Major Uses']}</li>
-                                    <li><b>Consumption Rank in US: </b>{this.energies[card][1]['Consumption Rank in US']}</li>
-                                    <li><b>Rank by electrical generating: </b>{this.energies[card][1]['Rank by electrical generating']}</li>
-                                    <li><b>Top Producing country: </b>{this.energies[card][1]['Top Producing country']}</li>
+                                    <li><b>Type: </b>{this.state.info[idx]['Type']}</li>
+                                    <li><b>Major Use: </b>{this.state.info[idx]['Major_Use']}</li>
+                                    <li><b>Consumption Rank in US: </b>{this.state.info[idx]['Consumption_Rank_in_US']}</li>
+                                    <li><b>Electrical Generating Rank: </b>{this.state.info[idx]['Electrical_Generating_Rank']}</li>
+                                    <li><b>Top Producing Country: </b>{this.state.info[idx]['Top_Producing_Country']}</li>
 
                                 </ul>
                             </Typography>
