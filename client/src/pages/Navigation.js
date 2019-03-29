@@ -22,7 +22,7 @@ export default class Navigation extends Component {
         <Navbar.Collapse>
           <Nav>
            <Nav.Link href="/">Home</Nav.Link>
-           <Nav.Link to='/energy'>Energy Category</Nav.Link>
+           <Nav.Link href='/energy'>Energy Category</Nav.Link>
            <Nav.Link to="/production">Production and Usage</Nav.Link>
            <Nav.Link to="/country">Country of Consumtion</Nav.Link>
            <Nav.Link to="/about">About Us</Nav.Link>

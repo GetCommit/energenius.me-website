@@ -10,13 +10,36 @@ handlers:
 - url: /api/(.*)
   script: main.app
 
+- url: /static/js/(.*)
+  static_files: www/static/js/\1
+  upload: www/static/js/(.*)
+
+- url: /static/css/(.*)
+  static_files: www/static/css/\1
+  upload: www/static/css/(.*)
+
+- url: /static/media/(.*)
+  static_files: www/static/media/\1
+  upload: www/static/media/(.*)
+
+- url: /(.*\.(json|ico))$
+  static_files: www/\1
+  upload: www/.*\.(json|ico)$
+
 - url: /
   static_files: www/index.html
   upload: www/index.html
 
-- url: /(.*)
-  static_files: www/\1
-  upload: www/(.*)
+# - url: /(.*)
+#   static_files: www/\1
+#   upload: www/(.*)
+# - url: /
+#   static_files: www/index.html
+#   upload: www/index.html
+
+- url: /.*
+  static_files: www/index.html
+  upload: www/index.html
 # - url: /.*
 #   script: main.app
 

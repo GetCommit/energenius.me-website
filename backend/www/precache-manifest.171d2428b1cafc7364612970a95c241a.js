@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/static/media/natural_gas1.310bc356.jpg"
   },
   {
-    "revision": "557930d98e360bfd6386",
+    "revision": "0148e41cc3ad3283c828",
     "url": "/static/css/main.ca39a72f.chunk.css"
   },
   {
@@ -144,8 +144,8 @@ self.__precacheManifest = [
     "url": "/static/media/hydropower3.b00726d0.jpg"
   },
   {
-    "revision": "557930d98e360bfd6386",
-    "url": "/static/js/main.57620d84.chunk.js"
+    "revision": "0148e41cc3ad3283c828",
+    "url": "/static/js/main.5becf567.chunk.js"
   },
   {
     "revision": "61bb0c21aae01fb825393e89f95bce79",
@@ -284,7 +284,7 @@ self.__precacheManifest = [
     "url": "/static/media/windturbine3.86475c61.jpg"
   },
   {
-    "revision": "54556a218998cb29e11b20a2ca579669",
+    "revision": "68a46e01b8ebb1b6c6d7808b6b4c1469",
     "url": "/index.html"
   }
 ];
