@@ -8,47 +8,59 @@ import json
 import webapp2
 
 # Database for the all instance page
-class AllInstancePage(ndb.Model):
-    pagename = ndb.StringProperty(required = True, indexed=True)
-    intro = ndb.StringProperty(required = True, indexed=True)
-    bodysection = ndb.StructuredProperty(SectionContent, repeated = True)
-    sidesection = ndb.StructuredProperty(SideSectioncontent)
-
-class SectionContent(ndb.Model):
-    title = ndb.StringProperty(required = True, indexed=True)
-    content = ndb.StringProperty(required = True, indexed=True)
-    # if need image put here
-
-class SideSectioncontent(ndb.Model):
-    uptitle = ndb.StringProperty(required = True)
-    upcontent = ndb.StringProperty(repeated = True)
-    # if need link or url, also could store here
-    downtitle = ndb.StringProperty(required = True)
-    downcontent = ndb.StringProperty(repeated = True)
-
+# ---------------------------------
+# Front end get the info directly from the other API, NO need for all instance page
+# ---------------------------------
+# class SectionContent(ndb.Model):
+#     title = ndb.StringProperty(required = True, indexed = True)
+#     content = ndb.StringProperty(required = True, indexed = True)
+#     # if need image put here
+#     # sectionimage = ndb.ndb.BlobProperty()
+#
+# class SideSectioncontent(ndb.Model):
+#     uptitle = ndb.StringProperty(required = True)
+#     upcontent = ndb.StringProperty(repeated = True)
+#     # if need link or url, also could store here
+#     downtitle = ndb.StringProperty(required = True)
+#     downcontent = ndb.StringProperty(repeated = True)
+#
+# class AllInstancePage(ndb.Model):
+#     pagename = ndb.StringProperty(required = True, indexed=True)
+#     intro = ndb.StringProperty(required = True, indexed = True)
+#     bodysection = ndb.StructuredProperty(SectionContent, repeated = True)
+#     sidesection = ndb.StructuredProperty(SideSectioncontent)
 
 # country API
-class Country (ndb.Model):
-    countryname = ndb.StringProperty(required = True, indexed=True)
-    totalproducation = ndb.IntegerProperty(required = True)
-    totalusage = ndb.IntegerProperty(required = True)
-    top3produce = ndb.StructuredProperty(Top3Energy, repeated = True)
-    carbon = ndb.FloatProperty(required=True)
+# class Top3Energy (ndb.Model):
+#     t3energyname = ndb.StringProperty(required = True)
+#     t3energyproduce = ndb.StringProperty()
 
-class Top3Energy (ndb.Model):
-    t3energyname = ndb.StringProperty()
-    t3energyproduce = ndb.IntegerProperty()
+class Country (ndb.Model):
+    countryName = ndb.StringProperty(required = True)
+    totalProduction = ndb.FloatProperty(required = True)
+    totalUsage = ndb.FloatProperty(required = True)
+    shorageDay = ndb.FloatProperty()
+    rankRenewableEnergy = ndb.IntegerProperty()
+    region = ndb.StringProperty(required = True)
+    population = ndb.FloatProperty(required = True)
 
 # energy API
 class Energy (ndb.Model):
-    energyname = ndb.StringProperty(required = True, indexed=True)
-    energytype = ndb.StringProperty(required = True, indexed=True)
-    energydevelop = ndb.BooleanProperty(required = True, indexed=True)
-    cumulativeCap = ndb.FloatProperty(required=True)
+    energyName = ndb.StringProperty(required = True)
+    energyType = ndb.StringProperty(required = True)
+    energyMajorUse = ndb.StringProperty()
+    consumptionUSRank = ndb.IntegerProperty()
+    electricalGenerRank = ndb.IntegerProperty()
+    topProduceCountry = ndb.StringProperty()
+
+    # energydevelop = ndb.BooleanProperty(required = True)
+    # cumulativeCap = ndb.StringProperty()
 
 # Production API
-class Production (ndb.Model):
-    producationname = ndb.StringProperty(required = True, indexed=True)
-    producevolumn = ndb.IntegerProperty(required = True)
-    yearofinvention = ndb.IntegerProperty()
-    topdevelopcountry = ndb.StringProperty(repeated = True, indexed=True)
+class ProductionAndUse (ndb.Model):
+    puName = ndb.StringProperty(required = True)
+    puType = ndb.StringProperty(required = True)
+    puRelatedEnergy = ndb.StringProperty(required = True)
+    carbon = ndb.FloatProperty()
+    yearOfInvention = ndb.IntegerProperty()
+    usageField = ndb.StringProperty()

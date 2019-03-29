@@ -1,0 +1,18 @@
+{
+  "name": "energenius",
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd client && npm run build && cd .. && node scripts/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "node scripts/deploy.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^3.1.0",
+    "fs-extra": "^1.0.0",
+    "jsonfile": "^2.4.0",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.3"
+  }
+}

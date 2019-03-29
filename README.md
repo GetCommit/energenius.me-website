@@ -12,18 +12,19 @@ link to GitLab pipelines: https://gitlab.com/LuculentDig/energiziousness/pipelin
 
 link to website: https://www.energenius.me/
 
-estimated completion time for each member: (hours: 30)<br/>
-Yaoyang: 10<br/>
-Yige: 15<br/>
-Wenyuan: 15<br/>
-Pengdi: 10<br/>
-Shijing: 8<br/>
+estimated completion time for each member: (hours: 100)<br/>
+Yaoyang: 30<br/>
+Yige: 35<br/>
+Wenyuan: 25<br/>
+Pengdi: 26<br/>
+Shijing: 23<br/>
 
-actual completion time for each member (hours: 50)<br/>
-Yaoyang: 18<br/>
-Yige: 20<br/>
-Wenyuan: 18<br/>
-Pengdi: 19<br/>
-Shijing: 19<br/>
+actual completion time for each member (hours: 100)<br/>
+
+Yaoyang: 30<br/>
+Yige: 30<br/>
+Wenyuan: 50<br/>
+Pengdi: 30<br/>
+Shijing: 20<br/>
 
 comments: So far we have 14 static webpage hosted on GCP servers. We are also able to pull commit and other stats dynamically from GitLab
