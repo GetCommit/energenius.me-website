@@ -20,6 +20,9 @@ frontend-testing:
     script:
         - cd client
         - npm install
+        - npm install chai
+        - npm install enzyme
+        - npm install enzyme-adapter-react-16
         - npm run test
 
 backend-unittests:
