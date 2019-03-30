@@ -31,7 +31,7 @@ class Person extends Component {
           <div class="container">
             <h2 className='card-title mb-0'>{this.props.name}</h2>
             <p><large>{this.props.bio}</large></p>
-            
+
             <div className='card-text text-black-50'>
               Number of Issues: {this.props.issues}
             </div>
@@ -49,7 +49,7 @@ class Person extends Component {
             </div>
             <p>
             </p>
-            <p> 
+            <p>
               Responsibilities: {this.props.role}
             </p>
           </div>
@@ -60,13 +60,13 @@ class Person extends Component {
   }
 }
 
-// create about to store each person's data 
+// create about to store each person's data
 class About extends Component {
   constructor (props) {
     super(props)
 
     this.state = {}
-    this.state.memData = {  
+    this.state.memData = {
       'Pengdi Xia': {
         name: 'Pengdi Xia',
         bio: 'I am a senior currently pursuing a master degree in Information Technology and Management at McCombs',
@@ -75,7 +75,7 @@ class About extends Component {
         img: px,
         commits: 0,
         issues: 0,
-        tests: 0
+        tests: 12
       },
       'Shijing Zhong': {
         name: 'Shijing Zhong',
@@ -85,7 +85,7 @@ class About extends Component {
         img: sz,
         commits: 0,
         issues: 0,
-        tests: 0
+        tests: 15
       },
       'Wenyuan Wu': {
         name: 'Wenyuan Wu',
@@ -95,7 +95,7 @@ class About extends Component {
         img: ww,
         commits: 0,
         issues: 0,
-        tests: 0
+        tests: 5
       },
       'Yige Wang': {
         name: 'Yige Wang',
@@ -115,7 +115,7 @@ class About extends Component {
         img: yl,
         commits: 0,
         issues: 0,
-        tests: 0
+        tests: 54
       },
       'Duck': {
         name: 'Duck',
@@ -185,7 +185,7 @@ componentDidMount (){
         </div>
       )
     }
-    
+
     return (
       <div className='main' style={{ marginTop: '10vh' }}>
         {/* display intro*/}
@@ -204,7 +204,7 @@ componentDidMount (){
               </p>
           </div>
         </section>
-        
+
         {/* display group members */}
         <div className='container'>
           <div className='row justify-content-center'>{components}</div>
