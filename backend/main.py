@@ -38,8 +38,8 @@ def default_json_serializer(obj):
     raise TypeError('Not sure how to serialize %s' % (obj,))
 
 # project function from the class
-def project(t,r):
-    return ({a : d[a] for a in t if a in d} for d in r)
+# def project(t,r):
+#     return ({a : d[a] for a in t if a in d} for d in r)
 # front-end request
 # ------------------ do not need all instance page anymore
 # class AllInstancePageRequest(webapp2.RequestHandler):
