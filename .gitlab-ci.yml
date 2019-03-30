@@ -8,12 +8,12 @@ energeziousness:
     script:
     - ls -al
 
-api-unittests:
-    image: gpdowning/node
-    script:
-        # - echo Running Postman Tests
-        # - npm install newman
-        # - node_modules/.bin/newman run PostmanTests.json
+# api-unittests:
+#     image: gpdowning/node
+#     script:
+#         - echo Running Postman Tests
+#         - npm install newman
+#         - node_modules/.bin/newman run PostmanTests.json
      
 frontend-testing:
     image: gpdowning/node
@@ -22,13 +22,13 @@ frontend-testing:
         - npm install
         - npm run test
 
-backend-unittests:
-    image: gpdowning/python
-    script:
-        # - cd backend
-        # - pip install -r requirements.txt
-        # - python3 tests.py
-        # - cd ../scraping/university_scraper
-        # - python3 university_scraper_test.py
+# backend-unittests:
+#     image: gpdowning/python
+#     script:
+#         - cd backend
+#         - pip install -r requirements.txt
+#         - python3 tests.py
+#         - cd ../scraping/university_scraper
+#         - python3 university_scraper_test.py
 
 
