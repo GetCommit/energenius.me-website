@@ -13,14 +13,14 @@ energeziousness:
 #     script:
 #         - echo Running Postman Tests
 #         - npm install newman
-#         - node_modules/.bin/newman run PostmanTests.json
+#         - node_modules/.bin/newman run Postman.json
      
-# frontend-testing:
-#     image: gpdowning/node
-#     script:
-#         - cd client
-#         - npm install
-#         - npm run test
+frontend-testing:
+    image: gpdowning/node
+    script:
+        - cd client
+        - npm install
+        - npm run test
 
 backend-unittests:
     image: gpdowning/python
