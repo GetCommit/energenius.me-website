@@ -22,9 +22,9 @@ https://gitlab.com/LuculentDig/energiziousness/pipelines
 ## Estimated Time
 estimated completion time for each member: (hours: 100)<br/>
 |          |      Phase one     |   Phase two        |
-|  Members |------------------- |------------------- |
-|          | Estimated | Actual | Estimated | Actual |
-| -------  | --------- | ------ | --------- | ------ |
+| -------- |------------------- |------------------- |
+|  Members | Estimated | Actual | Estimated | Actual |
+| -------- | --------- | ------ | --------- | ------ |
 | Yaoyang  | 10        | 18     | 30        |  36    |
 | Yige     | 15        | 20     | 35        |  39    |
 | TWenyuan | 15        | 18     | 25        |  43    |
