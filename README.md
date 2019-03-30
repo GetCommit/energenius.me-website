@@ -14,7 +14,7 @@ Student 5: Shijing Zhong, EID: SZ6539，GitLab: garysnake<br/>
 ## Git SHA:
 Phase one: 4d37e6b10f894e15e8d9bce2e46555b8131597f6
 
-Phase two: d3dcf7cd9b9d1da84e747c22c2d64024f4233f6b
+Phase two: 7c06970663265dc8396c5c0893fd67cb2cce5c3a
 
 ## GitLab pipelines:
 https://gitlab.com/LuculentDig/energiziousness/pipelines
