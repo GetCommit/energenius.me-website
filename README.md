@@ -19,7 +19,7 @@ Wenyuan: 25<br/>
 Pengdi: 26<br/>
 Shijing: 23<br/>
 
-actual completion time for each member (hours: 100)<br/>
+actual completion time for each member (hours: 150)<br/>
 
 Yaoyang: 30<br/>
 Yige: 30<br/>
@@ -27,4 +27,4 @@ Wenyuan: 50<br/>
 Pengdi: 30<br/>
 Shijing: 20<br/>
 
-comments: So far we have 14 static webpage hosted on GCP servers. We are also able to pull commit and other stats dynamically from GitLab
+comments: So far we have many dynamic webpage hosted on GCP servers. We are also able to pull commit and other stats dynamically from GitLab
