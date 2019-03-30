@@ -84,7 +84,7 @@ class Energy extends Component {
 
     componentDidMount() {
       document.title = "Energy";
-      fetch('http://www.energenius.me/api/energy?name=all')
+      fetch('/api/energy?name=all')
           .then(response => response.json())
           .then(data => this.setState({info: data}));
     }

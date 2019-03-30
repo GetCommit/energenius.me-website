@@ -84,7 +84,7 @@ class Country extends Component {
 
     componentDidMount() {
       document.title = "Country";
-      fetch('http://www.energenius.me/api/country?name=all')
+      fetch('/api/country?name=all')
           .then(response => response.json())
           .then(data => this.setState({info: data}));
     }
