@@ -13,6 +13,7 @@ Student 5: Shijing Zhong, EID: SZ6539，GitLab: garysnake<br/>
 
 ## Git SHA:
 Phase one: 4d37e6b10f894e15e8d9bce2e46555b8131597f6
+
 Phase two:
 
 ## GitLab pipelines:
@@ -20,7 +21,6 @@ https://gitlab.com/LuculentDig/energiziousness/pipelines
 
 
 ## Estimated Time
-estimated completion time for each member: (hours: 100)<br/>
 
 |  Members | Estimated | Actual | Estimated | Actual |
 | -------- | --------- | ------ | --------- | ------ |
@@ -31,4 +31,13 @@ estimated completion time for each member: (hours: 100)<br/>
 | Shijing  | 8         | 19     | 23        |  26    |
 
 
-comments: So far we have many dynamic webpage hosted on GCP servers. We are also able to pull commit and other stats dynamically from GitLab
+## Comments:
+### Build and Deployment
+`git clone https://gitlab.com/LuculentDig/energiziousness.git` Get our project
+`cd energiziousness` Go to our directory
+`cd client` Go to our front-end directory
+`npm install` Build front-end app
+`npm start` Run the front-end at `localhost:3000`
+-------------------------------------
+`cd ..` `npm run build` Build the front-end deploy file
+`npm run deploy` Deploy both frontend and backend
