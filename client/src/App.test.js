@@ -33,73 +33,81 @@ describe('IndexContent Component', () => {
 })
 
 describe('App Component and Classes', () => {
-    it('Contains a Router Component', () => {
+    it('Contains a Router ', () => {
       const about = shallow(<App />)
       expect(about.find('Router'))
     })
 })
 
-describe('App', function() {
-    describe('App Components & classes', () => {
-      assert.equal(1, 0)
-
-      it('contains a Router Component', () => {
-        const about = shallow(<App />)
-        expect(about.find('Router'))
-      })
-
-      it('contains a Component', () => {
-        const about = shallow(<App />)
-        expect(about.find('Navigation'))
-      })
-
-      it('contains a Component', () => {
-        const about = shallow(<App />)
-        expect(about.find('Home'))
-      })
-
-      it('contains a Component', () => {
-        const about = shallow(<App />)
-        expect(about.find('Energy'))
-      })
-
-      it('contains a Component', () => {
-        const about = shallow(<App />)
-        expect(about.find('EnergyInstance'))
-      })
-
-      it('contains a Component', () => {
-        const about = shallow(<App />)
-        expect(about.find('Production'))
-      })
-
-      it('contains a Component', () => {
-        const about = shallow(<App />)
-        expect(about.find('ProductionInstance'))
-      })
-
-      it('contains a Component', () => {
-        const about = shallow(<App />)
-        expect(about.find('Country'))
-      })
-
-      it('contains a Component', () => {
-        const about = shallow(<App />)
-        expect(about.find('CountryInstance'))
-      })
-
-      it('contains a Component', () => {
-        const about = shallow(<App />)
-        expect(about.find('About'))
-      })
-
-      it('contains a Component', () => {
-        const about = shallow(<App />)
-        expect(about.find('Footer'))
-      })
+describe('App Component and Classes', () => {
+    it('Contains a Home', () => {
+      const about = shallow(<App />)
+      expect(about.find('Home'))
     })
-});
+})
 
+describe('App Component and Classes', () => {
+    it('Contains a Navigation', () => {
+            const about = shallow(<App />)
+            expect(about.find('Navigation'))
+        })
+})
+
+describe('App Component and Classes', () => {
+    it('Contains a Energy', () => {
+      const about = shallow(<App />)
+      expect(about.find('Energy'))
+    })
+})
+
+describe('App Component and Classes', () => {
+    it('Contains a Production', () => {
+      const about = shallow(<App />)
+      expect(about.find('Production'))
+    })
+})
+
+describe('App Component and Classes', () => {
+    it('Contains a Country', () => {
+      const about = shallow(<App />)
+      expect(about.find('Country'))
+    })
+})
+
+describe('App Component and Classes', () => {
+    it('Contains a EnergyInstance', () => {
+      const about = shallow(<App />)
+      expect(about.find('EnergyInstance'))
+    })
+})
+
+describe('App Component and Classes', () => {
+    it('Contains a CountryInstance', () => {
+      const about = shallow(<App />)
+      expect(about.find('CountryInstance'))
+    })
+})
+
+describe('App Component and Classes', () => {
+    it('Contains a ProductionInstance', () => {
+      const about = shallow(<App />)
+      expect(about.find('ProductionInstance'))
+    })
+})
+
+describe('App Component and Classes', () => {
+    it('Contains a About', () => {
+      const about = shallow(<App />)
+      expect(about.find('About'))
+    })
+})
+
+describe('App Component and Classes', () => {
+    it('Contains a Footer', () => {
+      const about = shallow(<App />)
+      expect(about.find('Footer'))
+    })
+})
 
 describe('Navigation Component', () => {
   it('contains Navbar', () => {

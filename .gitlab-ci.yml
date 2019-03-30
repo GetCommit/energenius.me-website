@@ -8,24 +8,27 @@ energeziousness:
     script:
     - ls -al
 
-# api-unittests:
-#     image: gpdowning/node
-#     script:
-#         - echo Running Postman Tests
-#         - npm install newman
-#         - node_modules/.bin/newman run Postman.json
+api-unittests:
+    image: gpdowning/node
+    script:
+        - npm install newman
+        - node_modules/.bin/newman run Postman.json
      
 frontend-testing:
     image: gpdowning/node
     script:
         - cd client
         - npm install
+        - npm install chai
+        - npm install enzyme
+        - npm install enzyme-adapter-react-16
         - npm run test
 
 backend-unittests:
     image: gpdowning/python
     script:
         - cd backend
+        - pip3 install requests
         - python3 tests.py
 
 
