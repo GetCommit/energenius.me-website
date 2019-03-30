@@ -15,20 +15,18 @@ energeziousness:
 #         - npm install newman
 #         - node_modules/.bin/newman run PostmanTests.json
      
-frontend-testing:
-    image: gpdowning/node
-    script:
-        - cd client
-        - npm install
-        - npm run test
-
-# backend-unittests:
-#     image: gpdowning/python
+# frontend-testing:
+#     image: gpdowning/node
 #     script:
-#         - cd backend
-#         - pip install -r requirements.txt
-#         - python3 tests.py
-#         - cd ../scraping/university_scraper
-#         - python3 university_scraper_test.py
+#         - cd client
+#         - npm install
+#         - npm run test
+
+backend-unittests:
+    image: gpdowning/python
+    script:
+        - cd backend
+        - python3 tests.py
+
 
 
