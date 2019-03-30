@@ -2,6 +2,7 @@
   "name": "energenius",
   "version": "0.1.0",
   "main": "index.js",
+  "description": "If I am smart enough, no one could abuse me",
   "scripts": {
     "build": "cd client && npm run build && cd .. && node scripts/build.js",
     "test": "echo \"Error: no test specified\" && exit 1",

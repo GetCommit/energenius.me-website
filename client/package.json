@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "energenius",
   "version": "0.1.0",
   "private": true,
   "description": "If I am stupid enough, no one could abuse me",
@@ -28,6 +28,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",

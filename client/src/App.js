@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-// import { Container, Nav, NavItem, NavLink, Navbar, NavbarBrand, NavbarToggler, Collapse } from 'reactstrap';
+import { Container, Nav, NavItem, NavLink, Navbar, NavbarBrand, NavbarToggler, Collapse } from 'reactstrap';
 
 
 import Navigation from './pages/Navigation'
@@ -28,7 +28,7 @@ class App extends Component {
         <div>
         <Navigation />
         <Switch>
-          <Route exact path="/" component={Home}/>
+          <Route exact path="/" component={Home}/> 
 
           <Route exact path="/energy" component={Energy}/>
           <Route exact path="/energy/:id" component={EnergyInstance}/>

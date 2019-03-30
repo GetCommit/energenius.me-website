@@ -9,6 +9,7 @@ var WWW_DIR = 'backend/www'
 rimrafSync(WWW_DIR + '/*');
 mkdirp(WWW_DIR);
 
+
 fs.copySync('client/build', WWW_DIR);
 
 console.log(WWW_DIR + ' is ready');
