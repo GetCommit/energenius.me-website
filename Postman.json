@@ -1,0 +1,1540 @@
+{
+	"info": {
+		"_postman_id": "f861f647-7c80-4128-8258-faa3ed671086",
+		"name": "Energenius.me Restful API",
+		"description": "# Introduction\nOur Restful API enables both users and developer to retrieve data from energenius.me website. Our data covers the types of energy, energy usage, energy production and energy issues in the world.\n\n# Authentication\nWe currently provide the free access to our data collection and do not require authentication. \n\n# Error Codes\n404 - The given page doesn't exist.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All Countries' Info",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5459edf0-a14e-4851-b422-8d643b980cb6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "faf77697-245d-4c9c-aca2-8c0e07292dfb",
+						"exec": [
+							"",
+							"pm.test(\"Test1: response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Test2: Return content checking\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Energy\");",
+							"});",
+							"",
+							"pm.test(\"Test3: Response must be valid and have a body\", function () {",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Test4: Check the Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    // Find the array index for the COUNTRY",
+							"    var index = jsonData.map(",
+							"            function(filter) {",
+							"                return filter.Name;",
+							"            }",
+							"        ).indexOf('Japan');",
+							"        ",
+							"    // Get the target from the list",
+							"    var target = jsonData[index];",
+							"    console.log(target);",
+							"",
+							"    pm.expect(target).to.exist;",
+							"    pm.expect(target.Name).equal('Japan')",
+							"});",
+							"",
+							"pm.test(\"Test5: Should include object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var target = jsonData[0]",
+							"    var expectedObject = {",
+							"        \"Name\": \"Australia\",",
+							"        \"Region\": \"Pacific\"",
+							"    }",
+							"    pm.expect(target).to.include(expectedObject);",
+							"",
+							"    // Optional check if properties actually exist",
+							"    pm.expect(target).to.have.property('Total_Usage');",
+							"    pm.expect(target).to.have.property('API');",
+							"});",
+							"",
+							"// pm.test(\"Test5: Return content checking\", function () {",
+							"// // \tvar jsonData = pm.response.json();",
+							"// \tconsole.log(pm.response.json().results);",
+							"// \tpm.expect(pm.response.json().Name).equal('Austrialia')",
+							"// });",
+							"",
+							"pm.test(\"Test6: Response should be okay to process\", function () { ",
+							"    pm.response.to.not.be.error; ",
+							"    pm.response.to.not.have.jsonBody(\"error\"); ",
+							"});",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://www.energenius.me/api/country?name=all",
+					"protocol": "https",
+					"host": [
+						"www",
+						"energenius",
+						"me"
+					],
+					"path": [
+						"api",
+						"country"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "all"
+						}
+					]
+				},
+				"description": "This call accepts a name of a country and return the information summary of energy for that country."
+			},
+			"response": [
+				{
+					"name": "All Countries' Info",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.energenius.me/api/country?name=all",
+							"protocol": "https",
+							"host": [
+								"www",
+								"energenius",
+								"me"
+							],
+							"path": [
+								"api",
+								"country"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "f86b508068effdefe4dbafcfa5fc2600;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Mar 2019 22:18:43 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1751"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"Total_Usage\": 229.4,\n        \"Name\": \"Austrialia\",\n        \"Region\": \"Pacific\",\n        \"Total_Production\": 243,\n        \"API\": \"Energy_in_Australia\",\n        \"Energy_Shortage\": 0,\n        \"Renewable_Energy_Rank\": 7,\n        \"Population\": 24.6\n    },\n    {\n        \"Total_Usage\": 536.5,\n        \"Name\": \"Germany\",\n        \"Region\": \"Europe\",\n        \"Total_Production\": 612.8,\n        \"API\": \"Renewable_energy_in_Germany\",\n        \"Energy_Shortage\": 0.23,\n        \"Renewable_Energy_Rank\": 3,\n        \"Population\": 82.79\n    },\n    {\n        \"Total_Usage\": 3902,\n        \"Name\": \"US\",\n        \"Region\": \"North America\",\n        \"Total_Production\": 4095,\n        \"API\": \"Energy_in_the_United_States\",\n        \"Energy_Shortage\": 0,\n        \"Renewable_Energy_Rank\": 6,\n        \"Population\": 327.2\n    },\n    {\n        \"Total_Usage\": 2.19,\n        \"Name\": \"Zambia\",\n        \"Region\": \"Africa\",\n        \"Total_Production\": 11.55,\n        \"API\": \"Zambia\",\n        \"Energy_Shortage\": 30,\n        \"Renewable_Energy_Rank\": 1,\n        \"Population\": 17.09\n    },\n    {\n        \"Total_Usage\": 1408.6,\n        \"Name\": \"India\",\n        \"Region\": \"Aisa\",\n        \"Total_Production\": 1387,\n        \"API\": \"Energy_in_India\",\n        \"Energy_Shortage\": 67.15,\n        \"Renewable_Energy_Rank\": 2,\n        \"Population\": 1339\n    },\n    {\n        \"Total_Usage\": 406.2,\n        \"Name\": \"Haiti\",\n        \"Region\": \"Latin America\",\n        \"Total_Production\": 1.02,\n        \"API\": \"Electricity_sector_in_Haiti\",\n        \"Energy_Shortage\": 0,\n        \"Renewable_Energy_Rank\": 4,\n        \"Population\": 10.98\n    },\n    {\n        \"Total_Usage\": 57.78,\n        \"Name\": \"Kuwait\",\n        \"Region\": \"Middle East\",\n        \"Total_Production\": 65.95,\n        \"API\": \"Energy_in_Kuwait\",\n        \"Energy_Shortage\": 0,\n        \"Renewable_Energy_Rank\": 5,\n        \"Population\": 4.13\n    },\n    {\n        \"Total_Usage\": 5564,\n        \"Name\": \"China\",\n        \"Region\": \"Asia\",\n        \"Total_Production\": 5883,\n        \"API\": \"Energy_policy_of_China\",\n        \"Energy_Shortage\": 0,\n        \"Renewable_Energy_Rank\": 2,\n        \"Population\": 1386\n    },\n    {\n        \"Total_Usage\": 934,\n        \"Name\": \"Japan\",\n        \"Region\": \"Aisa\",\n        \"Total_Production\": 1020,\n        \"API\": \"Energy_in_Japan\",\n        \"Energy_Shortage\": 0,\n        \"Renewable_Energy_Rank\": 2,\n        \"Population\": 126.8\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "All Energy Info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f5cd408c-a26c-4f89-a0a0-bd746419a9b1",
+						"exec": [
+							"",
+							"pm.test(\"Test1: response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Test2: Return content checking\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Energy\");",
+							"});",
+							"",
+							"pm.test(\"Test3: Response must be valid and have a body\", function () {",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Test4: Check the Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    // Find the array index for the COUNTRY",
+							"    var index = jsonData.map(",
+							"            function(filter) {",
+							"                return filter.Name;",
+							"            }",
+							"        ).indexOf('Biomass');",
+							"        ",
+							"    // Get the target from the list",
+							"    var target = jsonData[index];",
+							"    console.log(target);",
+							"",
+							"    pm.expect(target).to.exist;",
+							"    pm.expect(target.Name).equal('Biomass')",
+							"});",
+							"",
+							"pm.test(\"Test5: Should include object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var target = jsonData[0]",
+							"    var expectedObject = {",
+							"        \"Name\": \"Biomass\",",
+							"        \"Major_Use\": \"Biomass Heating System\"",
+							"    }",
+							"    pm.expect(target).to.include(expectedObject);",
+							"",
+							"    // Optional check if properties actually exist",
+							"    pm.expect(target).to.have.property('Top_Producing_Country');",
+							"    pm.expect(target).to.have.property('API');",
+							"});",
+							"",
+							"// pm.test(\"Test5: Return content checking\", function () {",
+							"// // \tvar jsonData = pm.response.json();",
+							"// \tconsole.log(pm.response.json().results);",
+							"// \tpm.expect(pm.response.json().Name).equal('Austrialia')",
+							"// });",
+							"",
+							"pm.test(\"Test6: Response should be okay to process\", function () { ",
+							"    pm.response.to.not.be.error; ",
+							"    pm.response.to.not.have.jsonBody(\"error\"); ",
+							"});",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://www.energenius.me/api/energy?name=all",
+					"protocol": "https",
+					"host": [
+						"www",
+						"energenius",
+						"me"
+					],
+					"path": [
+						"api",
+						"energy"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "all"
+						}
+					]
+				},
+				"description": "This call accepts \"all\" and returns all the Energy information in the database."
+			},
+			"response": [
+				{
+					"name": "All Energy Info",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.energenius.me/api/energy?name=all",
+							"protocol": "https",
+							"host": [
+								"www",
+								"energenius",
+								"me"
+							],
+							"path": [
+								"api",
+								"energy"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "78a3fc86b3742c43ca96c83ce4f066f4;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Mar 2019 22:19:18 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1829"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"Name\": \"Biomass\",\n        \"Top_Producing_Country\": \"US\",\n        \"API\": \"Biomass\",\n        \"Electrical_Generating_Rank\": 8,\n        \"Major_Use\": \"Biomass Heating System\",\n        \"Type\": \"Reneable Energy\",\n        \"Consumption_Rank_in_US\": 5\n    },\n    {\n        \"Name\": \"Solar Energy\",\n        \"Top_Producing_Country\": \"China\",\n        \"API\": \"Solar_energy\",\n        \"Electrical_Generating_Rank\": 2,\n        \"Major_Use\": \"Lighting\",\n        \"Type\": \"Reneable Energy\",\n        \"Consumption_Rank_in_US\": 8\n    },\n    {\n        \"Name\": \"Hydropower\",\n        \"Top_Producing_Country\": \"China\",\n        \"API\": \"Hydropower\",\n        \"Electrical_Generating_Rank\": 4,\n        \"Major_Use\": \"Hydropower Plant\",\n        \"Type\": \"Reneable Energy\",\n        \"Consumption_Rank_in_US\": 6\n    },\n    {\n        \"Name\": \"Coal\",\n        \"Top_Producing_Country\": \"Australia\",\n        \"API\": \"Coal\",\n        \"Electrical_Generating_Rank\": 6,\n        \"Major_Use\": \"Coal Mining\",\n        \"Type\": \"Non-Renewable Energy\",\n        \"Consumption_Rank_in_US\": 3\n    },\n    {\n        \"Name\": \"Wind Power\",\n        \"Top_Producing_Country\": \"France\",\n        \"API\": \"Wind_power\",\n        \"Electrical_Generating_Rank\": 1,\n        \"Major_Use\": \"Electric power\",\n        \"Type\": \"Reneable Energy\",\n        \"Consumption_Rank_in_US\": 7\n    },\n    {\n        \"Name\": \"Natural Gas\",\n        \"Top_Producing_Country\": \"US\",\n        \"API\": \"Natural_gas\",\n        \"Electrical_Generating_Rank\": 7,\n        \"Major_Use\": \"Hydraulic Fracturing\",\n        \"Type\": \"Non-Renewable Energy\",\n        \"Consumption_Rank_in_US\": 2\n    },\n    {\n        \"Name\": \"Petroleum\",\n        \"Top_Producing_Country\": \"US\",\n        \"API\": \"Petroleum\",\n        \"Electrical_Generating_Rank\": 9,\n        \"Major_Use\": \"Offshore drilling\",\n        \"Type\": \"Non-Renewable Energy\",\n        \"Consumption_Rank_in_US\": 1\n    },\n    {\n        \"Name\": \"Nuclear Power\",\n        \"Top_Producing_Country\": \"US\",\n        \"API\": \"Nuclear_power\",\n        \"Electrical_Generating_Rank\": 5,\n        \"Major_Use\": \"Electric power\",\n        \"Type\": \"Non-Renewable Energy\",\n        \"Consumption_Rank_in_US\": 4\n    },\n    {\n        \"Name\": \"Geothermal Energy\",\n        \"Top_Producing_Country\": \"US\",\n        \"API\": \"Geothermal_energy\",\n        \"Electrical_Generating_Rank\": 3,\n        \"Major_Use\": \"Enhanced geothermal system\",\n        \"Type\": \"Reneable Energy\",\n        \"Consumption_Rank_in_US\": 9\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "All Usage and Production Info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2c57204f-fecb-48c1-8e6a-196862fb6a79",
+						"exec": [
+							"",
+							"pm.test(\"Test1: response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Test2: Return content checking\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Production\");",
+							"});",
+							"",
+							"pm.test(\"Test3: Response must be valid and have a body\", function () {",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Test4: Check the Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    // Find the array index for the COUNTRY",
+							"    var index = jsonData.map(",
+							"            function(filter) {",
+							"                return filter.Name;",
+							"            }",
+							"        ).indexOf('Medical');",
+							"        ",
+							"    // Get the target from the list",
+							"    var target = jsonData[index];",
+							"    console.log(target);",
+							"",
+							"    pm.expect(target).to.exist;",
+							"    pm.expect(target.Name).equal('Medical')",
+							"});",
+							"",
+							"pm.test(\"Test5: Should include object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var target = jsonData[0]",
+							"    var expectedObject = {",
+							"        \"Name\": \"Medical\",",
+							"        \"Carbon_Emission\": 0",
+							"    }",
+							"    pm.expect(target).to.include(expectedObject);",
+							"",
+							"    // Optional check if properties actually exist",
+							"    pm.expect(target).to.have.property('Usage_Field');",
+							"    pm.expect(target).to.have.property('Year_of_Invention');",
+							"});",
+							"",
+							"// pm.test(\"Test5: Return content checking\", function () {",
+							"// // \tvar jsonData = pm.response.json();",
+							"// \tconsole.log(pm.response.json().results);",
+							"// \tpm.expect(pm.response.json().Name).equal('Austrialia')",
+							"// });",
+							"",
+							"pm.test(\"Test6: Response should be okay to process\", function () { ",
+							"    pm.response.to.not.be.error; ",
+							"    pm.response.to.not.have.jsonBody(\"error\"); ",
+							"});",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://www.energenius.me/api/production?name=all",
+					"protocol": "https",
+					"host": [
+						"www",
+						"energenius",
+						"me"
+					],
+					"path": [
+						"api",
+						"production"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "all",
+							"description": "\"all\" is used to query all the Production and Usage methods in the database. "
+						}
+					]
+				},
+				"description": "Retrieve information regarding the area of application of certain energy. "
+			},
+			"response": [
+				{
+					"name": "Usage and Production",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://www.energenius.me/api/production?name=all",
+							"protocol": "https",
+							"host": [
+								"www",
+								"energenius",
+								"me"
+							],
+							"path": [
+								"api",
+								"production"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "all",
+									"description": "\"all\" is used to query all the Production and Usage methods in the database. "
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "3725c1208199f8b6818e2e22a0de2b8d;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Mar 2019 22:07:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1721"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"Name\": \"Medical\",\n        \"Usage_Field\": \"Electric power\",\n        \"Year_of_Invention\": 1928,\n        \"Related_Energy\": \"Nuclear Power\",\n        \"Carbon_Emission\": 0,\n        \"API\": \"Radioactive_tracer\",\n        \"Type\": \"Usage\"\n    },\n    {\n        \"Name\": \"Coal mining\",\n        \"Usage_Field\": \"Electric power\",\n        \"Year_of_Invention\": 0,\n        \"Related_Energy\": \"Coal\",\n        \"Carbon_Emission\": 1318,\n        \"API\": \"Coal_mining\",\n        \"Type\": \"Production\"\n    },\n    {\n        \"Name\": \"Offshore drilling\",\n        \"Usage_Field\": \"Transportation\",\n        \"Year_of_Invention\": 1891,\n        \"Related_Energy\": \"Petroleum\",\n        \"Carbon_Emission\": 2338,\n        \"API\": \"Offshore_drilling\",\n        \"Type\": \"Production\"\n    },\n    {\n        \"Name\": \"Enhanced geothermal system\",\n        \"Usage_Field\": \"Electric power\",\n        \"Year_of_Invention\": 1904,\n        \"Related_Energy\": \"Geothermal Energy\",\n        \"Carbon_Emission\": 0,\n        \"API\": \"Enhanced_geothermal_system\",\n        \"Type\": \"Production\"\n    },\n    {\n        \"Name\": \"Hydropower Plant\",\n        \"Usage_Field\": \"Electric power\",\n        \"Year_of_Invention\": 1831,\n        \"Related_Energy\": \"Hydropower\",\n        \"Carbon_Emission\": 0,\n        \"API\": \"Hydroelectricity\",\n        \"Type\": \"Production\"\n    },\n    {\n        \"Name\": \"Hydraulic fracturing\",\n        \"Usage_Field\": \"Industrial\",\n        \"Year_of_Invention\": 1865,\n        \"Related_Energy\": \"Natural Gas\",\n        \"Carbon_Emission\": 1472,\n        \"API\": \"Hydraulic_fracturing\",\n        \"Type\": \"Production\"\n    },\n    {\n        \"Name\": \"Lighting\",\n        \"Usage_Field\": \"Residential\",\n        \"Year_of_Invention\": 1839,\n        \"Related_Energy\": \"Solar Energy\",\n        \"Carbon_Emission\": 0,\n        \"API\": \"Solar_lamp\",\n        \"Type\": \"Usage\"\n    },\n    {\n        \"Name\": \"Wind turbine\",\n        \"Usage_Field\": \"Electric power\",\n        \"Year_of_Invention\": 1888,\n        \"Related_Energy\": \"Wind Power\",\n        \"Carbon_Emission\": 0,\n        \"API\": \"Wind_turbine\",\n        \"Type\": \"Production\"\n    },\n    {\n        \"Name\": \"Biomass Heating System\",\n        \"Usage_Field\": \"Residential\",\n        \"Year_of_Invention\": 0,\n        \"Related_Energy\": \"Biomass\",\n        \"Carbon_Emission\": 0,\n        \"API\": \"Biomass_heating_system\",\n        \"Type\": \"Usage\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "List Countries",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ee0f21df-16a7-4244-830f-16cc46c96dfc",
+						"exec": [
+							"",
+							"pm.test(\"Test1: response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Test2: Return content checking\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"China\");",
+							"});",
+							"",
+							"pm.test(\"Test3: Response must be valid and have a body\", function () {",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Test4: Check the Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    // Find the array index for the COUNTRY",
+							"    var index = jsonData.map(",
+							"            function(filter) {",
+							"                return filter.Name;",
+							"            }",
+							"        ).indexOf('Australia');",
+							"        ",
+							"    // Get the target from the list",
+							"    var target = jsonData[index];",
+							"    console.log(target);",
+							"",
+							"    pm.expect(target).to.exist;",
+							"    pm.expect(target.Name).equal('Australia')",
+							"});",
+							"",
+							"pm.test(\"Test5: Should include object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var target = jsonData[0]",
+							"    var expectedObject = {",
+							"        \"Name\": \"Australia\"",
+							"    }",
+							"    pm.expect(target).to.include(expectedObject);",
+							"    pm.expect(target).to.have.property('Name');",
+							"});",
+							"",
+							"// pm.test(\"Test5: Return content checking\", function () {",
+							"// // \tvar jsonData = pm.response.json();",
+							"// \tconsole.log(pm.response.json().results);",
+							"// \tpm.expect(pm.response.json().Name).equal('Austrialia')",
+							"// });",
+							"",
+							"pm.test(\"Test6: Response should be okay to process\", function () { ",
+							"    pm.response.to.not.be.error; ",
+							"    pm.response.to.not.have.jsonBody(\"error\"); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://www.energenius.me/api/country?name=list",
+					"protocol": "https",
+					"host": [
+						"www",
+						"energenius",
+						"me"
+					],
+					"path": [
+						"api",
+						"country"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "list"
+						}
+					]
+				},
+				"description": "This call accepts the \"list\" as a parameter and return the list of all countries' names from our database."
+			},
+			"response": [
+				{
+					"name": "List Countries Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://www.energenius.me/api/country?name=list",
+							"protocol": "https",
+							"host": [
+								"www",
+								"energenius",
+								"me"
+							],
+							"path": [
+								"api",
+								"country"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "list"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "fe4a2f68b87a387964398a2bdc1479ba;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Mar 2019 22:21:54 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "177"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"Name\": \"Austrialia\"\n    },\n    {\n        \"Name\": \"China\"\n    },\n    {\n        \"Name\": \"Germany\"\n    },\n    {\n        \"Name\": \"Haiti\"\n    },\n    {\n        \"Name\": \"India\"\n    },\n    {\n        \"Name\": \"Japan\"\n    },\n    {\n        \"Name\": \"Kuwait\"\n    },\n    {\n        \"Name\": \"US\"\n    },\n    {\n        \"Name\": \"Zambia\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "List Energies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "79e94c6c-f7a2-4b02-86ae-0332f36b6de6",
+						"exec": [
+							"",
+							"pm.test(\"Test1: response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Test2: Return content checking\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Biomass\");",
+							"});",
+							"",
+							"pm.test(\"Test3: Response must be valid and have a body\", function () {",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Test4: Check the Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    // Find the array index for the COUNTRY",
+							"    var index = jsonData.map(",
+							"            function(filter) {",
+							"                return filter.Name;",
+							"            }",
+							"        ).indexOf('Biomass');",
+							"        ",
+							"    // Get the target from the list",
+							"    var target = jsonData[index];",
+							"    console.log(target);",
+							"",
+							"    pm.expect(target).to.exist;",
+							"    pm.expect(target.Name).equal('Biomass')",
+							"});",
+							"",
+							"pm.test(\"Test5: Should include object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var target = jsonData[0]",
+							"    var expectedObject = {",
+							"        \"Name\": \"Biomass\"",
+							"    }",
+							"    pm.expect(target).to.include(expectedObject);",
+							"    pm.expect(target).to.have.property('Name');",
+							"});",
+							"",
+							"// pm.test(\"Test5: Return content checking\", function () {",
+							"// // \tvar jsonData = pm.response.json();",
+							"// \tconsole.log(pm.response.json().results);",
+							"// \tpm.expect(pm.response.json().Name).equal('Austrialia')",
+							"// });",
+							"",
+							"pm.test(\"Test6: Response should be okay to process\", function () { ",
+							"    pm.response.to.not.be.error; ",
+							"    pm.response.to.not.have.jsonBody(\"error\"); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://www.energenius.me/api/energy?name=list",
+					"protocol": "https",
+					"host": [
+						"www",
+						"energenius",
+						"me"
+					],
+					"path": [
+						"api",
+						"energy"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "list"
+						}
+					]
+				},
+				"description": "This call accepts the \"list\" as a parameter and return the list of all energies' names from our database."
+			},
+			"response": [
+				{
+					"name": "List Energies example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://www.energenius.me/api/energy?name=list",
+							"protocol": "https",
+							"host": [
+								"www",
+								"energenius",
+								"me"
+							],
+							"path": [
+								"api",
+								"energy"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "list"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "8c3eff2cd8a9adb352e6b7fe3039e73b"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Mar 2019 22:24:40 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "219"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"Name\": \"Biomass\"\n    },\n    {\n        \"Name\": \"Coal\"\n    },\n    {\n        \"Name\": \"Geothermal Energy\"\n    },\n    {\n        \"Name\": \"Hydropower\"\n    },\n    {\n        \"Name\": \"Natural Gas\"\n    },\n    {\n        \"Name\": \"Nuclear Power\"\n    },\n    {\n        \"Name\": \"Petroleum\"\n    },\n    {\n        \"Name\": \"Solar Energy\"\n    },\n    {\n        \"Name\": \"Wind Power\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "List Usage & Production",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f48476b1-b92b-4ec1-900b-9d125750c913",
+						"exec": [
+							"",
+							"pm.test(\"Test1: response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Test2: Return content checking\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Lighting\");",
+							"});",
+							"",
+							"pm.test(\"Test3: Response must be valid and have a body\", function () {",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Test4: Check the Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    // Find the array index for the COUNTRY",
+							"    var index = jsonData.map(",
+							"            function(filter) {",
+							"                return filter.Name;",
+							"            }",
+							"        ).indexOf('Lighting');",
+							"        ",
+							"    // Get the target from the list",
+							"    var target = jsonData[index];",
+							"    console.log(target);",
+							"",
+							"    pm.expect(target).to.exist;",
+							"    pm.expect(target.Name).equal('Lighting')",
+							"});",
+							"",
+							"pm.test(\"Test5: Should include object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var target = jsonData[0]",
+							"    var expectedObject = {",
+							"        \"Name\": \"Biomass Heating System\"",
+							"    }",
+							"    pm.expect(target).to.include(expectedObject);",
+							"    pm.expect(target).to.have.property('Name');",
+							"});",
+							"",
+							"// pm.test(\"Test5: Return content checking\", function () {",
+							"// // \tvar jsonData = pm.response.json();",
+							"// \tconsole.log(pm.response.json().results);",
+							"// \tpm.expect(pm.response.json().Name).equal('Austrialia')",
+							"// });",
+							"",
+							"pm.test(\"Test6: Response should be okay to process\", function () { ",
+							"    pm.response.to.not.be.error; ",
+							"    pm.response.to.not.have.jsonBody(\"error\"); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://www.energenius.me/api/production?name=list",
+					"protocol": "https",
+					"host": [
+						"www",
+						"energenius",
+						"me"
+					],
+					"path": [
+						"api",
+						"production"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "list"
+						}
+					]
+				},
+				"description": "This call accepts the \"list\" as a parameter and return the list of all productions' names from our database."
+			},
+			"response": [
+				{
+					"name": "List Usage & Production",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://www.energenius.me/api/production?name=list",
+							"protocol": "https",
+							"host": [
+								"www",
+								"energenius",
+								"me"
+							],
+							"path": [
+								"api",
+								"production"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "list"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "6bd87fc9098db76c4ef0e0c09b202e76"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Mar 2019 22:26:44 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "265"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"Name\": \"Biomass Heating System\"\n    },\n    {\n        \"Name\": \"Coal mining\"\n    },\n    {\n        \"Name\": \"Enhanced geothermal system\"\n    },\n    {\n        \"Name\": \"Hydraulic fracturing\"\n    },\n    {\n        \"Name\": \"Hydropower Plant\"\n    },\n    {\n        \"Name\": \"Lighting\"\n    },\n    {\n        \"Name\": \"Medical\"\n    },\n    {\n        \"Name\": \"Offshore drilling\"\n    },\n    {\n        \"Name\": \"Wind turbine\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Country's Info by Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6c3e63e9-65b7-4412-816b-da2c9c2bb6ad",
+						"exec": [
+							"",
+							"pm.test(\"Test1: response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Test2: Return content checking\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Asia\");",
+							"});",
+							"",
+							"pm.test(\"Test3: Response must be valid and have a body\", function () {",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"Test4: Check the Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    // Find the array index for the COUNTRY",
+							"    var index = jsonData.map(",
+							"            function(filter) {",
+							"                return filter.Name;",
+							"            }",
+							"        ).indexOf('China');",
+							"        ",
+							"    // Get the target from the list",
+							"    var target = jsonData[index];",
+							"    console.log(target);",
+							"",
+							"    pm.expect(target).to.exist;",
+							"    pm.expect(target.Total_Usage).equal(5564)",
+							"});",
+							"",
+							"pm.test(\"Test5: Should include object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var target = jsonData[0]",
+							"    var expectedObject = {",
+							"        \"Total_Usage\": 5564,",
+							"        \"Name\": \"China\",",
+							"        \"Region\": \"Asia\",",
+							"        \"Total_Production\": 5883,",
+							"        \"API\": \"Energy_policy_of_China\",",
+							"        \"Energy_Shortage\": 0,",
+							"        \"Renewable_Energy_Rank\": 2,",
+							"        \"Population\": 1386",
+							"    }",
+							"    pm.expect(target).to.include(expectedObject);",
+							"    pm.expect(target).to.have.property('Name');",
+							"});",
+							"",
+							"pm.test(\"Test6: Response should be okay to process\", function () { ",
+							"    pm.response.to.not.be.error; ",
+							"    pm.response.to.not.have.jsonBody(\"error\"); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://www.energenius.me/api/country?name=China",
+					"protocol": "https",
+					"host": [
+						"www",
+						"energenius",
+						"me"
+					],
+					"path": [
+						"api",
+						"country"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "China"
+						}
+					]
+				},
+				"description": "This call accept a country's name and return the energy information we collected in the database."
+			},
+			"response": [
+				{
+					"name": "Get Country's Info by Name Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://www.energenius.me/api/country?name=China",
+							"protocol": "https",
+							"host": [
+								"www",
+								"energenius",
+								"me"
+							],
+							"path": [
+								"api",
+								"country"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "China"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "4e7629bf7649d1c77550a903920fe4e4"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Mar 2019 22:28:09 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "195"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"Total_Usage\": 5564,\n        \"Name\": \"China\",\n        \"Region\": \"Asia\",\n        \"Total_Production\": 5883,\n        \"API\": \"Energy_policy_of_China\",\n        \"Energy_Shortage\": 0,\n        \"Renewable_Energy_Rank\": 2,\n        \"Population\": 1386\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Energy's Info by Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a1bf0e43-8913-4830-951b-db6c927cfd71",
+						"exec": [
+							"",
+							"pm.test(\"Test1: response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Test2: Return content checking\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Solar Energy\");",
+							"});",
+							"",
+							"pm.test(\"Test3: Response must be valid and have a body\", function () {",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"Test4: Check the Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    // Find the array index for the COUNTRY",
+							"    var index = jsonData.map(",
+							"            function(filter) {",
+							"                return filter.Name;",
+							"            }",
+							"        ).indexOf('Solar Energy');",
+							"        ",
+							"    // Get the target from the list",
+							"    var target = jsonData[index];",
+							"    console.log(target);",
+							"",
+							"    pm.expect(target).to.exist;",
+							"    pm.expect(target.Major_Use).equal(\"Lighting\")",
+							"});",
+							"",
+							"pm.test(\"Test5: Should include object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var target = jsonData[0]",
+							"    var expectedObject = {",
+							"        \"Name\": \"Solar Energy\",",
+							"        \"Top_Producing_Country\": \"China\",",
+							"        \"API\": \"Solar_energy\",",
+							"        \"Electrical_Generating_Rank\": 2,",
+							"        \"Major_Use\": \"Lighting\",",
+							"        \"Type\": \"Reneable Energy\",",
+							"        \"Consumption_Rank_in_US\": 8",
+							"    }",
+							"    pm.expect(target).to.include(expectedObject);",
+							"    pm.expect(target).to.have.property('Name');",
+							"});",
+							"",
+							"pm.test(\"Test6: Response should be okay to process\", function () { ",
+							"    pm.response.to.not.be.error; ",
+							"    pm.response.to.not.have.jsonBody(\"error\"); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://www.energenius.me/api/energy?name=Solar%20Energy",
+					"protocol": "https",
+					"host": [
+						"www",
+						"energenius",
+						"me"
+					],
+					"path": [
+						"api",
+						"energy"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Solar%20Energy"
+						}
+					]
+				},
+				"description": "This call accept a energy's name and return the energy information we collected in the database."
+			},
+			"response": [
+				{
+					"name": "Get Energy's Info by Name example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://www.energenius.me/api/energy?name=Solar%20Energy",
+							"protocol": "https",
+							"host": [
+								"www",
+								"energenius",
+								"me"
+							],
+							"path": [
+								"api",
+								"energy"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Solar%20Energy"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "4160d9a739ac99079ef129864ab55fe2;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Mar 2019 22:30:24 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "197"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"Name\": \"Solar Energy\",\n        \"Top_Producing_Country\": \"China\",\n        \"API\": \"Solar_energy\",\n        \"Electrical_Generating_Rank\": 2,\n        \"Major_Use\": \"Lighting\",\n        \"Type\": \"Reneable Energy\",\n        \"Consumption_Rank_in_US\": 8\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Production & Usage Info by Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f17dd54c-daf2-4aa7-b366-b89c5744df39",
+						"exec": [
+							"",
+							"pm.test(\"Test1: response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Test2: Return content checking\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Medical\");",
+							"});",
+							"",
+							"pm.test(\"Test3: Response must be valid and have a body\", function () {",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"Test4: Check the Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    // Find the array index for the COUNTRY",
+							"    var index = jsonData.map(",
+							"            function(filter) {",
+							"                return filter.Name;",
+							"            }",
+							"        ).indexOf('Medical');",
+							"        ",
+							"    // Get the target from the list",
+							"    var target = jsonData[index];",
+							"    console.log(target);",
+							"",
+							"    pm.expect(target).to.exist;",
+							"    pm.expect(target.Type).equal(\"Usage\")",
+							"});",
+							"",
+							"pm.test(\"Test5: Should include object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var target = jsonData[0]",
+							"    var expectedObject = {",
+							"        \"Name\": \"Medical\",",
+							"        \"Usage_Field\": \"Electric power\",",
+							"        \"Year_of_Invention\": 1928,",
+							"        \"Related_Energy\": \"Nuclear Power\",",
+							"        \"Carbon_Emission\": 0,",
+							"        \"API\": \"Radioactive_tracer\",",
+							"        \"Type\": \"Usage\"",
+							"    }",
+							"    pm.expect(target).to.include(expectedObject);",
+							"    pm.expect(target).to.have.property('Name');",
+							"});",
+							"",
+							"pm.test(\"Test6: Response should be okay to process\", function () { ",
+							"    pm.response.to.not.be.error; ",
+							"    pm.response.to.not.have.jsonBody(\"error\"); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://www.energenius.me/api/production?name=Medical",
+					"protocol": "https",
+					"host": [
+						"www",
+						"energenius",
+						"me"
+					],
+					"path": [
+						"api",
+						"production"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Medical"
+						}
+					]
+				},
+				"description": "This call accept a utilization's name and return the energy information we collected in the database."
+			},
+			"response": [
+				{
+					"name": "Get Production & Usage Info by Name Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://www.energenius.me/api/production?name=Medical",
+							"protocol": "https",
+							"host": [
+								"www",
+								"energenius",
+								"me"
+							],
+							"path": [
+								"api",
+								"production"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Medical"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "2d372d182f0a554a56e1f829d748ed85"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Mar 2019 22:33:22 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "184"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"Name\": \"Medical\",\n        \"Usage_Field\": \"Electric power\",\n        \"Year_of_Invention\": 1928,\n        \"Related_Energy\": \"Nuclear Power\",\n        \"Carbon_Emission\": 0,\n        \"API\": \"Radioactive_tracer\",\n        \"Type\": \"Usage\"\n    }\n]"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "bbeb4ef3-02f7-4252-bc91-863cb7f24250",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6bc01206-ff09-4cf9-8a7d-dfb5009d4624",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
