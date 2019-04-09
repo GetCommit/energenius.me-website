@@ -1,0 +1,34 @@
+@startuml
+Object Energy {
+  Name
+  Type 
+  Production_Usage
+  Consumption_Rank_in_US
+  Electrical_Generating_Rank
+  Top_Producing_Country
+}
+
+Object Production_Usage{
+  Name
+  Type
+  Related_Energy
+  Carbon Emission
+  Year of Invention
+  Usage Field
+}
+
+Object Country{
+  Name
+  Total Production
+  Total Usage
+  Energy Shortage
+  Renewable Energy Rank
+  Region
+  Population
+}
+
+
+Energy .. Production_Usage: dependent
+Country .. Production_Usage: develop
+Energy .. Country: control
+@enduml

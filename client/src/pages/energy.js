@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import ReactDOM from "react-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -84,11 +86,12 @@ class Energy extends Component {
 
     componentDidMount() {
       document.title = "Energy";
-      fetch('/api/energy?name=all')
+      fetch('https://www.energenius.me/api/energy?name=all')
           .then(response => response.json())
           .then(data => this.setState({info: data}));
     }
 
+  
     handlePageChange(pageNumber) {
      const start_idx = (pageNumber - 1) * 3;
      console.log(`active page is ${pageNumber}`);
@@ -97,10 +100,12 @@ class Energy extends Component {
     }
 
     render() {
+
         if (this.state.info === undefined) {
             return (<div>Loading</div>)
         }
-
+        console.log(this.state.info)
+        
       const { classes } = this.tmp_props;
 
       return (
@@ -108,6 +113,12 @@ class Energy extends Component {
             <CssBaseline />
 
             <main>
+
+            <DropdownButton id="dropdown-item-button" title="Filter">
+              <Dropdown.Item as="button">Action</Dropdown.Item>
+              <Dropdown.Item as="button">Another action</Dropdown.Item>
+              <Dropdown.Item as="button">Something else</Dropdown.Item>
+            </DropdownButton>
 
               {/* Hero unit */}
 
