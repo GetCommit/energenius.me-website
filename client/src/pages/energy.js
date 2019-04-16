@@ -215,7 +215,7 @@ class Energy extends Component {
                   <CssBaseline />
                   {this.state.shownIdx.map(idx => (
                     <Grid item key={"card"}>
-                        <Link to={'/energy/'+this.state.info[idx]['API']}>
+                        <Link to={'/energy/'+this.state.info[idx]['Name']}>
                         <Card className={classes.card} style={{ width: '18rem' }}>
                             <CardMedia
                             className={classes.cardMedia}
@@ -260,8 +260,8 @@ class Energy extends Component {
             <div>
             <Pagination
             activePage={this.state.activePage}
-            itemsCountPerPage={3}
-            totalItemsCount={9}
+            itemsCountPerPage={9}
+            totalItemsCount={27}
             pageRangeDisplayed={3}
             innerClass="pagination justify-content-center"
             linkClass="page-link"

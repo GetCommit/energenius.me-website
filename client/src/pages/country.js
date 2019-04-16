@@ -123,7 +123,7 @@ class Country extends Component {
                   <CssBaseline />
                   {this.state.shownIdx.map(idx => (
                     <Grid item key={"card"}>
-                        <Link to={'/country/'+this.state.info[idx]['API']}>
+                        <Link to={'/country/'+this.state.info[idx]['Name']}>
                         <Card className={classes.card}>
                             <CardMedia
                             className={classes.cardMedia}

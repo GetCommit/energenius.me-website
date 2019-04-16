@@ -10,7 +10,10 @@ class CountryInstance extends Component {
       this.title = this.id
       this.id = this.props.match.params;
       this.img = this.id['id']
+      console.log('hEllo '+this.img, typeof(this.img),this.id)
+
     }
+
     // componentDidMount (){
     //     fetch(
     //         'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsentences=10&origin=*&titles='+this.id['id']
@@ -28,6 +31,8 @@ class CountryInstance extends Component {
     //             console.log(e)
     //         })
     //     }
+
+
     componentDidMount (){
         fetch(
             'https://www.energenius.me/api/country?name=all'
@@ -35,14 +40,16 @@ class CountryInstance extends Component {
             .then(response => response.json())
             .then(data => {
                 for (var item in data){
-                    if(data[item]['API'] == this.id['id']){
+                    if(data[item]["Name"] == this.img){
                         this.states['result'] = data[item]['description']
+                        this.states['related_energy'] = data[item]['Energy_API']
+                        this.states['related_production'] = data[item]['Production_API']
 
                         break
                     }
                     
                 }
-            this.setState({})
+                this.setState({})
             })
             .catch(e => {
                 console.log(e)
@@ -69,7 +76,7 @@ class CountryInstance extends Component {
                     <aside class="col-md-4 blog-sidebar">
                         <div class="p-4">
                         {/* <img class="img-rounded" src="../bootstrap/img/country/china/china1.png" width = "300"> */}
-                        <img src={require('../../img/country/API/'+this.img+'.jpg')} width="80%" height="80%" />
+                        <img src={require('../../img/country/instance/'+this.img+'.jpg')} width="80%" height="80%" />
 
                         </div>
 
@@ -77,7 +84,7 @@ class CountryInstance extends Component {
                         <h4 class="font-italic">Related Energy</h4>
                         <ol class="list-unstyled mb-0">
 
-                            <li><Link to={'/production/'+'Biomass_heating_system'}>Residential</Link></li>
+                            <li><Link to={'/energy/'+this.states['related_energy']}>{this.states['related_energy']}</Link></li>
                             
                         </ol>
                         </div>
@@ -86,7 +93,7 @@ class CountryInstance extends Component {
                         <h4 class="font-italic">Related Production and Usage</h4>
                         <ol class="list-unstyled">
 
-                            <li><Link to={'/energy/'+'Solar_energy'}>Solar</Link></li>
+                            <li><Link to={'/production/'+this.states['related_production']}>{this.states['related_production']}</Link></li>
 
                         </ol>
                         </div>

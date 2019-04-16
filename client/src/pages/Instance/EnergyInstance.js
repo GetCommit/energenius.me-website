@@ -11,24 +11,47 @@ class EnergyInstance extends Component {
       this.id = this.props.match.params;
       this.img = this.id['id']
     }
+    // componentDidMount (){
+    //     fetch(
+    //         'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsentences=10&origin=*&titles='+this.id['id']
+    //     )
+    //         .then(response => response.json())
+    //         .then(data => {
+
+    //             var v = data['query']['pages'];
+    //             var keys = Object.keys(v);
+    //             this.states['result'] = data['query']['pages'][keys[0]]['extract'];
+    //         //   process the data
+    //         this.setState({})
+    //         })
+    //         .catch(e => {
+    //             console.log(e)
+    //         })
+    //     }
+
+
     componentDidMount (){
         fetch(
-            'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsentences=10&origin=*&titles='+this.id['id']
+            'https://www.energenius.me/api/energy?name=all'
         )
             .then(response => response.json())
             .then(data => {
+                for (var item in data){
+                    if(data[item]["Name"] == this.img){
+                        this.states['result'] = data[item]['description']
+                        this.states['related_country'] = data[item]['Country_API']
+                        this.states['related_production'] = data[item]['Production_API']
 
-                var v = data['query']['pages'];
-                var keys = Object.keys(v);
-                this.states['result'] = data['query']['pages'][keys[0]]['extract'];
-            //   process the data
-            this.setState({})
+                        break
+                    }
+                    
+                }
+                this.setState({})
             })
             .catch(e => {
                 console.log(e)
             })
         }
-
 
     render() {
         return (
@@ -47,22 +70,23 @@ class EnergyInstance extends Component {
 
                     <aside class="col-md-4 blog-sidebar">
                         <div class="p-4">
-                            <img src={require('../../img/energy/API/'+this.img+'.jpg')} width="80%" height="80%" />
+                            <img src={require('../../img/energy/instance/'+this.img+'.jpg')} width="80%" height="80%" />
                         </div>
 
                         <div class="p-4">
-                        <h4 class="font-italic">Production & Usage</h4>
+                        <h4 class="font-italic">Related Country</h4>
                         <ol class="list-unstyled mb-0">
-                            <li><Link to={'/production/'+'Biomass_heating_system'}>Residential</Link></li>
+
+                            <li><Link to={'/country/'+this.states['related_country']}>{this.states['related_country']}</Link></li>
+                            
                         </ol>
                         </div>
 
                         <div class="p-4 mt-0">
-                        <h4 class="font-italic">Country of Consumption</h4>
+                        <h4 class="font-italic">Related Production & Usage</h4>
                         <ol class="list-unstyled">
-                            <li><Link to={'/country/'+'Energy_policy_of_China'}>China</Link></li>
-                            <li><Link to={'/country/'+'Energy_in_the_United_States'}>United States</Link></li>
-                            <li><Link to={'/country/'+'Energy_in_Australia'}>Australia</Link></li>
+
+                            <li><Link to={'/production/'+this.states['related_production']}>{this.states['related_production']}</Link></li>
 
                         </ol>
                         </div>
