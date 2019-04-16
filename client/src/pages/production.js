@@ -76,7 +76,7 @@ class Production extends Component {
       this.state = {
           activePage: 1,
           info: undefined,
-          shownIdx: [0, 1, 2]
+          shownIdx: [0, 1, 2, 3, 4, 5, 6, 7, 8]
       };
 
       this.handlePageChange = this.handlePageChange.bind(this);
@@ -93,7 +93,9 @@ class Production extends Component {
      const start_idx = (pageNumber - 1) * 3;
      console.log(`active page is ${pageNumber}`);
      this.setState({activePage: pageNumber,
-         shownIdx: [start_idx, start_idx + 1, start_idx + 2]});
+         shownIdx: [start_idx, start_idx + 1, start_idx + 2,
+             start_idx + 3, start_idx + 4, start_idx + 5,
+             start_idx + 6, start_idx + 7, start_idx + 8]});
     }
 
     render() {

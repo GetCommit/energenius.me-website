@@ -18,6 +18,8 @@ import { withStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Instance from './Instance.js'
 import Pagination from "react-js-pagination";
+import Form from 'react-bootstrap/Form';
+
 
 const styles = theme => ({
     appBar: {
@@ -78,10 +80,11 @@ class Energy extends Component {
       this.state = {
           activePage: 1,
           info: undefined,
-          shownIdx: [0, 1, 2]
+          shownIdx: [0, 1, 2, 3, 4, 5, 6, 7, 8]
       };
 
       this.handlePageChange = this.handlePageChange.bind(this);
+      // this.handleFilter = this.handleFilter.bind(this);
     }
 
     componentDidMount() {
@@ -91,12 +94,76 @@ class Energy extends Component {
           .then(data => this.setState({info: data}));
     }
 
-  
+
     handlePageChange(pageNumber) {
-     const start_idx = (pageNumber - 1) * 3;
+     const start_idx = (pageNumber - 1) * 9;
      console.log(`active page is ${pageNumber}`);
      this.setState({activePage: pageNumber,
-         shownIdx: [start_idx, start_idx + 1, start_idx + 2]});
+         shownIdx: [start_idx, start_idx + 1, start_idx + 2,
+             start_idx + 3, start_idx + 4, start_idx + 5,
+             start_idx + 6, start_idx + 7, start_idx + 8]});
+    }
+
+    handleFilter(event) {
+        // window.alert("here");
+        const form = event.currentTarget;
+
+        var checkedType = []
+        for (var i in form["Type"]) {
+            // window.alert(form["Type"][i]);
+            if (form["Type"][i].checked) {
+                checkedType += String(form["Type"][i].id);
+            }
+        }
+
+        var checkedUse = []
+        for (var i in form["Major_Use"]) {
+            // window.alert(form["Type"][i]);
+            if (form["Major_Use"][i].checked) {
+                checkedUse += String(form["Major_Use"][i].id);
+            }
+        }
+
+        var checkedCountry = []
+        for (var i in form["Top_Producing_Country"]) {
+            if (form["Top_Producing_Country"][i].checked) {
+                checkedCountry += String(form["Top_Producing_Country"][i].id);
+            }
+        }
+        window.alert(checkedCountry);
+
+
+        var api = ""
+        if (checkedType.length == 0) {
+            api += "Type=all"
+        } else {
+            api += "Type="
+            api += checkedType.join("-")
+        }
+        api += "&"
+
+        if (checkedUse.length == 0) {
+            api += "Major_Use=all"
+        } else {
+            api += "Major_Use="
+            api += checkedUse.join("-")
+        }
+
+        api += "&"
+        if (checkedCountry.length == 0) {
+            api += "Top_Producing_Country=all"
+        } else {
+            api += "Top_Producing_Country="
+            api += checkedCountry.join("-")
+        }
+
+        window.alert(api);
+
+        // if (form.checkValidity() === false) {
+        //   event.preventDefault();
+        //   event.stopPropagation();
+        // }
+        // this.setState({ validated: true });
     }
 
     render() {
@@ -104,8 +171,8 @@ class Energy extends Component {
         if (this.state.info === undefined) {
             return (<div>Loading</div>)
         }
-        console.log(this.state.info)
-        
+        // console.log(this.state.info)
+
       const { classes } = this.tmp_props;
 
       return (
@@ -114,13 +181,32 @@ class Energy extends Component {
 
             <main>
 
+
             <DropdownButton id="dropdown-item-button" title="Filter">
-              <Dropdown.Item as="button">Action</Dropdown.Item>
-              <Dropdown.Item as="button">Another action</Dropdown.Item>
-              <Dropdown.Item as="button">Something else</Dropdown.Item>
+              <Dropdown.Item as="button"><Form.Check
+                type={'checkbox'}
+                id={'Type'}
+                name={'Type'}
+                label={'Physical Energy'}
+              /></Dropdown.Item>
+              <Dropdown.Item as="button"><Form.Check
+                type={'checkbox'}
+                id={'Type'}
+                name={'Type'}
+                label={'Non-Renewable Energy'}
+              /></Dropdown.Item>
+              <Dropdown.Item as="button"><Form.Check
+                type={'checkbox'}
+                id={'Type'}
+                name={'Type'}
+                label={'Reneable Energy'}
+              /></Dropdown.Item>
             </DropdownButton>
 
               {/* Hero unit */}
+
+              <div class="row">
+              <div class="col-md-10">
 
               <div className={classNames(classes.layout, classes.cardGrid)}>
                 {/* End hero unit */}
@@ -130,7 +216,7 @@ class Energy extends Component {
                   {this.state.shownIdx.map(idx => (
                     <Grid item key={"card"}>
                         <Link to={'/energy/'+this.state.info[idx]['API']}>
-                        <Card className={classes.card}>
+                        <Card className={classes.card} style={{ width: '18rem' }}>
                             <CardMedia
                             className={classes.cardMedia}
 
@@ -182,6 +268,43 @@ class Energy extends Component {
             itemClass="page-item"
             onChange={this.handlePageChange}
             />
+            </div>
+            </div>
+
+            <aside class="col-md-2">
+            <Form noValidate onSubmit={this.handleFilter}>
+                <Form.Label>Type</Form.Label>
+                <div key={'type'} className="mb-3">
+                  <Form.Check type={'checkbox'} id={'Physical Energy'} name={'Type'} label={'Physical Energy'} />
+                  <Form.Check type={'checkbox'} id={'Non-Renewable Energy'} name={'Type'} label={'Non-Renewable Energy'} />
+                  <Form.Check type={'checkbox'} id={'Reneable Energy'} name={'Type'} label={'Reneable Energy'} />
+                </div>
+
+                <Form.Label>Major Use</Form.Label>
+                <div key={'use'} className="mb-3">
+                  <Form.Check type={'checkbox'} id={'Industrial'} name={'Major_Use'} label={'Industrial'} />
+                  <Form.Check type={'checkbox'} id={'Electric Power'} name={'Major_Use'} label={'Electric Power'} />
+                  <Form.Check type={'checkbox'} id={'Residential'} name={'Major_Use'} label={'Residential'} />
+                  <Form.Check type={'checkbox'} id={'High Technology'} name={'Major_Use'} label={'High Technology'} />
+                  <Form.Check type={'checkbox'} id={'Transportation'} name={'Major_Use'} label={'Transportation'} />
+                  <Form.Check type={'checkbox'} id={'Shield'} name={'Major_Use'} label={'Shield'} />
+                </div>
+
+                <Form.Label>Top Producing Country</Form.Label>
+                <div key={'country'} className="mb-3">
+                  <Form.Check type={'checkbox'} id={'Australia'} name={'Top_Producing_Country'} label={'Australia'} />
+                  <Form.Check type={'checkbox'} id={'China'} name={'Top_Producing_Country'} label={'China'} />
+                  <Form.Check type={'checkbox'} id={'France'} name={'Top_Producing_Country'} label={'France'} />
+                  <Form.Check type={'checkbox'} id={'India'} name={'Top_Producing_Country'} label={'India'} />
+                  <Form.Check type={'checkbox'} id={'Japan'} name={'Top_Producing_Country'} label={'Japan'} />
+                  <Form.Check type={'checkbox'} id={'Kuwait'} name={'Top_Producing_Country'} label={'Kuwait'} />
+                  <Form.Check type={'checkbox'} id={'United States'} name={'Top_Producing_Country'} label={'United States'} />
+                  <Form.Check type={'checkbox'} id={'Wakanda'} name={'Top_Producing_Country'} label={'Wakanda'} />
+                </div>
+                <Button variant="outlined" color="primary" type="submit">Apply Filter</Button>
+            </Form>
+
+            </aside>
             </div>
             </main>
 
