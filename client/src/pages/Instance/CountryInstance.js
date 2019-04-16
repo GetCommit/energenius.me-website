@@ -11,17 +11,37 @@ class CountryInstance extends Component {
       this.id = this.props.match.params;
       this.img = this.id['id']
     }
+    // componentDidMount (){
+    //     fetch(
+    //         'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsentences=10&origin=*&titles='+this.id['id']
+    //     )
+    //         .then(response => response.json())
+    //         .then(data => {
+
+    //             var v = data['query']['pages'];
+    //             var keys = Object.keys(v);
+    //             this.states['result'] = data['query']['pages'][keys[0]]['extract'];
+    //         //   process the data
+    //         this.setState({})
+    //         })
+    //         .catch(e => {
+    //             console.log(e)
+    //         })
+    //     }
     componentDidMount (){
         fetch(
-            'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsentences=10&origin=*&titles='+this.id['id']
+            'https://www.energenius.me/api/country?name=all'
         )
             .then(response => response.json())
             .then(data => {
+                for (var item in data){
+                    if(data[item]['API'] == this.id['id']){
+                        this.states['result'] = data[item]['description']
 
-                var v = data['query']['pages'];
-                var keys = Object.keys(v);
-                this.states['result'] = data['query']['pages'][keys[0]]['extract'];
-            //   process the data
+                        break
+                    }
+                    
+                }
             this.setState({})
             })
             .catch(e => {
@@ -54,21 +74,19 @@ class CountryInstance extends Component {
                         </div>
 
                         <div class="p-4">
-                        <h4 class="font-italic">Production&Usage</h4>
+                        <h4 class="font-italic">Related Energy</h4>
                         <ol class="list-unstyled mb-0">
-                            <li><Link to={'/production/'+'Biomass_heating_system'}>Residential</Link></li>
-                            <li><Link to={'/production/'+'Radioactive_tracer'}>Medical</Link></li>
-                            <li><Link to={'/production/'+'Hydraulic_fracturing'}>Hydraulic Fracturing</Link></li>
 
+                            <li><Link to={'/production/'+'Biomass_heating_system'}>Residential</Link></li>
+                            
                         </ol>
                         </div>
 
                         <div class="p-4">
-                        <h4 class="font-italic">Energy Categories</h4>
+                        <h4 class="font-italic">Related Production and Usage</h4>
                         <ol class="list-unstyled">
+
                             <li><Link to={'/energy/'+'Solar_energy'}>Solar</Link></li>
-                            <li><Link to={'/energy/'+'Nuclear_power'}>Nuclear</Link></li>
-                            <li><Link to={'/energy/'+'Natural_gas'}>Natural Gas</Link></li>
 
                         </ol>
                         </div>
