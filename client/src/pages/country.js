@@ -90,14 +90,14 @@ class Country extends Component {
     }
 
     handlePageChange(pageNumber) {
-     const start_idx = (pageNumber - 1) * 10;
+     const start_idx = (pageNumber - 1) * 9;
      console.log(start_idx)
      this.setState({activePage: pageNumber,
          shownIdx:
 
          [start_idx, start_idx + 1, start_idx + 2,
              start_idx + 3, start_idx + 4, start_idx + 5,
-             start_idx + 6, start_idx + 7, start_idx + 8, start_idx+9
+             start_idx + 6, start_idx + 7, start_idx + 8
           ]
 
         });
@@ -168,8 +168,8 @@ class Country extends Component {
             <div>
             <Pagination
             activePage={this.state.activePage}
-            itemsCountPerPage={10}
-            totalItemsCount={30}
+            itemsCountPerPage={9}
+            totalItemsCount={27}
             pageRangeDisplayed={3}
             innerClass="pagination justify-content-center"
             linkClass="page-link"
