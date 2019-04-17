@@ -155,7 +155,9 @@ class Production extends Component {
             api += checkedUse.join("|");
         }
 
-        console.log("https://www.energenius.me/api/search/production?" + api);
+        fetch("https://www.energenius.me/api/search/production?" + api)
+            .then(response => response.json())
+            .then(data => this.setState({info: data}));
     }
 
     GetSortOrder(prop) {
@@ -180,6 +182,15 @@ class Production extends Component {
             return (<div>Loading</div>)
         }
 
+        var tmpIdx = [];
+        for (var idx in this.state.shownIdx) {
+            if (this.state.shownIdx[idx] < this.state.info.length) {
+                tmpIdx.push(this.state.shownIdx[idx]);
+            } else {
+                break;
+            }
+        }
+
         const { classes } = this.tmp_props;
 
         return (
@@ -198,7 +209,7 @@ class Production extends Component {
 
                 <Grid container spacing={40}>
                   <CssBaseline />
-                  {this.state.shownIdx.map(idx => (
+                  {tmpIdx.map(idx => (
                     <Grid item key={"card"}>
                         <Link to={'/production/'+this.state.info[idx]['Name']}>
                         <Card className={classes.card} style={{ width: '18rem' }}>
