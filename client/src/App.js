@@ -23,7 +23,7 @@ import './index.css'
 
 class App extends Component {
 
-  
+
 
 
   render() {
@@ -35,7 +35,7 @@ class App extends Component {
         <p1> </p1>
 
         {/* <Switch> */}
-          <Route exact path="/" component={Home}/> 
+          <Route exact path="/" component={Home}/>
 
           <Route exact path="/energy" component={Energy}/>
           <Route exact path="/energy/:id" component={EnergyInstance}/>

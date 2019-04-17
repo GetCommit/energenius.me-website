@@ -288,6 +288,9 @@ class Energy extends Component {
                 <Button variant="outlined" color="primary" type="submit">Apply Filter</Button>
             </Form>
 
+            <Button type="button" class="dropdown-toggle" variant="outlined" color="primary">Sort by:</Button>
+
+
             </aside>
             </div>
             </main>
