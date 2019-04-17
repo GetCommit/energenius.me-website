@@ -34,43 +34,43 @@ class CountryInstance extends Component {
 
 
     componentDidMount (){
+        document.title = this.img;
+
         fetch(
-            'https://www.energenius.me/api/country?name=all'
+            'https://www.energenius.me/api/country?name=' + this.img
         )
             .then(response => response.json())
             .then(data => {
-                for (var item in data){
-                    if(data[item]["Name"] == this.img){
-                        this.states['result'] = data[item]['description']
-                        this.states['related_energy'] = data[item]['Energy_API']
-                        this.states['related_production'] = data[item]['Production_API']
-
-                        break
-                    }
-                    
-                }
-                this.setState({})
+                this.states['result'] = data[0]['description'];
+                this.states['related_energy'] = data[0]['Energy_API'];
+                this.states['related_production'] = data[0]['Production_API'];
+                this.states['Video'] = data[0]['Video_API'];
+                this.setState({});
             })
             .catch(e => {
-                console.log(e)
+                console.log(e);
             })
         }
+
+
 
     render() {
         return (
 
-        <div>
+            <main role="main" class="container">
             <div class="row">
-
                     <div class="col-md-8 blog-main">
-                        <h2 class="blog-post-title">{this.title}</h2>
-                        <div class="ml-1">
-                            <p class="px-5 c font" >
-                               {this.states['result']}
-                            </p>
+                        <div class="blog-post">
+                            <h2 class="blog-post-title">{this.img}</h2>
+                                <p>
+                                   {this.states['result']}
+                                </p>
+
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe allowfullscreen="" class="embed-responsive-item" src={"https://www.youtube.com/embed/"+this.states['Video']}>
+                                    </iframe>
+                                </div>
                         </div>
-
-
                     </div>
 
                     <aside class="col-md-4 blog-sidebar">
@@ -85,7 +85,7 @@ class CountryInstance extends Component {
                         <ol class="list-unstyled mb-0">
 
                             <li><Link to={'/energy/'+this.states['related_energy']}>{this.states['related_energy']}</Link></li>
-                            
+
                         </ol>
                         </div>
 
@@ -100,7 +100,7 @@ class CountryInstance extends Component {
                     </aside>
 
             </div>
-        </div>
+            </main>
 
         )
     }

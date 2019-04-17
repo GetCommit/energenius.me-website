@@ -200,7 +200,7 @@ class Country extends Component {
                   {this.state.shownIdx.map(idx => (
                     <Grid item key={"card"}>
                         <Link to={'/country/'+this.state.info[idx]['Name']}>
-                        <Card className={classes.card}>
+                        <Card className={classes.card} style={{ width: '18rem' }}>
                             <CardMedia
                             className={classes.cardMedia}
 
@@ -244,8 +244,8 @@ class Country extends Component {
             <div>
             <Pagination
             activePage={this.state.activePage}
-            itemsCountPerPage={10}
-            totalItemsCount={30}
+            itemsCountPerPage={9}
+            totalItemsCount={27}
             pageRangeDisplayed={3}
             innerClass="pagination justify-content-center"
             linkClass="page-link"

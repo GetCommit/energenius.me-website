@@ -200,7 +200,7 @@ class Production extends Component {
                   {this.state.shownIdx.map(idx => (
                     <Grid item key={"card"}>
                         <Link to={'/production/'+this.state.info[idx]['Name']}>
-                        <Card className={classes.card}>
+                        <Card className={classes.card} style={{ width: '18rem' }}>
                             <CardMedia
                             className={classes.cardMedia}
 
