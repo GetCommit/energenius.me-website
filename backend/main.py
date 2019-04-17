@@ -8,16 +8,11 @@ import webapp2
 import jinja2
 import json
 import logging
+import urllib2
 
-# from model import AllInstancePage
 from model import Energy
 from model import Country
 from model import ProductionAndUse
-
-# from model import SectionContent
-# from model import SideSectioncontent
-# from model import Top3Energy
-
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -37,25 +32,21 @@ def default_json_serializer(obj):
         return millis
     raise TypeError("Not sure how to serialize %s" % (obj,))
 
+# [START search]
+# class Search(webapp2.RequestHandler):
+#
+#     def get(self):
+#
+#         options = search.QueryOptions(limit=10)
+#
+#         query_string = self.request.get('queryString')
+#         print("searching for ", query_string)
+#         query = search.Query(query_string=query_string, options=options)
+#         results = search.Index('tags').search(query)
+#         print(results)
 
-# project function from the class
-# def project(t,r):
-#     return ({a : d[a] for a in t if a in d} for d in r)
-# front-end request
-# ------------------ do not need all instance page anymore
-# class AllInstancePageRequest(webapp2.RequestHandler):
-#     def get(self, inputpagename):
-#          page_query = AllInstancePage.query(AllInstancePage.pagename == inputpagename)
-#
-#          # template_values = {
-#          #     'pagename': page_query.pagename,
-#          #     'intro': page_query.intro,
-#          #     'bodysectionlist': page_query.bodysection,
-#          #     'sidesection': page_query.sidesection,
-#          # }
-#
-#         self.response.headers['Content-Type'] = 'application/json'
-#         self.response.out.write(json.dumps([temp.to_dict() for temp in page_query], default=default_json_serializer))
+# [END search]
+wikiURL = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsentences=6&titles="
 
 # energy API
 class EnergyAPI(webapp2.RequestHandler):
@@ -67,13 +58,6 @@ class EnergyAPI(webapp2.RequestHandler):
             energy_query = Energy.query(projection=[Energy.Name])
         else:
             energy_query = Energy.query(Energy.Name == energyname)
-
-        # template_values = {
-        #     'energyname': energy_query.energyname,
-        #     'energytype': energy_query.energytype,
-        #     'development': energy_query.energydevelop,
-        #     'cumulativeCap': energy_query.cumulativeCap,
-        # }
 
         self.response.headers["Content-Type"] = "application/json"
         self.response.out.write(
@@ -99,13 +83,6 @@ class ProductionAPI(webapp2.RequestHandler):
                 ProductionAndUse.Name == producationname
             )
 
-        # template_values = {
-        #     'producationname': production_query.producationname,
-        #     'producevolumn': production_query.producevolumn,
-        #     'yearofinvention': production_query.yearofinvention,
-        #     'topdevelopcountry': production_query.topdevelopcountry,
-        # }
-
         self.response.headers["Content-Type"] = "application/json"
         self.response.out.write(
             json.dumps(
@@ -126,13 +103,6 @@ class CountryAPI(webapp2.RequestHandler):
         else:
             country_query = Country.query(Country.Name == countryname)
 
-        # template_values = {
-        #     'countryname': country_query.countryname,
-        #     'totalproducation': country_query.totalproducation,
-        #     'totalusage': country_query.totalusage,
-        #     'carbon': country_query.carbon,
-        #     'top3produce': country_query.top3produce,
-        # }
         self.response.headers["Content-Type"] = "application/json"
         self.response.out.write(
             json.dumps(
@@ -155,12 +125,22 @@ class Addcountry(webapp2.RequestHandler):
         post_country.Total_Production = float(self.request.get("totalproduction"))
         post_country.Total_Usage = float(self.request.get("totalusage"))
         post_country.Energy_Shortage = float(self.request.get("shorageDay"))
-        post_country.Renewable_Energy_Rank = int(
-            self.request.get("rankRenewableEnergy")
-        )
         post_country.Region = self.request.get("region")
         post_country.Population = float(self.request.get("population"))
-        post_country.API = self.request.get("api")
+        api = self.request.get("api")
+        post_country.API = api
+        post_country.Energy_API = self.request.get("energy_api")
+        post_country.Production_API = self.request.get("production_api")
+        post_country.Video_API = self.request.get("video_api")
+        # parse from apis
+        try:
+            response = urllib2.urlopen(wikiURL + api)
+            data = json.load(response)
+            keys = data['query']['pages'].keys()
+            temp = data['query']['pages'][keys[0]]['extract']
+        except urllib2.URLError:
+            temp = ""
+        post_country.description = temp
         post_country.put()
         self.redirect("/api/add/country")
 
@@ -182,7 +162,19 @@ class Addenergy(webapp2.RequestHandler):
             self.request.get("electricalGenerRank")
         )
         post_energy.Top_Producing_Country = self.request.get("topProduceCountry")
-        post_energy.API = self.request.get("api")
+        api = self.request.get("api")
+        post_energy.API = api
+        post_energy.Country_API = self.request.get("country_api")
+        post_energy.Production_API = self.request.get("production_api")
+        post_energy.Video_API = self.request.get("video_api")
+        try:
+            response = urllib2.urlopen(wikiURL + api)
+            data = json.load(response)
+            keys = data['query']['pages'].keys()
+            temp = data['query']['pages'][keys[0]]['extract']
+        except urllib2.URLError:
+            temp = ""
+        post_energy.description = temp
         post_energy.put()
         self.redirect("/api/add/energy")
 
@@ -202,10 +194,145 @@ class Addproduction(webapp2.RequestHandler):
         post_prod.Related_Energy = self.request.get("puRelatedEnergy")
         post_prod.Carbon_Emission = int(self.request.get("carbon"))
         post_prod.Usage_Field = self.request.get("usageField")
-        post_prod.API = self.request.get("api")
+        api = self.request.get("api")
+        post_prod.API = api
+        post_prod.Country_API = self.request.get("country_api")
+        post_prod.Energy_API = self.request.get("energy_api")
+        post_prod.Video_API = self.request.get("video_api")
+        try:
+            response = urllib2.urlopen(wikiURL + api)
+            data = json.load(response)
+            keys = data['query']['pages'].keys()
+            temp = data['query']['pages'][keys[0]]['extract']
+        except urllib2.URLError:
+            temp = ""
+        post_prod.description = temp
         post_prod.put()
         self.redirect("/api/add/production")
 
+
+# three basic search, think about the special case and improve it
+class SearchEnergy(webapp2.RequestHandler):
+    def get(self):
+        # use Continued filter to filter out the condition and "all" situation
+        energy_query = Energy.query()
+        energyType = self.request.get("Type")
+        if energyType != "all":
+            energy_query = energy_query.filter(Energy.Type.IN(energyType.split("|")))
+        majorUse = self.request.get("Major_Use")
+        if majorUse != "all":
+            energy_query = energy_query.filter(Energy.Major_Use.IN(majorUse.split("|")))
+        topCountry = self.request.get("Top_Producing_Country")
+        if topCountry != "all":
+            energy_query = energy_query.filter(Energy.Top_Producing_Country.IN(topCountry.split("|")))
+
+        self.response.headers["Content-Type"] = "application/json"
+        self.response.out.write(
+            json.dumps(
+                [temp.to_dict() for temp in energy_query],
+                default=default_json_serializer,
+            )
+        )
+
+class SearchProduction(webapp2.RequestHandler):
+    def get(self):
+        production_query = ProductionAndUse.query()
+        productionType = self.request.get("Type")
+        if productionType != "all":
+            production_query = production_query.filter(ProductionAndUse.Type.IN(productionType.split("|")))
+
+        usageField = self.request.get("Usage_Field")
+        if usageField != "all":
+            production_query = production_query.filter(ProductionAndUse.Usage_Field.IN(usageField.split("|")))
+
+        year = self.request.get("Year_of_Invention")
+        if year != "all":
+            listOfEle = year.split("|")
+            listOFKey = []
+            for year in listOfEle:
+                if year == "BC":
+                    temp = production_query.filter(ProductionAndUse.Year_of_Invention < 0).fetch(keys_only = True)
+                elif year == "1700-1900":
+                    temp = production_query.filter(ProductionAndUse.Year_of_Invention < 1900,ProductionAndUse.Year_of_Invention >= 1700).fetch(keys_only = True)
+                elif year == "1900-2000":
+                    temp = production_query.filter(ProductionAndUse.Year_of_Invention < 2000,ProductionAndUse.Year_of_Invention >= 1900).fetch(keys_only = True)
+                else:
+                    temp = production_query.filter(ProductionAndUse.Year_of_Invention >= 2000).fetch(keys_only = True)
+                listOFKey += temp
+            production_query = ndb.get_multi(listOFKey)
+
+
+
+        self.response.headers["Content-Type"] = "application/json"
+        self.response.out.write(
+            json.dumps(
+                [temp.to_dict() for temp in production_query],
+                default=default_json_serializer,
+            )
+        )
+
+class SearchCountry(webapp2.RequestHandler):
+    def get(self):
+        country_query = Country.query()
+
+        region = self.request.get("Region")
+        if region != "all":
+            country_query = country_query.filter(Country.Region.IN(region.split("|")))
+
+        population = self.request.get("Population")
+        if population != "all":
+            listOfEle = population.split("|")
+            listOFKey = []
+            for rang in listOfEle:
+                if rang == "0-100":
+                    temp = country_query.filter(Country.Population < 100).fetch(keys_only = True)
+                elif rang == "100-500":
+                    temp = country_query.filter(Country.Population < 500,Country.Population >= 100).fetch(keys_only = True)
+                else:
+                    temp = country_query.filter(Country.Population >= 500).fetch(keys_only = True)
+                listOFKey += temp
+            country_query = ndb.get_multi(listOFKey)
+
+        totalProduce = self.request.get("Total_Production")
+        if totalProduce != "all":
+            listOfEle = totalProduce.split("|")
+            listOFResult = []
+            for rang in listOfEle:
+                for each in country_query:
+                    if rang == "0-1000" and each.Total_Production < 1000:
+                        listOFResult.append(each)
+                    elif rang == "1000-2000" and each.Total_Production < 2000 and each.Total_Production >= 1000:
+                        listOFResult.append(each)
+                    elif each.Total_Production >= 2000:
+                        listOFResult.append(each)
+            country_query = listOFResult
+
+        self.response.headers["Content-Type"] = "application/json"
+        self.response.out.write(
+            json.dumps(
+                [temp.to_dict() for temp in country_query],
+                default=default_json_serializer,
+            )
+        )
+
+# find a way search all
+# class SearchAPI(webapp2.RequestHandler):
+#     def get(self):
+#         countryname = self.request.get("name")
+#         if countryname == "all":
+#             country_query = Country.query()
+#         elif countryname == "list":
+#             country_query = Country.query(projection=[Country.Name])
+#         else:
+#             country_query = Country.query(Country.Name == countryname)
+#
+#         self.response.headers["Content-Type"] = "application/json"
+#         self.response.out.write(
+#             json.dumps(
+#                 [temp.to_dict() for temp in country_query],
+#                 default=default_json_serializer,
+#             )
+#         )
 
 # class MainPage(webapp2.RequestHandler):
 #     def get(self):
@@ -223,6 +350,9 @@ app = webapp2.WSGIApplication(
         ("/api/energy", EnergyAPI),
         ("/api/production", ProductionAPI),
         ("/api/country", CountryAPI),
+        ("/api/search/energy", SearchEnergy),
+        ("/api/search/production", SearchProduction),
+        ("/api/search/country", SearchCountry),
     ],
     debug=True,
 )
