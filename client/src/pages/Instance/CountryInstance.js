@@ -44,7 +44,7 @@ class CountryInstance extends Component {
                         this.states['result'] = data[item]['description']
                         this.states['related_energy'] = data[item]['Energy_API']
                         this.states['related_production'] = data[item]['Production_API']
-
+                        this.states['Video'] = data[item]['Video_API']
                         break
                     }
                     
@@ -55,6 +55,10 @@ class CountryInstance extends Component {
                 console.log(e)
             })
         }
+
+
+        // get video data
+
 
     render() {
         return (
@@ -68,6 +72,13 @@ class CountryInstance extends Component {
                             <p class="px-5 c font" >
                                {this.states['result']}
                             </p>
+                        </div>
+                        
+                        <div class="col-sm-6">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen="" class="embed-responsive-item" src={"https://www.youtube.com/embed/"+this.states['Video']}>
+                                </iframe>
+                            </div>
                         </div>
 
 

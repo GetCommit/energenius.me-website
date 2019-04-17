@@ -41,6 +41,7 @@ class EnergyInstance extends Component {
                         this.states['result'] = data[item]['description']
                         this.states['related_country'] = data[item]['Country_API']
                         this.states['related_production'] = data[item]['Production_API']
+                        this.states['Video'] = data[item]['Video_API']
 
                         break
                     }
@@ -65,6 +66,12 @@ class EnergyInstance extends Component {
                                {this.states['result']}
                             </p>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen="" class="embed-responsive-item" src={"https://www.youtube.com/embed/"+this.states['Video']}>
+                                </iframe>
+                            </div>
+                        </div>
                     </div>
 
 
@@ -78,7 +85,7 @@ class EnergyInstance extends Component {
                         <ol class="list-unstyled mb-0">
 
                             <li><Link to={'/country/'+this.states['related_country']}>{this.states['related_country']}</Link></li>
-                            
+
                         </ol>
                         </div>
 

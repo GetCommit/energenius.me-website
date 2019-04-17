@@ -39,6 +39,7 @@ class ProductionInstance extends Component {
                         this.states['result'] = data[item]['description']
                         this.states['related_country'] = data[item]['Country_API']
                         this.states['related_energy'] = data[item]['Related_Energy']
+                        this.states['Video'] = data[item]['Video_API']
 
                         break
                     }
@@ -66,6 +67,13 @@ class ProductionInstance extends Component {
                             <p class="px-5 c font" >
                                {this.states['result']}
                             </p>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe allowfullscreen="" class="embed-responsive-item" src={"https://www.youtube.com/embed/"+this.states['Video']}>
+                                </iframe>
+                            </div>
                         </div>
 
 
