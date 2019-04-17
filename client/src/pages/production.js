@@ -278,7 +278,7 @@ class Production extends Component {
                 <Form.Label>Year of Invention</Form.Label>
                 <div key={'year'} className="mb-3">
                   <Form.Check type={'checkbox'} id={'BC'} name={'Year_of_Invention'} label={'BC'} />
-                  <Form.Check type={'checkbox'} id={'1800-1900'} name={'Year_of_Invention'} label={'1800-1900'} />
+                  <Form.Check type={'checkbox'} id={'1700-1900'} name={'Year_of_Invention'} label={'1800-1900'} />
                   <Form.Check type={'checkbox'} id={'1900-2000'} name={'Year_of_Invention'} label={'1900-2000'} />
                   <Form.Check type={'checkbox'} id={'2000-now'} name={'Year_of_Invention'} label={'2000-now'} />
                 </div>
