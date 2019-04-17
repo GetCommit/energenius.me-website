@@ -110,7 +110,7 @@ describe('App Component and Classes', () => {
 })
 
 describe('Navigation Component', () => {
-  it('contains Navbar', () => {
+  it('contains ', () => {
     const components = shallow(<Navigation />);
     expect(components.find('Navigation'));
   })
