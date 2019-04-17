@@ -5,13 +5,18 @@ import { Link } from 'react-router-dom';
 import ReactDOM from "react-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import DropdownButton from 'react-bootstrap/DropdownButton'
-import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
 import CardActions from '@material-ui/core/CardActions';
 import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/core/styles';
@@ -77,11 +82,13 @@ class Production extends Component {
       this.state = {
           activePage: 1,
           info: undefined,
-          shownIdx: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+          shownIdx: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+          sort: ''
       };
 
       this.handlePageChange = this.handlePageChange.bind(this);
       // this.handleFilter = this.handleFilter.bind(this);
+      this.handleSort = this.handleSort.bind(this);
     }
 
     componentDidMount() {
@@ -148,8 +155,24 @@ class Production extends Component {
             api += checkedUse.join("|");
         }
 
-        console.log("https://www.energenius.me/api/production?" + api);
+        console.log("https://www.energenius.me/api/search/production?" + api);
+    }
 
+    GetSortOrder(prop) {
+        return function(a, b) {
+            if (a[prop] > b[prop]) {
+                return 1;
+            } else if (a[prop] < b[prop]) {
+                return -1;
+            }
+            return 0;
+        }
+    }
+
+    handleSort(event) {
+        event.preventDefault();
+        this.state.info.sort(this.GetSortOrder(event.target.value));
+        this.setState({ [event.target.name]: event.target.value });
     }
 
     render() {
@@ -164,28 +187,6 @@ class Production extends Component {
               <CssBaseline />
 
               <main>
-
-
-              <DropdownButton id="dropdown-item-button" title="Filter">
-                <Dropdown.Item as="button"><Form.Check
-                  type={'checkbox'}
-                  id={'Type'}
-                  name={'Type'}
-                  label={'Physical Energy'}
-                /></Dropdown.Item>
-                <Dropdown.Item as="button"><Form.Check
-                  type={'checkbox'}
-                  id={'Type'}
-                  name={'Type'}
-                  label={'Non-Renewable Energy'}
-                /></Dropdown.Item>
-                <Dropdown.Item as="button"><Form.Check
-                  type={'checkbox'}
-                  id={'Type'}
-                  name={'Type'}
-                  label={'Reneable Energy'}
-                /></Dropdown.Item>
-              </DropdownButton>
 
               {/* Hero unit */}
 
@@ -279,6 +280,20 @@ class Production extends Component {
                   <Form.Check type={'checkbox'} id={'Transportation'} name={'Usage_Field'} label={'Transportation'} />
                 </div>
                 <Button variant="outlined" color="primary" type="submit">Apply Filter</Button>
+
+                <p>
+
+                </p>
+            </Form>
+            <Form>
+            <FormControl variant="outlined" color="primary" style={{ width: '10rem'}}>
+            <InputLabel> Sort by</InputLabel>
+            <Select value={this.state.sort} onChange={this.handleSort} input={<OutlinedInput name="sort" id="sort" />} >
+                <MenuItem value=""> <em>None</em> </MenuItem>
+                <MenuItem value="Carbon_Emission">Carbon Emission</MenuItem>
+                <MenuItem value="Year_of_Invention">Year of Invention</MenuItem>
+            </Select>
+            </FormControl>
             </Form>
 
             </aside>
