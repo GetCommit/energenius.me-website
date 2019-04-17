@@ -16,12 +16,15 @@ export default class Navigation extends Component {
   constructor(props) {
     super(props)
     this.state = {name: "Default"}
-    this.handleClick = this.handleClick.bind(this);
+    this.textInput = React.createRef();
+
   }
 
-  handleClick(){
-    this.setState ( {name : "Change"})
-  }
+  handleSubmit = e => {
+    e.preventDefault();
+    this.setState({ value: this.textInput.value})
+  };
+
 
   render(){
     return (
@@ -51,9 +54,15 @@ export default class Navigation extends Component {
             </Nav>
 
             <Nav fill className="justify-content-end" alignRight>
-              <Form inline className="justify-content-left col-xs-6">
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                <Button variant="outline-primary" className="mt-2 mt-sm-0">Search</Button>
+              <Form inline className="justify-content-left col-xs-6" onSubmit={this.handleSubmit} >
+              <input type="text" ref={this.textInput} />
+                <Link to={'/search/'+this.textInput.value}>
+
+
+                  <Button variant="outline-primary" className="mt-2 mt-sm-0">
+                    Search
+                  </Button>
+                </Link>
               </Form>
             </Nav>
 
@@ -63,4 +72,5 @@ export default class Navigation extends Component {
     )
 
   }
+  
 }

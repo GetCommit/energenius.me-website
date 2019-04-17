@@ -87,7 +87,7 @@ class Energy extends Component {
       };
 
       this.handlePageChange = this.handlePageChange.bind(this);
-      // this.handleFilter = this.handleFilter.bind(this);
+      this.handleFilter = this.handleFilter.bind(this);
       this.handleSort = this.handleSort.bind(this);
     }
 
@@ -155,7 +155,9 @@ class Energy extends Component {
             api += checkedCountry.join("|");
         }
 
-        console.log("https://www.energenius.me/api/search/energy?" + api);
+        fetch("https://www.energenius.me/api/search/energy?" + api)
+            .then(response => response.json())
+            .then(data => this.setState({info: data}));
     }
 
     GetSortOrder(prop) {
@@ -180,6 +182,15 @@ class Energy extends Component {
             return (<div>Loading</div>)
         }
 
+        var tmpIdx = [];
+        for (var idx in this.state.shownIdx) {
+            if (this.state.shownIdx[idx] < this.state.info.length) {
+                tmpIdx.push(this.state.shownIdx[idx]);
+            } else {
+                break;
+            }
+        }
+
         const { classes } = this.tmp_props;
 
         return (
@@ -198,7 +209,7 @@ class Energy extends Component {
 
                 <Grid container spacing={40}>
                   <CssBaseline />
-                  {this.state.shownIdx.map(idx => (
+                  {tmpIdx.map(idx => (
                     <Grid item key={"card"}>
                         <Link to={'/energy/'+this.state.info[idx]['Name']}>
                         <Card className={classes.card} style={{ width: '18rem' }}>

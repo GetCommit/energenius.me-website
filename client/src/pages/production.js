@@ -155,7 +155,9 @@ class Production extends Component {
             api += checkedUse.join("|");
         }
 
-        console.log("https://www.energenius.me/api/search/production?" + api);
+        fetch("https://www.energenius.me/api/search/production?" + api)
+            .then(response => response.json())
+            .then(data => this.setState({info: data}));
     }
 
     GetSortOrder(prop) {
@@ -180,6 +182,15 @@ class Production extends Component {
             return (<div>Loading</div>)
         }
 
+        var tmpIdx = [];
+        for (var idx in this.state.shownIdx) {
+            if (this.state.shownIdx[idx] < this.state.info.length) {
+                tmpIdx.push(this.state.shownIdx[idx]);
+            } else {
+                break;
+            }
+        }
+
         const { classes } = this.tmp_props;
 
         return (
@@ -198,7 +209,7 @@ class Production extends Component {
 
                 <Grid container spacing={40}>
                   <CssBaseline />
-                  {this.state.shownIdx.map(idx => (
+                  {tmpIdx.map(idx => (
                     <Grid item key={"card"}>
                         <Link to={'/production/'+this.state.info[idx]['Name']}>
                         <Card className={classes.card} style={{ width: '18rem' }}>
@@ -267,7 +278,7 @@ class Production extends Component {
                 <Form.Label>Year of Invention</Form.Label>
                 <div key={'year'} className="mb-3">
                   <Form.Check type={'checkbox'} id={'BC'} name={'Year_of_Invention'} label={'BC'} />
-                  <Form.Check type={'checkbox'} id={'1800-1900'} name={'Year_of_Invention'} label={'1800-1900'} />
+                  <Form.Check type={'checkbox'} id={'1700-1900'} name={'Year_of_Invention'} label={'1700-1900'} />
                   <Form.Check type={'checkbox'} id={'1900-2000'} name={'Year_of_Invention'} label={'1900-2000'} />
                   <Form.Check type={'checkbox'} id={'2000-now'} name={'Year_of_Invention'} label={'2000-now'} />
                 </div>
