@@ -13,7 +13,7 @@ import Country from './pages/country'
 import CountryInstance from './pages/Instance/CountryInstance.js'
 import EnergyInstance from './pages/Instance/EnergyInstance.js'
 import ProductionInstance from './pages/Instance/ProductionInstance.js'
-
+import Search from './pages/search'
 
 import About from './pages/about'
 import Footer from './pages/footer'
@@ -46,6 +46,8 @@ class App extends Component {
           <Route exact path="/country" component={Country}/>
           <Route exact path="/country/:id" component={CountryInstance}/>
 
+
+          <Route exact path="/search/:id" component={Search}/>
           <Route exact path="/about" component={About}/>
 
         {/* </Switch> */}
