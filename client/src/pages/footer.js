@@ -67,7 +67,7 @@ export default class Footer extends Component {
           <Typography variant="h6" align="center" gutterBottom>
           </Typography>
           <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-            Footer here :)
+            Copyright © energenius.me 2019
           </Typography>
         {/* End footer */}
       </div>
