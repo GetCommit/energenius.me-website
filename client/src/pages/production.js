@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import ReactDOM from "react-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -16,6 +18,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Instance from './Instance.js'
 import Pagination from "react-js-pagination";
+import Form from 'react-bootstrap/Form';
 
 const styles = theme => ({
     appBar: {
@@ -65,8 +68,6 @@ const styles = theme => ({
     },
   });
 
-  // testing reading from directory
-
 class Production extends Component {
 
     constructor(props) {
@@ -80,6 +81,7 @@ class Production extends Component {
       };
 
       this.handlePageChange = this.handlePageChange.bind(this);
+      // this.handleFilter = this.handleFilter.bind(this);
     }
 
     componentDidMount() {
@@ -91,11 +93,63 @@ class Production extends Component {
 
     handlePageChange(pageNumber) {
      const start_idx = (pageNumber - 1) * 3;
-     console.log(`active page is ${pageNumber}`);
      this.setState({activePage: pageNumber,
          shownIdx: [start_idx, start_idx + 1, start_idx + 2,
              start_idx + 3, start_idx + 4, start_idx + 5,
              start_idx + 6, start_idx + 7, start_idx + 8]});
+    }
+
+    handleFilter(event) {
+        event.preventDefault();
+        const form = event.currentTarget;
+
+        var checkedType = []
+        for (var i in form["Type"]) {
+            if (form["Type"][i].checked) {
+                checkedType.push(String(form["Type"][i].id));
+            }
+        }
+
+        var checkedYear = []
+        for (var i in form["Year_of_Invention"]) {
+            if (form["Year_of_Invention"][i].checked) {
+                checkedYear.push(String(form["Year_of_Invention"][i].id));
+            }
+        }
+
+        var checkedUse = []
+        for (var i in form["Usage_Field"]) {
+            if (form["Usage_Field"][i].checked) {
+                checkedUse.push(String(form["Usage_Field"][i].id));
+            }
+        }
+
+        var api = "";
+        if (checkedType.length == 0 || checkedType.length == 2) {
+            api += "Type=all";
+        } else {
+            api += "Type=";
+            api += checkedType.join("|");
+        }
+        api += "&";
+
+        if (checkedYear.length == 0 || checkedYear.length == 4) {
+            api += "Year_of_Invention=all";
+        } else {
+            api += "Year_of_Invention=";
+            api += checkedYear.join("|");
+        }
+
+        api += "&";
+        if (checkedUse.length == 0 || checkedUse.length == 4) {
+            api += "Usage_Field=all";
+        } else {
+            api += "Usage_Field=";
+            api += checkedUse.join("|");
+        }
+
+        console.log("https://www.energenius.me/api/production?" + api);
+
     }
 
     render() {
@@ -105,13 +159,38 @@ class Production extends Component {
 
         const { classes } = this.tmp_props;
 
-      return (
-          <React.Fragment>
-            <CssBaseline />
+        return (
+            <React.Fragment>
+              <CssBaseline />
 
-            <main>
+              <main>
+
+
+              <DropdownButton id="dropdown-item-button" title="Filter">
+                <Dropdown.Item as="button"><Form.Check
+                  type={'checkbox'}
+                  id={'Type'}
+                  name={'Type'}
+                  label={'Physical Energy'}
+                /></Dropdown.Item>
+                <Dropdown.Item as="button"><Form.Check
+                  type={'checkbox'}
+                  id={'Type'}
+                  name={'Type'}
+                  label={'Non-Renewable Energy'}
+                /></Dropdown.Item>
+                <Dropdown.Item as="button"><Form.Check
+                  type={'checkbox'}
+                  id={'Type'}
+                  name={'Type'}
+                  label={'Reneable Energy'}
+                /></Dropdown.Item>
+              </DropdownButton>
 
               {/* Hero unit */}
+
+              <div class="row">
+              <div class="col-md-10">
 
               <div className={classNames(classes.layout, classes.cardGrid)}>
                 {/* End hero unit */}
@@ -173,6 +252,36 @@ class Production extends Component {
             itemClass="page-item"
             onChange={this.handlePageChange}
             />
+            </div>
+            </div>
+
+            <aside class="col-md-2">
+            <Form noValidate onSubmit={this.handleFilter}>
+                <Form.Label>Type</Form.Label>
+                <div key={'type'} className="mb-3">
+                  <Form.Check type={'checkbox'} id={'Production'} name={'Type'} label={'Production'} />
+                  <Form.Check type={'checkbox'} id={'Usage'} name={'Type'} label={'Usage'} />
+                </div>
+
+                <Form.Label>Year of Invention</Form.Label>
+                <div key={'year'} className="mb-3">
+                  <Form.Check type={'checkbox'} id={'BC'} name={'Year_of_Invention'} label={'BC'} />
+                  <Form.Check type={'checkbox'} id={'1800-1900'} name={'Year_of_Invention'} label={'1800-1900'} />
+                  <Form.Check type={'checkbox'} id={'1900-2000'} name={'Year_of_Invention'} label={'1900-2000'} />
+                  <Form.Check type={'checkbox'} id={'2000-now'} name={'Year_of_Invention'} label={'2000-now'} />
+                </div>
+
+                <Form.Label>Usage Field</Form.Label>
+                <div key={'country'} className="mb-3">
+                  <Form.Check type={'checkbox'} id={'Electric Power'} name={'Usage_Field'} label={'Electric Power'} />
+                  <Form.Check type={'checkbox'} id={'Industrial'} name={'Usage_Field'} label={'Industrial'} />
+                  <Form.Check type={'checkbox'} id={'Residential'} name={'Usage_Field'} label={'Residential'} />
+                  <Form.Check type={'checkbox'} id={'Transportation'} name={'Usage_Field'} label={'Transportation'} />
+                </div>
+                <Button variant="outlined" color="primary" type="submit">Apply Filter</Button>
+            </Form>
+
+            </aside>
             </div>
             </main>
 

@@ -20,7 +20,6 @@ import Instance from './Instance.js'
 import Pagination from "react-js-pagination";
 import Form from 'react-bootstrap/Form';
 
-
 const styles = theme => ({
     appBar: {
       position: 'relative',
@@ -69,8 +68,6 @@ const styles = theme => ({
     },
   });
 
-  // testing reading from directory
-
 class Energy extends Component {
 
     constructor(props) {
@@ -94,10 +91,8 @@ class Energy extends Component {
           .then(data => this.setState({info: data}));
     }
 
-
     handlePageChange(pageNumber) {
      const start_idx = (pageNumber - 1) * 9;
-     console.log(`active page is ${pageNumber}`);
      this.setState({activePage: pageNumber,
          shownIdx: [start_idx, start_idx + 1, start_idx + 2,
              start_idx + 3, start_idx + 4, start_idx + 5,
@@ -105,103 +100,92 @@ class Energy extends Component {
     }
 
     handleFilter(event) {
-        // window.alert("here");
+        event.preventDefault();
         const form = event.currentTarget;
 
         var checkedType = []
         for (var i in form["Type"]) {
-            // window.alert(form["Type"][i]);
             if (form["Type"][i].checked) {
-                checkedType += String(form["Type"][i].id);
+                checkedType.push(String(form["Type"][i].id));
             }
         }
 
         var checkedUse = []
         for (var i in form["Major_Use"]) {
-            // window.alert(form["Type"][i]);
             if (form["Major_Use"][i].checked) {
-                checkedUse += String(form["Major_Use"][i].id);
+                checkedUse.push(String(form["Major_Use"][i].id));
             }
         }
 
         var checkedCountry = []
         for (var i in form["Top_Producing_Country"]) {
             if (form["Top_Producing_Country"][i].checked) {
-                checkedCountry += String(form["Top_Producing_Country"][i].id);
+                checkedCountry.push(String(form["Top_Producing_Country"][i].id));
             }
         }
-        window.alert(checkedCountry);
 
-
-        var api = ""
-        if (checkedType.length == 0) {
-            api += "Type=all"
+        var api = "";
+        if (checkedType.length == 0 || checkedType.length == 3) {
+            api += "Type=all";
         } else {
-            api += "Type="
-            api += checkedType.join("-")
+            api += "Type=";
+            api += checkedType.join("|");
         }
-        api += "&"
+        api += "&";
 
-        if (checkedUse.length == 0) {
-            api += "Major_Use=all"
+        if (checkedUse.length == 0 || checkedUse.length == 6) {
+            api += "Major_Use=all";
         } else {
-            api += "Major_Use="
-            api += checkedUse.join("-")
+            api += "Major_Use=";
+            api += checkedUse.join("|");
         }
 
-        api += "&"
-        if (checkedCountry.length == 0) {
-            api += "Top_Producing_Country=all"
+        api += "&";
+        if (checkedCountry.length == 0 || checkedCountry.length == 8) {
+            api += "Top_Producing_Country=all";
         } else {
-            api += "Top_Producing_Country="
-            api += checkedCountry.join("-")
+            api += "Top_Producing_Country=";
+            api += checkedCountry.join("|");
         }
 
-        window.alert(api);
+        console.log("https://www.energenius.me/api/energy?" + api);
 
-        // if (form.checkValidity() === false) {
-        //   event.preventDefault();
-        //   event.stopPropagation();
-        // }
-        // this.setState({ validated: true });
     }
 
     render() {
-
         if (this.state.info === undefined) {
             return (<div>Loading</div>)
         }
-        // console.log(this.state.info)
 
-      const { classes } = this.tmp_props;
+        const { classes } = this.tmp_props;
 
-      return (
-          <React.Fragment>
-            <CssBaseline />
+        return (
+            <React.Fragment>
+              <CssBaseline />
 
-            <main>
+              <main>
 
 
-            <DropdownButton id="dropdown-item-button" title="Filter">
-              <Dropdown.Item as="button"><Form.Check
-                type={'checkbox'}
-                id={'Type'}
-                name={'Type'}
-                label={'Physical Energy'}
-              /></Dropdown.Item>
-              <Dropdown.Item as="button"><Form.Check
-                type={'checkbox'}
-                id={'Type'}
-                name={'Type'}
-                label={'Non-Renewable Energy'}
-              /></Dropdown.Item>
-              <Dropdown.Item as="button"><Form.Check
-                type={'checkbox'}
-                id={'Type'}
-                name={'Type'}
-                label={'Reneable Energy'}
-              /></Dropdown.Item>
-            </DropdownButton>
+              <DropdownButton id="dropdown-item-button" title="Filter">
+                <Dropdown.Item as="button"><Form.Check
+                  type={'checkbox'}
+                  id={'Type'}
+                  name={'Type'}
+                  label={'Physical Energy'}
+                /></Dropdown.Item>
+                <Dropdown.Item as="button"><Form.Check
+                  type={'checkbox'}
+                  id={'Type'}
+                  name={'Type'}
+                  label={'Non-Renewable Energy'}
+                /></Dropdown.Item>
+                <Dropdown.Item as="button"><Form.Check
+                  type={'checkbox'}
+                  id={'Type'}
+                  name={'Type'}
+                  label={'Reneable Energy'}
+                /></Dropdown.Item>
+              </DropdownButton>
 
               {/* Hero unit */}
 
@@ -277,7 +261,7 @@ class Energy extends Component {
                 <div key={'type'} className="mb-3">
                   <Form.Check type={'checkbox'} id={'Physical Energy'} name={'Type'} label={'Physical Energy'} />
                   <Form.Check type={'checkbox'} id={'Non-Renewable Energy'} name={'Type'} label={'Non-Renewable Energy'} />
-                  <Form.Check type={'checkbox'} id={'Reneable Energy'} name={'Type'} label={'Reneable Energy'} />
+                  <Form.Check type={'checkbox'} id={'Reneable Energy'} name={'Type'} label={'Renewable Energy'} />
                 </div>
 
                 <Form.Label>Major Use</Form.Label>

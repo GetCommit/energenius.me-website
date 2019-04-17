@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import ReactDOM from "react-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -16,6 +18,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Instance from './Instance.js'
 import Pagination from "react-js-pagination";
+import Form from 'react-bootstrap/Form';
 
 const styles = theme => ({
     appBar: {
@@ -65,8 +68,6 @@ const styles = theme => ({
     },
   });
 
-  // testing reading from directory
-
 class Country extends Component {
 
     constructor(props) {
@@ -80,6 +81,7 @@ class Country extends Component {
       };
 
       this.handlePageChange = this.handlePageChange.bind(this);
+      // this.handleFilter = this.handleFilter.bind(this);
     }
 
     componentDidMount() {
@@ -90,31 +92,105 @@ class Country extends Component {
     }
 
     handlePageChange(pageNumber) {
-     const start_idx = (pageNumber - 1) * 10;
-     console.log(start_idx)
+     const start_idx = (pageNumber - 1) * 9;
      this.setState({activePage: pageNumber,
-         shownIdx:
-
-         [start_idx, start_idx + 1, start_idx + 2,
+         shownIdx: [start_idx, start_idx + 1, start_idx + 2,
              start_idx + 3, start_idx + 4, start_idx + 5,
-             start_idx + 6, start_idx + 7, start_idx + 8, start_idx+9
-          ]
+             start_idx + 6, start_idx + 7, start_idx + 8]});
+    }
 
-        });
+    handleFilter(event) {
+        event.preventDefault();
+        const form = event.currentTarget;
+
+        var checkedRegion = []
+        for (var i in form["Region"]) {
+            if (form["Region"][i].checked) {
+                checkedRegion.push(String(form["Region"][i].id));
+            }
+        }
+
+        var checkedPopulation = []
+        for (var i in form["Population"]) {
+            if (form["Population"][i].checked) {
+                checkedPopulation.push(String(form["Population"][i].id));
+            }
+        }
+
+        var checkedProd = []
+        for (var i in form["Total_Production"]) {
+            if (form["Total_Production"][i].checked) {
+                checkedProd.push(String(form["Total_Production"][i].id));
+            }
+        }
+
+        var api = "";
+        if (checkedRegion.length == 0 || checkedRegion.length == 7) {
+            api += "Region=all";
+        } else {
+            api += "Region=";
+            api += checkedRegion.join("|");
+        }
+        api += "&";
+
+        if (checkedPopulation.length == 0 || checkedPopulation.length == 3) {
+            api += "Population=all";
+        } else {
+            api += "Population=";
+            api += checkedPopulation.join("|");
+        }
+
+        api += "&";
+        if (checkedProd.length == 0 || checkedProd.length == 3) {
+            api += "Total_Production=all";
+        } else {
+            api += "Total_Production=";
+            api += checkedProd.join("|");
+        }
+
+        console.log("https://www.energenius.me/api/country?" + api);
+
     }
 
     render() {
         if (this.state.info === undefined) {
             return (<div>Loading</div>)
         }
-      const { classes } = this.tmp_props;
-      return (
-          <React.Fragment>
-            <CssBaseline />
 
-            <main>
+        const { classes } = this.tmp_props;
+
+        return (
+            <React.Fragment>
+              <CssBaseline />
+
+              <main>
+
+
+              <DropdownButton id="dropdown-item-button" title="Filter">
+                <Dropdown.Item as="button"><Form.Check
+                  type={'checkbox'}
+                  id={'Type'}
+                  name={'Type'}
+                  label={'Physical Energy'}
+                /></Dropdown.Item>
+                <Dropdown.Item as="button"><Form.Check
+                  type={'checkbox'}
+                  id={'Type'}
+                  name={'Type'}
+                  label={'Non-Renewable Energy'}
+                /></Dropdown.Item>
+                <Dropdown.Item as="button"><Form.Check
+                  type={'checkbox'}
+                  id={'Type'}
+                  name={'Type'}
+                  label={'Reneable Energy'}
+                /></Dropdown.Item>
+              </DropdownButton>
 
               {/* Hero unit */}
+
+              <div class="row">
+              <div class="col-md-10">
 
               <div className={classNames(classes.layout, classes.cardGrid)}>
                 {/* End hero unit */}
@@ -176,6 +252,39 @@ class Country extends Component {
             itemClass="page-item"
             onChange={this.handlePageChange}
             />
+            </div>
+            </div>
+
+            <aside class="col-md-2">
+            <Form noValidate onSubmit={this.handleFilter}>
+                <Form.Label>Region</Form.Label>
+                <div key={'type'} className="mb-3">
+                  <Form.Check type={'checkbox'} id={'Africa'} name={'Region'} label={'Africa'} />
+                  <Form.Check type={'checkbox'} id={'Asia'} name={'Region'} label={'Asia'} />
+                  <Form.Check type={'checkbox'} id={'Europe'} name={'Region'} label={'Europe'} />
+                  <Form.Check type={'checkbox'} id={'Latin America'} name={'Region'} label={'Latin America'} />
+                  <Form.Check type={'checkbox'} id={'Middle East'} name={'Region'} label={'Middle East'} />
+                  <Form.Check type={'checkbox'} id={'North America'} name={'Region'} label={'North America'} />
+                  <Form.Check type={'checkbox'} id={'Pacific'} name={'Region'} label={'Pacific'} />
+                </div>
+
+                <Form.Label>Population(Million)</Form.Label>
+                <div key={'use'} className="mb-3">
+                  <Form.Check type={'checkbox'} id={'0-100'} name={'Population'} label={'0-100'} />
+                  <Form.Check type={'checkbox'} id={'100-500'} name={'Population'} label={'100-500'} />
+                  <Form.Check type={'checkbox'} id={'>500'} name={'Population'} label={'>500'} />
+                </div>
+
+                <Form.Label>Total Production(bn kWh)</Form.Label>
+                <div key={'country'} className="mb-3">
+                  <Form.Check type={'checkbox'} id={'0-1000'} name={'Total_Production'} label={'0-1000'} />
+                  <Form.Check type={'checkbox'} id={'1000-2000'} name={'Total_Production'} label={'1000-2000'} />
+                  <Form.Check type={'checkbox'} id={'>2000'} name={'Total_Production'} label={'>2000'} />
+                </div>
+                <Button variant="outlined" color="primary" type="submit">Apply Filter</Button>
+            </Form>
+
+            </aside>
             </div>
             </main>
 
