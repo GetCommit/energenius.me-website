@@ -46,7 +46,7 @@ export default class Navigation extends Component {
     const { name, value } = e.target;
     let formErrors = { ...this.state.formErrors };
 
-    // this.setState({ formErrors, [name]: value }, () => console.log(this.state));
+    this.setState({ formErrors, [name]: value }, () => console.log(this.state));
   };
   
   render(){
