@@ -99,7 +99,7 @@ class Production extends Component {
     }
 
     handlePageChange(pageNumber) {
-     const start_idx = (pageNumber - 1) * 3;
+     const start_idx = (pageNumber - 1) * 9;
      this.setState({activePage: pageNumber,
          shownIdx: [start_idx, start_idx + 1, start_idx + 2,
              start_idx + 3, start_idx + 4, start_idx + 5,
