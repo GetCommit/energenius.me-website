@@ -19,35 +19,27 @@ class GUI_tests(unittest.TestCase):
         driver.get("https://www.energenius.me/")
         self.assertIn(home_page_name, driver.title)
 
-    def test_navbar_home(self):
-        home_page_name = "Energenius"
-        driver = self.driver
-        driver.get("https://www.energenius.me/")
-        home_link = driver.find_element_by_link_text('Home')
-        home_link.click()
-        self.assertIn(home_page_name, driver.title)
-
     def test_navbar_Energy(self):
-        species_page_name = "Energenius"
+        species_page_name = "Energy"
         driver = self.driver
         driver.get("https://www.energenius.me/")
-        species_link = driver.find_element_by_link_text('Energy Category')
+        species_link = driver.find_element_by_link_text('Energy')
         species_link.click()
         self.assertIn(species_page_name, driver.title)
 
     def test_navbar_Usage(self):
-        location_page_name = "Energenius"
+        location_page_name = "Production and Usage"
         driver = self.driver
         driver.get("https://www.energenius.me/")
-        location_link = driver.find_element_by_link_text('Production and Usage')
+        location_link = driver.find_element_by_link_text('Production & Usage')
         location_link.click()
         self.assertIn(location_page_name, driver.title)
 
     def test_navbar_Consumtion(self):
-        causes_page_name = "Energenius"
+        causes_page_name = "Country"
         driver = self.driver
         driver.get("https://www.energenius.me/")
-        causes_link = driver.find_element_by_link_text('Country of Consumtion')
+        causes_link = driver.find_element_by_link_text('Country')
         causes_link.click()
         self.assertIn(causes_page_name, driver.title)
 
@@ -57,6 +49,7 @@ class GUI_tests(unittest.TestCase):
         driver.get("https://www.energenius.me/")
         about_link = driver.find_element_by_link_text('About Us')
         about_link.click()
+        print driver.title
         self.assertIn(about_page_name, driver.title)
 
     
