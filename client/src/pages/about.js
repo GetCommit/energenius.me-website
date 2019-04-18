@@ -134,25 +134,27 @@ class About extends Component {
 // Fetch data from gitlab api
 // calculate the total number of commits/ issues for each contributor
 componentDidMount (){
-  fetch(
-    'https://gitlab.com/api/v4/projects/11032527/repository/commits?per_page=100&page=1'
-  )
-    .then(response => response.json())
-    .then(data => {
-      // process the data
-      for (var i in data) {
-        let commit_data = data[i]
-        for (var member in this.state.memData) {
-          if (this.state.memData[member].alias.includes(commit_data.author_name)) {
-            this.state.memData[member].commits += 1;
+  for (var page = 1; page < 3; page ++) {
+    fetch(
+      'https://gitlab.com/api/v4/projects/11032527/repository/commits?per_page=100&page='+page
+    )
+      .then(response => response.json())
+      .then(data => {
+        // process the data
+        for (var i in data) {
+          let commit_data = data[i]
+          for (var member in this.state.memData) {
+            if (this.state.memData[member].alias.includes(commit_data.author_name)) {
+              this.state.memData[member].commits += 1;
+            }
           }
         }
-      }
-      this.setState({})
-    })
-    .catch(e => {
-      console.log(e)
-    })
+        this.setState({})
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  }
 
 
   fetch('https://gitlab.com/api/v4/projects/11032527/issues?per_page=100&page=1')
