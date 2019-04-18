@@ -273,7 +273,7 @@ class Energy extends Component {
                 <div key={'type'} className="mb-3">
                   <Form.Check type={'checkbox'} id={'Physical Energy'} name={'Type'} label={'Physical Energy'} />
                   <Form.Check type={'checkbox'} id={'Non-Renewable Energy'} name={'Type'} label={'Non-Renewable Energy'} />
-                  <Form.Check type={'checkbox'} id={'Reneable Energy'} name={'Type'} label={'Renewable Energy'} />
+                  <Form.Check type={'checkbox'} id={'Renewable Energy'} name={'Type'} label={'Renewable Energy'} />
                 </div>
 
                 <Form.Label>Major Use</Form.Label>
