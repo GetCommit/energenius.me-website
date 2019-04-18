@@ -14,6 +14,7 @@ import CountryInstance from './pages/Instance/CountryInstance.js'
 import EnergyInstance from './pages/Instance/EnergyInstance.js'
 import ProductionInstance from './pages/Instance/ProductionInstance.js'
 import Search from './pages/search'
+import InstanceSearch from './pages/instanceSearch'
 
 import About from './pages/about'
 import Footer from './pages/footer'
@@ -48,6 +49,7 @@ class App extends Component {
 
 
           <Route exact path="/search/:id" component={Search}/>
+          <Route exact path="/instanceSearch/:id" component={Search}/>
           <Route exact path="/about" component={About}/>
 
         {/* </Switch> */}
