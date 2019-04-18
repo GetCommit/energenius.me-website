@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
 import {Jumbotron, Button, Carousel} from 'react-bootstrap'
-// import DocumentTitle from 'react-document-title/DocumentTitle';
 
 class ProductionInstance extends Component {
     constructor (props) {
@@ -11,23 +10,7 @@ class ProductionInstance extends Component {
       this.id = this.props.match.params;
       this.img = this.id['id']
     }
-    // componentDidMount (){
-    //     fetch(
-    //         'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsentences=10&origin=*&titles='+this.id['id']
-    //     )
-    //         .then(response => response.json())
-    //         .then(data => {
 
-    //             var v = data['query']['pages'];
-    //             var keys = Object.keys(v);
-    //             this.states['result'] = data['query']['pages'][keys[0]]['extract'];
-    //         //   process the data
-    //         this.setState({})
-    //         })
-    //         .catch(e => {
-    //             console.log(e)
-    //         })
-    //     }
     componentDidMount (){
         document.title = this.img;
 

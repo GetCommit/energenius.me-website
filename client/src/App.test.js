@@ -5,10 +5,15 @@ import { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import "isomorphic-fetch";
 Enzyme.configure({ adapter: new Adapter() });
+import { BrowserRouter } from 'react-router-dom';
+
 
 import Home from './pages/home';
 import Navigation from './pages/Navigation';
 import App from './App';
+import CountryInstance from './pages/Instance/CountryInstance';
+import EnergyInstance from './pages/Instance/EnergyInstance';
+import ProductionInstance from './pages/Instance/ProductionInstance';
 
 
 describe('IndexContent Component', () => {
@@ -109,9 +114,78 @@ describe('App Component and Classes', () => {
     })
 })
 
-describe('Navigation Component', () => {
-  it('contains ', () => {
-    const components = shallow(<Navigation />);
+describe('Search Component and Classes', () => {
+  it('Contains a Navigation ', () => {
+    const components = shallow(<search />);
     expect(components.find('Navigation'));
+  })
+})
+
+describe('Energy Instance', () => {
+  it('Biomass has image', () => {
+      const parameterObject = {"params": {"id": "Biomass"}};
+      const wrapper = mount(<BrowserRouter><EnergyInstance match = {parameterObject}/></BrowserRouter>);
+      expect(wrapper.find('img')).to.not.have.lengthOf(0);
+  });
+  it('Coal has image', () => {
+      const parameterObject = {"params": {"id": "Coal"}};
+      const wrapper = mount(<BrowserRouter><EnergyInstance match = {parameterObject}/></BrowserRouter>);
+      expect(wrapper.find('img')).to.not.have.lengthOf(0);
+  });
+  it('Ethanol has image', () => {
+      const parameterObject = {"params": {"id": "Ethanol"}};
+      const wrapper = mount(<BrowserRouter><EnergyInstance match = {parameterObject}/></BrowserRouter>);
+      expect(wrapper.find('img')).to.not.have.lengthOf(0);
+  });
+  it('Methane has image', () => {
+      const parameterObject = {"params": {"id": "Methane"}};
+      const wrapper = mount(<BrowserRouter><EnergyInstance match = {parameterObject}/></BrowserRouter>);
+      expect(wrapper.find('img')).to.not.have.lengthOf(0);
+  })
+})
+
+describe('Production and Usage Instance', () => {
+  it('Hydraulic fracturing has image', () => {
+      const parameterObject = {"params": {"id": "Hydraulic fracturing"}};
+      const wrapper = mount(<BrowserRouter><ProductionInstance match = {parameterObject}/></BrowserRouter>);
+      expect(wrapper.find('img')).to.not.have.lengthOf(0);
+  });
+  it('Wind turbine has image', () => {
+      const parameterObject = {"params": {"id": "Wind turbine"}};
+      const wrapper = mount(<BrowserRouter><ProductionInstance match = {parameterObject}/></BrowserRouter>);
+      expect(wrapper.find('img')).to.not.have.lengthOf(0);
+  });
+  it('Airplane has image', () => {
+      const parameterObject = {"params": {"id": "Airplane"}};
+      const wrapper = mount(<BrowserRouter><ProductionInstance match = {parameterObject}/></BrowserRouter>);
+      expect(wrapper.find('img')).to.not.have.lengthOf(0);
+  });
+  it('Telecommunication has image', () => {
+      const parameterObject = {"params": {"id": "Telecommunication"}};
+      const wrapper = mount(<BrowserRouter><ProductionInstance match = {parameterObject}/></BrowserRouter>);
+      expect(wrapper.find('img')).to.not.have.lengthOf(0);
+  })
+})
+
+describe('Country Instance', () => {
+  it('China has image', () => {
+      const parameterObject = {"params": {"id": "China"}};
+      const wrapper = mount(<BrowserRouter><CountryInstance match = {parameterObject}/></BrowserRouter>);
+      expect(wrapper.find('img')).to.not.have.lengthOf(0);
+  });
+  it('United States has image', () => {
+      const parameterObject = {"params": {"id": "United States"}};
+      const wrapper = mount(<BrowserRouter><CountryInstance match = {parameterObject}/></BrowserRouter>);
+      expect(wrapper.find('img')).to.not.have.lengthOf(0);
+  });
+  it('Wakanda has image', () => {
+      const parameterObject = {"params": {"id": "Wakanda"}};
+      const wrapper = mount(<BrowserRouter><CountryInstance match = {parameterObject}/></BrowserRouter>);
+      expect(wrapper.find('img')).to.not.have.lengthOf(0);
+  });
+  it('France has image', () => {
+      const parameterObject = {"params": {"id": "France"}};
+      const wrapper = mount(<BrowserRouter><CountryInstance match = {parameterObject}/></BrowserRouter>);
+      expect(wrapper.find('img')).to.not.have.lengthOf(0);
   })
 })

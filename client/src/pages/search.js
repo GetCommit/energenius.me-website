@@ -17,9 +17,9 @@ export default class search extends Component {
         getBriefInfo(str, target, length) {
             var brief = [];
             var targetIndex;
-            
+
             var info = str.split(" ");
-            
+
             // find highlight
             for(let index in info){
                 if(info[index] === target){
@@ -28,21 +28,21 @@ export default class search extends Component {
                 break;
                 }
             }
-            
+
             for(var i = (+targetIndex - length/2); i < (+targetIndex+length/2); i++){
-            
+
                 // console.log(i < (targetIndex + 5))
                 if( 0 <= i  && i < info.length){
                 brief.push(info[i]);
                 }
             }
-            
+
             return "..."+brief.join(' ')+"...";
         }
-        
+
         componentDidMount (){
             document.title = this.img;
-        
+
             fetch(
                 'https://www.energenius.me/api/energy?name=all'
             )
@@ -65,21 +65,21 @@ export default class search extends Component {
                         if(des.includes(this.search)){
 
                             var str = this.info['description'];
-                            
+
                             var substr = this.getBriefInfo(this.info['description'], this.search, 20)
 
-                            var left = substr.substring(0,substr.indexOf(this.search)) 
+                            var left = substr.substring(0,substr.indexOf(this.search))
                             var right = substr.substring(substr.indexOf(this.search)+this.search.length+1, substr.length)
 
                             console.log("HELLO WORLD")
-                            
+
                             this.search_results.push(
                             <div>
 
                                 <h5>
                                     <Link to={'/energy/'+elem[1]['Name']}> {elem[1]['Name']} </Link>
                                 </h5>
-                                
+
 
                                 <div >
                                     <div className = "Button">{left} <b>{this.search}</b> {right} </div>
@@ -92,18 +92,18 @@ export default class search extends Component {
                             )
                         }
 
-                        
+
 
                     }
 
                     this.setState({})
 
-                    
+
                 })                .catch(e => {
                     console.log(e);
                 })
 
-    
+
             fetch(
                 'https://www.energenius.me/api/production?name=all'
             )
@@ -126,19 +126,19 @@ export default class search extends Component {
                         if(des.includes(this.search)){
 
                             var str = this.info['description'];
-                            
+
                             var substr = this.getBriefInfo(this.info['description'], this.search, 10)
 
-                            var left = substr.substring(0,substr.indexOf(this.search)) 
+                            var left = substr.substring(0,substr.indexOf(this.search))
                             var right = substr.substring(substr.indexOf(this.search)+this.search.length+1, substr.length)
 
-                            
+
                             this.search_results.push(
                             <div>
                                 <h5>
                                     <Link to={'/production/'+elem[1]['Name']}>{elem[1]['Name']}</Link>
                                 </h5>
-                                
+
 
                                 <div >
                                     <div className = "Button">{left} <b>{this.search}</b> {right} </div>
@@ -183,21 +183,21 @@ export default class search extends Component {
                         if(des.includes(this.search)){
 
                             var str = this.info['description'];
-                            
+
                             var idx = str.indexOf(this.search);
 
                             var substr = this.getBriefInfo(this.info['description'], this.search, 10)
-                            
-                            var left = substr.substring(0,substr.indexOf(this.search)) 
+
+                            var left = substr.substring(0,substr.indexOf(this.search))
                             var right = substr.substring(substr.indexOf(this.search)+this.search.length+1, substr.length)
 
-                            
+
                             this.search_results.push(
                             <div>
                                 <h5>
                                     <Link to={'/country/'+elem[1]['Name']}>{elem[1]['Name']}</Link>
                                 </h5>
-                                
+
 
                                 <div >
                                     <div className = "Button">{left} <b>{this.search}</b> {right} </div>
@@ -222,7 +222,7 @@ export default class search extends Component {
                     console.log(e);
                 })
 
-                
+
             }
 
     render() {
@@ -231,9 +231,9 @@ export default class search extends Component {
 
 
             <div>
-                
+
                 <p>{this.search_results}</p>
-                
+
             </div>
 
 
@@ -245,7 +245,7 @@ export default class search extends Component {
                     Reset
                   </Button>
 
-                </Link> 
+                </Link>
             </Form>
 
 

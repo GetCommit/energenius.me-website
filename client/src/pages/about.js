@@ -105,7 +105,7 @@ class About extends Component {
         img: yw,
         commits: 0,
         issues: 0,
-        tests: 0
+        tests: 12
       },
       'Yaoyang Liu': {
         name: 'Yaoyang Liu',
