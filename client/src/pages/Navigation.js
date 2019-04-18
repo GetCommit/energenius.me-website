@@ -61,7 +61,7 @@ export default class Navigation extends Component {
 
             <Nav.Item>
                 <Link to="/" style={{ textDecoration: 'none'}}>
-                <Nav.Link href="/">Energeinus</Nav.Link>
+                <Nav.Link href="/"><b>Energeinus</b></Nav.Link>
                 </Link>
             </Nav.Item>
             <Nav.Item>
