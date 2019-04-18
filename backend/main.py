@@ -3,6 +3,7 @@ import urllib
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
+from google.appengine.api import search
 
 import webapp2
 import jinja2
@@ -212,18 +213,20 @@ class Addproduction(webapp2.RequestHandler):
 
 
 # three basic search, think about the special case and improve it
-class SearchEnergy(webapp2.RequestHandler):
+class FilterEnergy(webapp2.RequestHandler):
     def get(self):
         # use Continued filter to filter out the condition and "all" situation
         energy_query = Energy.query()
         energyType = self.request.get("Type")
         if energyType != "all":
             energy_query = energy_query.filter(Energy.Type.IN(energyType.split("|")))
+
         majorUse = self.request.get("Major_Use")
-        if majorUse != "all":
+        if majorUse != "all" and energy_query.fetch() != []:
             energy_query = energy_query.filter(Energy.Major_Use.IN(majorUse.split("|")))
+
         topCountry = self.request.get("Top_Producing_Country")
-        if topCountry != "all":
+        if topCountry != "all" and energy_query.fetch() != []:
             energy_query = energy_query.filter(Energy.Top_Producing_Country.IN(topCountry.split("|")))
 
         self.response.headers["Content-Type"] = "application/json"
@@ -234,7 +237,7 @@ class SearchEnergy(webapp2.RequestHandler):
             )
         )
 
-class SearchProduction(webapp2.RequestHandler):
+class FilterProduction(webapp2.RequestHandler):
     def get(self):
         production_query = ProductionAndUse.query()
         productionType = self.request.get("Type")
@@ -242,11 +245,11 @@ class SearchProduction(webapp2.RequestHandler):
             production_query = production_query.filter(ProductionAndUse.Type.IN(productionType.split("|")))
 
         usageField = self.request.get("Usage_Field")
-        if usageField != "all":
+        if usageField != "all" and production_query.fetch() != []:
             production_query = production_query.filter(ProductionAndUse.Usage_Field.IN(usageField.split("|")))
 
         year = self.request.get("Year_of_Invention")
-        if year != "all":
+        if year != "all" and production_query.fetch() != []:
             listOfEle = year.split("|")
             listOFKey = []
             for year in listOfEle:
@@ -261,8 +264,6 @@ class SearchProduction(webapp2.RequestHandler):
                 listOFKey += temp
             production_query = ndb.get_multi(listOFKey)
 
-
-
         self.response.headers["Content-Type"] = "application/json"
         self.response.out.write(
             json.dumps(
@@ -271,7 +272,7 @@ class SearchProduction(webapp2.RequestHandler):
             )
         )
 
-class SearchCountry(webapp2.RequestHandler):
+class FilterCountry(webapp2.RequestHandler):
     def get(self):
         country_query = Country.query()
 
@@ -280,7 +281,7 @@ class SearchCountry(webapp2.RequestHandler):
             country_query = country_query.filter(Country.Region.IN(region.split("|")))
 
         population = self.request.get("Population")
-        if population != "all":
+        if population != "all" and country_query.fetch() != []:
             listOfEle = population.split("|")
             listOFKey = []
             for rang in listOfEle:
@@ -294,7 +295,7 @@ class SearchCountry(webapp2.RequestHandler):
             country_query = ndb.get_multi(listOFKey)
 
         totalProduce = self.request.get("Total_Production")
-        if totalProduce != "all":
+        if totalProduce != "all" and country_query != []:
             listOfEle = totalProduce.split("|")
             listOFResult = []
             for rang in listOfEle:
@@ -315,44 +316,35 @@ class SearchCountry(webapp2.RequestHandler):
             )
         )
 
-# find a way search all
-# class SearchAPI(webapp2.RequestHandler):
+# search function
+# class SearchEnergy(webapp2.RequestHandler):
 #     def get(self):
-#         countryname = self.request.get("name")
-#         if countryname == "all":
-#             country_query = Country.query()
-#         elif countryname == "list":
-#             country_query = Country.query(projection=[Country.Name])
-#         else:
-#             country_query = Country.query(Country.Name == countryname)
-#
-#         self.response.headers["Content-Type"] = "application/json"
-#         self.response.out.write(
-#             json.dumps(
-#                 [temp.to_dict() for temp in country_query],
-#                 default=default_json_serializer,
-#             )
-#         )
+#         target = self.request.get("search")
 
-# class MainPage(webapp2.RequestHandler):
-#     def get(self):
-#         template = JINJA_ENVIRONMENT.get_template('/html_frontend/index.html')
-#         self.response.write(template.render())
+# class SearchProduction(webapp2.RequestHandler):
+#
+# class SearchCountry(webapp2.RequestHandler):
+#
+# class SearchHome(webapp2.RequestHandler):
+
 
 
 app = webapp2.WSGIApplication(
     [
-        # ('/', MainPage),
         ("/api/add/country", Addcountry),
         ("/api/add/energy", Addenergy),
         ("/api/add/production", Addproduction),
-        # ('/allpages/(\d+)',AllInstancePageRequest),
         ("/api/energy", EnergyAPI),
         ("/api/production", ProductionAPI),
         ("/api/country", CountryAPI),
-        ("/api/search/energy", SearchEnergy),
-        ("/api/search/production", SearchProduction),
-        ("/api/search/country", SearchCountry),
+        # filter API
+        ("/api/filter/energy", FilterEnergy),
+        ("/api/filter/production", FilterProduction),
+        ("/api/filter/country", FilterCountry),
+        # ("/api/search/energy", SearchEnergy),
+        # ("/api/search/production", SearchProduction),
+        # ("/api/search/country", SearchCountry),
+        # ("/api/search/home", SearchHome),
     ],
     debug=True,
 )
