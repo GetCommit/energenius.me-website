@@ -1,30 +1,30 @@
 @startuml
 Object Energy {
-  Name
-  Type 
-  Production_Usage
-  Consumption_Rank_in_US
-  Electrical_Generating_Rank
-  Top_Producing_Country
+  String	Name
+  String	Type 
+  String	Production_Usage
+  Unsigned_Int	Consumption_Rank_in_US
+  Unsigned_Int	Electrical_Generating_Rank
+  Country	Top_Producing_Country
 }
 
 Object Production_Usage{
-  Name
-  Type
-  Related_Energy
-  Carbon Emission
-  Year of Invention
-  Usage Field
+  String	Name
+  String	Type
+  Energy	Related_Energy
+  Int		Carbon_Emission
+  Int		Year_of_Invention
+  String	Usage_Field
 }
 
 Object Country{
-  Name
-  Total Production
-  Total Usage
-  Energy Shortage
-  Renewable Energy Rank
-  Region
-  Population
+  String	Name
+  Int		Total_Production
+  Int		Total_Usage
+  String	Energy_Shortage
+  Unsigned_Int	Renewable_Energy_Rank
+  String	Region
+  Int		Population
 }
 
 

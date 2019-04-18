@@ -85,7 +85,6 @@ export default class Navigation extends Component {
             </Nav>
 
             <Nav fill className="justify-content-end" alignRight>
-
               <Form  onSubmit={this.handleChange} noValidate inline className="justify-content-left col-xs-6" alignRight >
                 <FormControl 
 
