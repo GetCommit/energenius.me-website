@@ -33,7 +33,7 @@ class TestBeckendAPIMethods(unittest.TestCase):
     def test_API_all(self):
         r = requests.get(url + "energy?name=all")
         d = json.loads(r.text)
-        self.assertEqual(len(d), 9)
+        self.assertEqual(len(d), 27)
 
     def test_API_list(self):
         r = requests.get(url + "energy?name=list")
@@ -48,7 +48,7 @@ class TestBeckendAPIMethods(unittest.TestCase):
     def test_API_name_match_Type(self):
         r = requests.get(url + "energy?name=Biomass")
         d = json.loads(r.text)
-        self.assertEqual(d[0]["Type"], "Reneable Energy")
+        self.assertEqual(d[0]["Type"], "Renewable Energy")
 
     def test_API_name_match_Region(self):
         r = requests.get(url + "country?name=Australia")
@@ -59,6 +59,40 @@ class TestBeckendAPIMethods(unittest.TestCase):
         r = requests.get(url + "production?name=Offshore drilling")
         d = json.loads(r.text)
         self.assertEqual(d[0]["Carbon_Emission"], 2338)
+
+    # filter test
+    def test_API_filter_Energy(self):
+        """
+        Type = Physical Energy
+        Major_Use = Industrial
+        Top_Producing_Country = China
+        """
+        r = requests.get("https://www.energenius.me/api/filter/energy?Type=Physical%20Energy&Major_Use=Industrial&Top_Producing_Country=China")
+        d = json.loads(r.text)
+        self.assertEqual(len(d), 1)
+
+    def test_API_filter_Country(self):
+        """
+        Type = all
+        Year_of_Invention = BC or 1900-2000
+        Usage_Field = Residential
+        """
+        r = requests.get("https://www.energenius.me/api/filter/production?Type=all&Year_of_Invention=BC|1900-2000&Usage_Field=Residential")
+        d = json.loads(r.text)
+        self.assertEqual(len(d), 4)
+        self.assertEqual(d[2]["Usage_Field"], "Residential")
+
+        def test_API_filter_Country(self):
+            """
+            Region = Africa
+            Population = all
+            Total_Production = >2000
+            """
+            r = requests.get("https://www.energenius.me/api/filter/country?Region=Africa&Population=all&Total_Production=%3E2000")
+            d = json.loads(r.text)
+            self.assertEqual(len(d), 1)
+            self.assertEqual(d[0]["Name"], "Wakanda")
+
 
 if __name__ == '__main__':
     unittest.main()
