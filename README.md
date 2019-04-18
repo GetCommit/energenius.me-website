@@ -26,7 +26,7 @@ https://gitlab.com/LuculentDig/energiziousness/pipelines
 | -------- | --------- | ------ | --------- | ------ |
 | Yaoyang  | 10        | 18     | 30        |  36    |
 | Yige     | 15        | 20     | 35        |  39    |
-| TWenyuan | 15        | 18     | 25        |  43    |
+| Wenyuan | 15        | 18     | 25        |  43    |
 | Pengdi   | 10        | 19     | 26        |  31    |
 | Shijing  | 8         | 19     | 23        |  26    |
 
