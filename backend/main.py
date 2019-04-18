@@ -33,6 +33,7 @@ def default_json_serializer(obj):
         return millis
     raise TypeError("Not sure how to serialize %s" % (obj,))
 
+
 # [START search]
 # class Search(webapp2.RequestHandler):
 #
@@ -137,8 +138,8 @@ class Addcountry(webapp2.RequestHandler):
         try:
             response = urllib2.urlopen(wikiURL + api)
             data = json.load(response)
-            keys = data['query']['pages'].keys()
-            temp = data['query']['pages'][keys[0]]['extract']
+            keys = data["query"]["pages"].keys()
+            temp = data["query"]["pages"][keys[0]]["extract"]
         except urllib2.URLError:
             temp = ""
         post_country.description = temp
@@ -171,8 +172,8 @@ class Addenergy(webapp2.RequestHandler):
         try:
             response = urllib2.urlopen(wikiURL + api)
             data = json.load(response)
-            keys = data['query']['pages'].keys()
-            temp = data['query']['pages'][keys[0]]['extract']
+            keys = data["query"]["pages"].keys()
+            temp = data["query"]["pages"][keys[0]]["extract"]
         except urllib2.URLError:
             temp = ""
         post_energy.description = temp
@@ -203,8 +204,8 @@ class Addproduction(webapp2.RequestHandler):
         try:
             response = urllib2.urlopen(wikiURL + api)
             data = json.load(response)
-            keys = data['query']['pages'].keys()
-            temp = data['query']['pages'][keys[0]]['extract']
+            keys = data["query"]["pages"].keys()
+            temp = data["query"]["pages"][keys[0]]["extract"]
         except urllib2.URLError:
             temp = ""
         post_prod.description = temp
@@ -227,7 +228,9 @@ class FilterEnergy(webapp2.RequestHandler):
 
         topCountry = self.request.get("Top_Producing_Country")
         if topCountry != "all" and energy_query.fetch() != []:
-            energy_query = energy_query.filter(Energy.Top_Producing_Country.IN(topCountry.split("|")))
+            energy_query = energy_query.filter(
+                Energy.Top_Producing_Country.IN(topCountry.split("|"))
+            )
 
         self.response.headers["Content-Type"] = "application/json"
         self.response.out.write(
@@ -237,16 +240,21 @@ class FilterEnergy(webapp2.RequestHandler):
             )
         )
 
+
 class FilterProduction(webapp2.RequestHandler):
     def get(self):
         production_query = ProductionAndUse.query()
         productionType = self.request.get("Type")
         if productionType != "all":
-            production_query = production_query.filter(ProductionAndUse.Type.IN(productionType.split("|")))
+            production_query = production_query.filter(
+                ProductionAndUse.Type.IN(productionType.split("|"))
+            )
 
         usageField = self.request.get("Usage_Field")
         if usageField != "all" and production_query.fetch() != []:
-            production_query = production_query.filter(ProductionAndUse.Usage_Field.IN(usageField.split("|")))
+            production_query = production_query.filter(
+                ProductionAndUse.Usage_Field.IN(usageField.split("|"))
+            )
 
         year = self.request.get("Year_of_Invention")
         if year != "all" and production_query.fetch() != []:
@@ -254,13 +262,23 @@ class FilterProduction(webapp2.RequestHandler):
             listOFKey = []
             for year in listOfEle:
                 if year == "BC":
-                    temp = production_query.filter(ProductionAndUse.Year_of_Invention < 0).fetch(keys_only = True)
+                    temp = production_query.filter(
+                        ProductionAndUse.Year_of_Invention < 0
+                    ).fetch(keys_only=True)
                 elif year == "1700-1900":
-                    temp = production_query.filter(ProductionAndUse.Year_of_Invention < 1900,ProductionAndUse.Year_of_Invention >= 1700).fetch(keys_only = True)
+                    temp = production_query.filter(
+                        ProductionAndUse.Year_of_Invention < 1900,
+                        ProductionAndUse.Year_of_Invention >= 1700,
+                    ).fetch(keys_only=True)
                 elif year == "1900-2000":
-                    temp = production_query.filter(ProductionAndUse.Year_of_Invention < 2000,ProductionAndUse.Year_of_Invention >= 1900).fetch(keys_only = True)
+                    temp = production_query.filter(
+                        ProductionAndUse.Year_of_Invention < 2000,
+                        ProductionAndUse.Year_of_Invention >= 1900,
+                    ).fetch(keys_only=True)
                 else:
-                    temp = production_query.filter(ProductionAndUse.Year_of_Invention >= 2000).fetch(keys_only = True)
+                    temp = production_query.filter(
+                        ProductionAndUse.Year_of_Invention >= 2000
+                    ).fetch(keys_only=True)
                 listOFKey += temp
             production_query = ndb.get_multi(listOFKey)
 
@@ -271,6 +289,7 @@ class FilterProduction(webapp2.RequestHandler):
                 default=default_json_serializer,
             )
         )
+
 
 class FilterCountry(webapp2.RequestHandler):
     def get(self):
@@ -286,11 +305,17 @@ class FilterCountry(webapp2.RequestHandler):
             listOFKey = []
             for rang in listOfEle:
                 if rang == "0-100":
-                    temp = country_query.filter(Country.Population < 100).fetch(keys_only = True)
+                    temp = country_query.filter(Country.Population < 100).fetch(
+                        keys_only=True
+                    )
                 elif rang == "100-500":
-                    temp = country_query.filter(Country.Population < 500,Country.Population >= 100).fetch(keys_only = True)
+                    temp = country_query.filter(
+                        Country.Population < 500, Country.Population >= 100
+                    ).fetch(keys_only=True)
                 else:
-                    temp = country_query.filter(Country.Population >= 500).fetch(keys_only = True)
+                    temp = country_query.filter(Country.Population >= 500).fetch(
+                        keys_only=True
+                    )
                 listOFKey += temp
             country_query = ndb.get_multi(listOFKey)
 
@@ -302,7 +327,11 @@ class FilterCountry(webapp2.RequestHandler):
                 for each in country_query:
                     if rang == "0-1000" and each.Total_Production < 1000:
                         listOFResult.append(each)
-                    elif rang == "1000-2000" and each.Total_Production < 2000 and each.Total_Production >= 1000:
+                    elif (
+                        rang == "1000-2000"
+                        and each.Total_Production < 2000
+                        and each.Total_Production >= 1000
+                    ):
                         listOFResult.append(each)
                     elif rang == ">2000" and each.Total_Production >= 2000:
                         listOFResult.append(each)
@@ -316,6 +345,7 @@ class FilterCountry(webapp2.RequestHandler):
             )
         )
 
+
 # search function
 # class SearchEnergy(webapp2.RequestHandler):
 #     def get(self):
@@ -326,7 +356,6 @@ class FilterCountry(webapp2.RequestHandler):
 # class SearchCountry(webapp2.RequestHandler):
 #
 # class SearchHome(webapp2.RequestHandler):
-
 
 
 app = webapp2.WSGIApplication(

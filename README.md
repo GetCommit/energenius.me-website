@@ -16,19 +16,21 @@ Phase one: 4d37e6b10f894e15e8d9bce2e46555b8131597f6
 
 Phase two: 7c06970663265dc8396c5c0893fd67cb2cce5c3a
 
+Phase three:
+
 ## GitLab pipelines:
 https://gitlab.com/LuculentDig/energiziousness/pipelines
 
 
 ## Estimated Time
 
-|  Members | Estimated | Actual | Estimated | Actual |
-| -------- | --------- | ------ | --------- | ------ |
-| Yaoyang  | 10        | 18     | 30        |  36    |
-| Yige     | 15        | 20     | 35        |  39    |
-| Wenyuan | 15        | 18     | 25        |  43    |
-| Pengdi   | 10        | 19     | 26        |  31    |
-| Shijing  | 8         | 19     | 23        |  26    |
+|  Members | Estimated | Actual | Estimated | Actual | Estimated | Actual |
+| -------- | --------- | ------ | --------- | ------ | --------- | ------ |
+| Yaoyang  | 10        | 18     | 30        |  36    | 12        |  16    |
+| Yige     | 15        | 20     | 35        |  39    | 20        |  18    |
+| Wenyuan  | 15        | 18     | 25        |  43    | 30        |  25    |
+| Pengdi   | 10        | 19     | 26        |  31    | 25        |  23    |
+| Shijing  | 8         | 19     | 23        |  26    | 10        |  12    |
 
 
 ## Comments:
