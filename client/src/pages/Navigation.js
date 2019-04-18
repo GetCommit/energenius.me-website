@@ -27,7 +27,15 @@ export default class Navigation extends Component {
         query: ""
       }
     };
+    this.onInputChange = this.onInputChange.bind(this);
+
+
+  
   }
+  
+  onInputChange (nativeEvent){
+    this.setState({ searchValue: nativeEvent.target.value });
+  };
 
   handleSubmit = e => {
     e.preventDefault();
@@ -77,8 +85,8 @@ export default class Navigation extends Component {
             </Nav>
 
             <Nav fill className="justify-content-end" alignRight>
-              <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left col-xs-6" alignRight >
-              
+
+              <Form  onSubmit={this.handleChange} noValidate inline className="justify-content-left col-xs-6" alignRight >
                 <FormControl 
 
                   placeholder=""
@@ -90,6 +98,7 @@ export default class Navigation extends Component {
                 />
 
                 <Link to={'/search/'+this.state.query}>
+
 
                   <Button variant="outline-primary" className="mt-2 mt-sm-0">
                     Search

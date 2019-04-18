@@ -10,6 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import {Navbar,Nav, NavbarBrand} from 'react-bootstrap'
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
+
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import AppBar from '@material-ui/core/AppBar';
@@ -351,6 +352,7 @@ class Energy extends Component {
             </div>
 
             <aside class="col-md-2">
+
 
               {/* Local search */}
               <Nav fill className="justify-content-end" alignRight>
