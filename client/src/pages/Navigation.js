@@ -85,7 +85,7 @@ export default class Navigation extends Component {
                 </Link>
             </Nav.Item>
 
-            <Nav.Item  style={{ paddingLeft: "33%" }}>
+            <Nav.Item  style={{ paddingLeft: "10px" }}>
               <Form  onSubmit={this.handleChange} noValidate inline className="justify-content-left col-xs-6" alignRight >
                 <FormControl
 
@@ -101,7 +101,7 @@ export default class Navigation extends Component {
 
 
                   <Button variant="outline-primary" className="mt-2 mt-sm-0">
-                    Search
+                    Global Search
                   </Button>
 
                 </Link>

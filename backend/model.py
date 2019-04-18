@@ -20,9 +20,9 @@ import webapp2
 #     bodysection = ndb.StructuredProperty(SectionContent, repeated=True)
 #     uptitle = ndb.StringProperty(required=True)
 #     upcontent = ndb.StringProperty(repeated=True)
-    # if need link or url, also could store here
-    # downtitle = ndb.StringProperty(required=True)
-    # downcontent = ndb.StringProperty(repeated=True)
+# if need link or url, also could store here
+# downtitle = ndb.StringProperty(required=True)
+# downcontent = ndb.StringProperty(repeated=True)
 
 # country API
 # class Top3Energy (ndb.Model):
@@ -34,6 +34,7 @@ import webapp2
 # Three models
 
 # Model- country
+
 
 class Country(ndb.Model):
     Name = ndb.StringProperty(required=True)
@@ -48,6 +49,7 @@ class Country(ndb.Model):
     Video_API = ndb.StringProperty(required=True)
     description = ndb.StringProperty(required=True)
 
+
 # Model- energy
 class Energy(ndb.Model):
     Name = ndb.StringProperty(required=True)
@@ -61,6 +63,7 @@ class Energy(ndb.Model):
     Production_API = ndb.StringProperty(required=True)
     Video_API = ndb.StringProperty(required=True)
     description = ndb.StringProperty(required=True)
+
 
 # Model- Production and usage
 class ProductionAndUse(ndb.Model):

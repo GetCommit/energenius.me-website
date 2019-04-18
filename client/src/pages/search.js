@@ -15,29 +15,45 @@ export default class search extends Component {
         }
 
         getBriefInfo(str, target, length) {
-            var brief = [];
+            // Target must be lower case
             var targetIndex;
 
             var info = str.split(" ");
 
             // find highlight
             for(let index in info){
-                if(info[index] === target){
+                if(info[index].toLowerCase() === target.toLowerCase()){
                 targetIndex = index;
-                info[index] = target;
                 break;
                 }
             }
 
+            var left = [];
+            var mid = [];
+            var right = [];
+
+
             for(var i = (+targetIndex - length/2); i < (+targetIndex+length/2); i++){
 
-                // console.log(i < (targetIndex + 5))
                 if( 0 <= i  && i < info.length){
-                brief.push(info[i]);
+                    if( i < targetIndex){
+                        left.push(info[i]);
+                    }
+                    if(i == targetIndex){
+                        mid=info[i];
+                    }
+                    if(i > targetIndex){
+                        right.push(info[i]);
+                    }
                 }
             }
 
-            return "..."+brief.join(' ')+"...";
+            var brief = [];
+            brief.push(left);
+            brief.push(mid);
+            brief.push(right);
+            // return "..."+brief.join(' ')+"...";
+            return brief;
         }
 
         componentDidMount (){
@@ -61,15 +77,16 @@ export default class search extends Component {
 
                         this.state[elem[1]['Name']] = this.info
                         var str = elem[1]['description'].replace('\n','')
-                        var des = str.split(" ");
-                        if(des.includes(this.search)){
+                        var des = str.toLowerCase().split(" ");
+                        if(des.includes(this.search.toLowerCase())){
 
                             var str = this.info['description'];
 
-                            var substr = this.getBriefInfo(this.info['description'], this.search, 20)
+                            var brief = this.getBriefInfo(this.info['description'], this.search, 20)
 
-                            var left = substr.substring(0,substr.indexOf(this.search))
-                            var right = substr.substring(substr.indexOf(this.search)+this.search.length+1, substr.length)
+                            var mid = brief[1];
+                            var left = "..."+brief[0].join(" ")
+                            var right = brief[2].join(" ")+"..."
 
                             console.log("HELLO WORLD")
 
@@ -82,7 +99,7 @@ export default class search extends Component {
 
 
                                 <div >
-                                    <div className = "Button">{left} <b>{this.search}</b> {right} </div>
+                                    <div className = "Button">{left} <b>{mid}</b> {right} </div>
                                     <br/>
                                     <br/>
 
@@ -122,15 +139,15 @@ export default class search extends Component {
 
                         this.state[elem[1]['Name']] = this.info
                         var str = elem[1]['description'].replace('\n','')
-                        var des = str.split(" ");
-                        if(des.includes(this.search)){
+                        var des = str.toLowerCase().split(" ");
+                        if(des.includes(this.search.toLowerCase())){
 
                             var str = this.info['description'];
+                            var brief = this.getBriefInfo(this.info['description'], this.search, 20)
 
-                            var substr = this.getBriefInfo(this.info['description'], this.search, 10)
-
-                            var left = substr.substring(0,substr.indexOf(this.search))
-                            var right = substr.substring(substr.indexOf(this.search)+this.search.length+1, substr.length)
+                            var mid = brief[1];
+                            var left = "..."+brief[0].join(" ")
+                            var right = brief[2].join(" ")+"..."
 
 
                             this.search_results.push(
@@ -141,7 +158,7 @@ export default class search extends Component {
 
 
                                 <div >
-                                    <div className = "Button">{left} <b>{this.search}</b> {right} </div>
+                                    <div className = "Button">{left} <b>{mid}</b> {right} </div>
                                     <br/>
                                     <br/>
 
@@ -179,17 +196,18 @@ export default class search extends Component {
 
 
                         var str = elem[1]['description'].replace('\n','')
-                        var des = str.split(" ");
-                        if(des.includes(this.search)){
+                        var des = str.toLowerCase().split(" ");
+                        if(des.includes(this.search.toLowerCase())){
 
                             var str = this.info['description'];
 
                             var idx = str.indexOf(this.search);
 
-                            var substr = this.getBriefInfo(this.info['description'], this.search, 10)
+                            var brief = this.getBriefInfo(this.info['description'], this.search, 20)
 
-                            var left = substr.substring(0,substr.indexOf(this.search))
-                            var right = substr.substring(substr.indexOf(this.search)+this.search.length+1, substr.length)
+                            var mid = brief[1];
+                            var left = "..."+brief[0].join(" ")
+                            var right = brief[2].join(" ")+"..."
 
 
                             this.search_results.push(
@@ -200,7 +218,7 @@ export default class search extends Component {
 
 
                                 <div >
-                                    <div className = "Button">{left} <b>{this.search}</b> {right} </div>
+                                    <div className = "Button">{left} <b>{mid}</b> {right} </div>
                                     <br/>
                                     <br/>
 

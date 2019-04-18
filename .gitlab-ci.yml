@@ -13,7 +13,7 @@ api-unittests:
     script:
         - npm install newman
         - node_modules/.bin/newman run Postman.json
-     
+
 frontend-testing:
     image: gpdowning/node
     script:
@@ -30,6 +30,3 @@ backend-unittests:
         - cd backend
         - pip3 install requests
         - python3 tests.py
-
-
-

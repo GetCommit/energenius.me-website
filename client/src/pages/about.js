@@ -69,9 +69,9 @@ class About extends Component {
     this.state.memData = {
       'Pengdi Xia': {
         name: 'Pengdi Xia',
-        bio: 'I am a senior currently pursuing a master degree in Information Technology and Management at McCombs',
+        bio: 'I am a senior currently pursuing a master degree in MSITM at McCombs',
         alias: ['Pengdi Xia'],
-        role: 'Setting up GCP server, getting domain name',
+        role: 'Setting up GCP server. Backend development. Database design.',
         img: px,
         commits: 0,
         issues: 0,
@@ -81,7 +81,7 @@ class About extends Component {
         name: 'Shijing Zhong',
         bio: 'I am an Integrated Master student at CSEM and a Christian. And I love music.',
         alias: ['Shijing Zhong'],
-        role: 'Setting up GCP server. Postman. writing technical report.',
+        role: 'Setting up GCP server. Postman. Writing technical report.',
         img: sz,
         commits: 0,
         issues: 0,
@@ -91,7 +91,7 @@ class About extends Component {
         name: 'Wenyuan Wu',
         bio: 'I am a super senior at UT. I love playing phone games and solving Rubik\'s Cube.',
         alias: ['Wenyuan Wu'],
-        role: 'Setting up GitLab slack integration, Front End',
+        role: 'Setting up GitLab slack integration, Front End. Search.',
         img: ww,
         commits: 0,
         issues: 0,
@@ -101,7 +101,7 @@ class About extends Component {
         name: 'Yige Wang',
         bio: 'Hi, I am Yige. I am a senior and future Googler and I love puppies.',
         alias: ['Yige Wang'],
-        role: 'Front End and website stylist',
+        role: 'Front End and website stylist. Filter.',
         img: yw,
         commits: 0,
         issues: 0,
@@ -111,21 +111,21 @@ class About extends Component {
         name: 'Yaoyang Liu',
         bio: 'I am Yaoyang. I like software engineering very much.',
         alias: ['Yaoyang Liu'],
-        role: 'Project architect. monitoring all aspects of the project.',
+        role: 'Project architect. Postman. QA. Technical Report.',
         img: yl,
         commits: 0,
         issues: 0,
-        tests: 54
+        tests: 72
       },
       'Duck': {
         name: 'Duck',
-        bio: 'I am a energetic duck that did all the work. Everybody else is lying.',
+        bio: 'I am a energetic duck that did all the work. Everybody else is lying. (Total Stats Here)',
         alias: ['Duck'],
-        role: 'Setting up GCP server, Fullstack, Debug, Crakcing Joke',
+        role: 'Fullstack',
         img: bug,
-        commits: '∞',
-        issues: '∞',
-        tests: '∞'
+        commits: 0,
+        issues: 0,
+        tests: 0
       },
     }
   }
@@ -144,8 +144,10 @@ componentDidMount (){
         for (var i in data) {
           let commit_data = data[i]
           for (var member in this.state.memData) {
+            // console.log(member);
             if (this.state.memData[member].alias.includes(commit_data.author_name)) {
               this.state.memData[member].commits += 1;
+              this.state.memData['Duck'].commits += 1;
             }
           }
         }
@@ -165,7 +167,13 @@ componentDidMount (){
         for (var member in this.state.memData) {
           if (this.state.memData[member].alias.includes(data.author.name)) {
             this.state.memData[member].issues += 1;
+            this.state.memData['Duck'].issues += 1;
           }
+        }
+      }
+      for (var member in this.state.memData) {
+        if (member != 'Duck') {
+          this.state.memData['Duck'].tests += this.state.memData[member].tests;
         }
       }
       this.setState({})
@@ -174,6 +182,7 @@ componentDidMount (){
       console.log(e)
     })
   }
+  
 
   // Final Render
   render () {

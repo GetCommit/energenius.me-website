@@ -4,8 +4,8 @@ import requests
 
 url = "https://www.energenius.me/api/"
 
-class TestBeckendAPIMethods(unittest.TestCase):
 
+class TestBeckendAPIMethods(unittest.TestCase):
     def test_API_Page_1(self):
         r = requests.get(url + "add/energy")
         self.assertEqual(r.status_code, 200)
@@ -61,38 +61,162 @@ class TestBeckendAPIMethods(unittest.TestCase):
         self.assertEqual(d[0]["Carbon_Emission"], 2338)
 
     # filter test
-    def test_API_filter_Energy(self):
+    def test_API_filter_Energy_Number(self):
         """
         Type = Physical Energy
         Major_Use = Industrial
         Top_Producing_Country = China
         """
-        r = requests.get("https://www.energenius.me/api/filter/energy?Type=Physical%20Energy&Major_Use=Industrial&Top_Producing_Country=China")
+        r = requests.get(
+            "https://www.energenius.me/api/filter/energy?Type=Physical%20Energy&Major_Use=Industrial&Top_Producing_Country=China"
+        )
         d = json.loads(r.text)
         self.assertEqual(len(d), 1)
 
-    def test_API_filter_Country(self):
+    def test_API_filter_Energy_Type(self):
+        """
+        Type = Physical Energy
+        Major_Use = Industrial
+        Top_Producing_Country = China
+        """
+        r = requests.get(
+            "https://www.energenius.me/api/filter/energy?Type=Physical%20Energy&Major_Use=Industrial&Top_Producing_Country=China"
+        )
+        d = json.loads(r.text)
+        self.assertEqual(d[0]["Type"], "Physical Energy")
+
+    def test_API_filter_Energy_Major_Use(self):
+        """
+        Type = Physical Energy
+        Major_Use = Industrial
+        Top_Producing_Country = China
+        """
+        r = requests.get(
+            "https://www.energenius.me/api/filter/energy?Type=Physical%20Energy&Major_Use=Industrial&Top_Producing_Country=China"
+        )
+        d = json.loads(r.text)
+        self.assertEqual(d[0]["Major_Use"], "Industrial")
+
+    def test_API_filter_Energy_Country(self):
+        """
+        Type = Physical Energy
+        Major_Use = Industrial
+        Top_Producing_Country = China
+        """
+        r = requests.get(
+            "https://www.energenius.me/api/filter/energy?Type=Physical%20Energy&Major_Use=Industrial&Top_Producing_Country=China"
+        )
+        d = json.loads(r.text)
+        self.assertEqual(d[0]["Top_Producing_Country"], "China")
+
+    def test_API_filter_Production_Number(self):
         """
         Type = all
         Year_of_Invention = BC or 1900-2000
         Usage_Field = Residential
         """
-        r = requests.get("https://www.energenius.me/api/filter/production?Type=all&Year_of_Invention=BC|1900-2000&Usage_Field=Residential")
+        r = requests.get(
+            "https://www.energenius.me/api/filter/production?Type=all&Year_of_Invention=BC|1900-2000&Usage_Field=Residential"
+        )
         d = json.loads(r.text)
         self.assertEqual(len(d), 4)
+
+    def test_API_filter_Production_Usage_Field_0(self):
+        """
+        Type = all
+        Year_of_Invention = BC or 1900-2000
+        Usage_Field = Residential
+        """
+        r = requests.get(
+            "https://www.energenius.me/api/filter/production?Type=all&Year_of_Invention=BC|1900-2000&Usage_Field=Residential"
+        )
+        d = json.loads(r.text)
+        self.assertEqual(d[0]["Usage_Field"], "Residential")
+
+    def test_API_filter_Production_Usage_Field_1(self):
+        """
+        Type = all
+        Year_of_Invention = BC or 1900-2000
+        Usage_Field = Residential
+        """
+        r = requests.get(
+            "https://www.energenius.me/api/filter/production?Type=all&Year_of_Invention=BC|1900-2000&Usage_Field=Residential"
+        )
+        d = json.loads(r.text)
+        self.assertEqual(d[1]["Usage_Field"], "Residential")
+
+    def test_API_filter_Production_Usage_Field_2(self):
+        """
+        Type = all
+        Year_of_Invention = BC or 1900-2000
+        Usage_Field = Residential
+        """
+        r = requests.get(
+            "https://www.energenius.me/api/filter/production?Type=all&Year_of_Invention=BC|1900-2000&Usage_Field=Residential"
+        )
+        d = json.loads(r.text)
         self.assertEqual(d[2]["Usage_Field"], "Residential")
 
-        def test_API_filter_Country(self):
-            """
-            Region = Africa
-            Population = all
-            Total_Production = >2000
-            """
-            r = requests.get("https://www.energenius.me/api/filter/country?Region=Africa&Population=all&Total_Production=%3E2000")
-            d = json.loads(r.text)
-            self.assertEqual(len(d), 1)
-            self.assertEqual(d[0]["Name"], "Wakanda")
+    def test_API_filter_Production_Usage_Field_3(self):
+        """
+        Type = all
+        Year_of_Invention = BC or 1900-2000
+        Usage_Field = Residential
+        """
+        r = requests.get(
+            "https://www.energenius.me/api/filter/production?Type=all&Year_of_Invention=BC|1900-2000&Usage_Field=Residential"
+        )
+        d = json.loads(r.text)
+        self.assertEqual(d[3]["Usage_Field"], "Residential")
+
+    def test_API_filter_Country_Number(self):
+        """
+        Region = Africa
+        Population = all
+        Total_Production = >2000
+        """
+        r = requests.get(
+            "https://www.energenius.me/api/filter/country?Region=Africa&Population=all&Total_Production=%3E2000"
+        )
+        d = json.loads(r.text)
+        self.assertEqual(len(d), 1)
+
+    def test_API_filter_Country_Name(self):
+        """
+        Region = Africa
+        Population = all
+        Total_Production = >2000
+        """
+        r = requests.get(
+            "https://www.energenius.me/api/filter/country?Region=Africa&Population=all&Total_Production=%3E2000"
+        )
+        d = json.loads(r.text)
+        self.assertEqual(d[0]["Name"], "Wakanda")
+
+    def test_API_filter_Country_Region(self):
+        """
+        Region = Africa
+        Population = all
+        Total_Production = >2000
+        """
+        r = requests.get(
+            "https://www.energenius.me/api/filter/country?Region=Africa&Population=all&Total_Production=%3E2000"
+        )
+        d = json.loads(r.text)
+        self.assertEqual(d[0]["Region"], "Africa")
+
+    def test_API_filter_Country_Production(self):
+        """
+        Region = Africa
+        Population = all
+        Total_Production = >2000
+        """
+        r = requests.get(
+            "https://www.energenius.me/api/filter/country?Region=Africa&Population=all&Total_Production=%3E2000"
+        )
+        d = json.loads(r.text)
+        self.assertEqual(d[0]["Total_Production"] > 2000, True)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
