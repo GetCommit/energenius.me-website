@@ -13,9 +13,8 @@ export default class search extends Component {
         this.search_results = []
         console.log("GLOBAL SEARCH")
         }
-        
-        getBriefInfo(str, target, length)
-        {
+
+        getBriefInfo(str, target, length) {
             var brief = [];
             var targetIndex;
             
@@ -25,7 +24,7 @@ export default class search extends Component {
             for(let index in info){
                 if(info[index] === target){
                 targetIndex = index;
-                info[index] = "<b>" + target + "</b>";
+                info[index] = target;
                 break;
                 }
             }
@@ -67,18 +66,23 @@ export default class search extends Component {
 
                             var str = this.info['description'];
                             
-                            var substr = this.getBriefInfo(this.info['description'], this.search, 10)
-                                
+                            var substr = this.getBriefInfo(this.info['description'], this.search, 20)
+
+                            var left = substr.substring(0,substr.indexOf(this.search)) 
+                            var right = substr.substring(substr.indexOf(this.search)+this.search.length+1, substr.length)
+
+                            console.log("HELLO WORLD")
                             
                             this.search_results.push(
                             <div>
+
                                 <h5>
-                                <li><Link to={'/energy/'+elem[1]['Name']}> {elem[1]['Name']} </Link></li>
+                                    <Link to={'/energy/'+elem[1]['Name']}> {elem[1]['Name']} </Link>
                                 </h5>
                                 
 
                                 <div >
-                                    {substr}
+                                    <div className = "Button">{left} <b>{this.search}</b> {right} </div>
                                     <br/>
                                     <br/>
 
@@ -125,17 +129,19 @@ export default class search extends Component {
                             
                             var substr = this.getBriefInfo(this.info['description'], this.search, 10)
 
-                                
+                            var left = substr.substring(0,substr.indexOf(this.search)) 
+                            var right = substr.substring(substr.indexOf(this.search)+this.search.length+1, substr.length)
+
                             
                             this.search_results.push(
                             <div>
                                 <h5>
-                                <li><Link to={'/production/'+elem[1]['Name']}>{elem[1]['Name']}</Link></li>
+                                    <Link to={'/production/'+elem[1]['Name']}>{elem[1]['Name']}</Link>
                                 </h5>
                                 
 
                                 <div >
-                                    {substr}
+                                    <div className = "Button">{left} <b>{this.search}</b> {right} </div>
                                     <br/>
                                     <br/>
 
@@ -181,18 +187,20 @@ export default class search extends Component {
                             var idx = str.indexOf(this.search);
 
                             var substr = this.getBriefInfo(this.info['description'], this.search, 10)
+                            
+                            var left = substr.substring(0,substr.indexOf(this.search)) 
+                            var right = substr.substring(substr.indexOf(this.search)+this.search.length+1, substr.length)
 
-                                
                             
                             this.search_results.push(
                             <div>
                                 <h5>
-                                <li><Link to={'/country/'+elem[1]['Name']}>{elem[1]['Name']}</Link></li>
+                                    <Link to={'/country/'+elem[1]['Name']}>{elem[1]['Name']}</Link>
                                 </h5>
                                 
 
                                 <div >
-                                    {substr}
+                                    <div className = "Button">{left} <b>{this.search}</b> {right} </div>
                                     <br/>
                                     <br/>
 
@@ -216,74 +224,11 @@ export default class search extends Component {
 
                 
             }
-            
-        // componentDidMount (){
-        //     document.title = this.img;
-    
-        //     fetch(
-        //         'https://www.energenius.me/api/country?name=all'
-        //     )
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             for (const elem of data.entries()) {
-        //               this.info = {}
-        //               this.info['API'] = elem[1]['API']
-        //               this.info["description"] = elem[1]['description']
-        //               this.state[elem[1]['Name']] = this.info
-        //               if(this.info['description'].includes(this.search)){
-        //                 var str = this.info['description'];
-
-                        
-        //                 var idx = str.indexOf(this.search);
-
-        //                 if(idx<20){
-        //                     var idx1 = 0
-        //                 }
-        //                 else{
-        //                     var idx1 = idx - 20
-        //                 }
-        //                 if(str.length - idx <10){
-        //                     var idx2 = str.length
-        //                 }
-        //                 else{
-        //                     var idx2 = idx+20+this.search.length
-        //                 }
-        //                 var substr = str.substring(idx1,idx2);
-
-        //                 this.search_results.push(
-        //                     <div>
-        //                         <h2>
-        //                         <li><Link to={'/country/'+elem[1]['Name']}>{elem[1]['Name']}</Link></li>
-        //                         </h2>
-                                
-
-        //                         <div >
-        //                             {substr}
-        //                             <br/>
-        //                             <br/>
-
-
-        //                         </div>
-        //                     </div>
-
-                            
-        //                     )
-
-        //               }
-
-        //             }
-        //             this.setState({});
-        //         })                .catch(e => {
-        //             console.log(e);
-        //         })
-
-        //     }
 
     render() {
         return (
         <div>
 
-            <h1>Search results for <b>{this.search}</b></h1>
 
             <div>
                 

@@ -10,7 +10,6 @@ class CountryInstance extends Component {
       this.title = this.id
       this.id = this.props.match.params;
       this.img = this.id['id']
-      console.log('hEllo '+this.img, typeof(this.img),this.id)
 
     }
 

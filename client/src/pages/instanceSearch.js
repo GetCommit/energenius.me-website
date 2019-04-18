@@ -69,7 +69,7 @@ export default class instanceSearch extends Component {
                             this.search_results.push(
                             <div>
                                 <h5>
-                                <li><Link to={'/energy/'+elem[1]['Name']}> {elem[1]['Name']} </Link></li>
+                                    <Link to={'/energy/'+elem[1]['Name']}> {elem[1]['Name']} </Link>
                                 </h5>
                                 
 
