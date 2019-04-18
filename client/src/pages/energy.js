@@ -303,6 +303,7 @@ class Energy extends Component {
 
                 </p>
             </Form>
+            
 
             <Form>
             <FormControl variant="outlined" color="primary" style={{ width: '10rem'}}>

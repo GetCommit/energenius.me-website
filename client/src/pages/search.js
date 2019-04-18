@@ -13,6 +13,33 @@ export default class search extends Component {
         this.search_results = []
         }
         
+        getBriefInfo(str, target, length)
+        {
+            var brief = [];
+            var targetIndex;
+            
+            var info = str.split(" ");
+            
+            // find highlight
+            for(let index in info){
+                if(info[index] === target){
+                targetIndex = index;
+                info[index] = "<b>" + target + "</b>";
+                break;
+                }
+            }
+            
+            for(var i = (+targetIndex - length/2); i < (+targetIndex+length/2); i++){
+            
+                // console.log(i < (targetIndex + 5))
+                if( 0 <= i  && i < info.length){
+                brief.push(info[i]);
+                }
+            }
+            
+            return "..."+brief.join(' ')+"...";
+        }
+        
         componentDidMount (){
             document.title = this.img;
         
@@ -33,33 +60,19 @@ export default class search extends Component {
                         this.info["modelType"] = 'energy'
 
                         this.state[elem[1]['Name']] = this.info
-
-                        if(elem[1]['description'].includes(this.search)){
+                        var str = elem[1]['description'].replace('\n','')
+                        var des = str.split(" ");
+                        if(des.includes(this.search)){
 
                             var str = this.info['description'];
                             
-                            var idx = str.indexOf(this.search);
-
-                            if(idx<20){
-                                var idx1 = 0
-                            }
-                            else{
-                                var idx1 = idx - 20
-                            }
-                            if(str.length - idx <10){
-                                var idx2 = str.length
-                            }
-                            else{
-                                var idx2 = idx+20+this.search.length
-                            }
-                            var substr = str.substring(idx1,idx2);
-
+                            var substr = this.getBriefInfo(this.info['description'], this.search, 10)
                                 
                             
                             this.search_results.push(
                             <div>
                                 <h5>
-                                <li><Link to={'/energy/'+elem[1]['Name']}>{elem[1]['Name']}</Link></li>
+                                <li><Link to={'/energy/'+elem[1]['Name']}> {elem[1]['Name']} </Link></li>
                                 </h5>
                                 
 
@@ -102,26 +115,13 @@ export default class search extends Component {
                         this.info["modelType"] = 'production'
 
                         this.state[elem[1]['Name']] = this.info
-
-                        if(elem[1]['description'].includes(this.search)){
+                        var str = elem[1]['description'].replace('\n','')
+                        var des = str.split(" ");
+                        if(des.includes(this.search)){
 
                             var str = this.info['description'];
                             
-                            var idx = str.indexOf(this.search);
-
-                            if(idx<20){
-                                var idx1 = 0
-                            }
-                            else{
-                                var idx1 = idx - 20
-                            }
-                            if(str.length - idx <10){
-                                var idx2 = str.length
-                            }
-                            else{
-                                var idx2 = idx+20+this.search.length
-                            }
-                            var substr = str.substring(idx1,idx2);
+                            var substr = this.getBriefInfo(this.info['description'], this.search, 10)
 
                                 
                             
@@ -170,25 +170,15 @@ export default class search extends Component {
                         this.state[elem[1]['Name']] = this.info
 
 
-                        if(elem[1]['description'].includes(this.search)){
+                        var str = elem[1]['description'].replace('\n','')
+                        var des = str.split(" ");
+                        if(des.includes(this.search)){
 
                             var str = this.info['description'];
                             
                             var idx = str.indexOf(this.search);
 
-                            if(idx<20){
-                                var idx1 = 0
-                            }
-                            else{
-                                var idx1 = idx - 20
-                            }
-                            if(str.length - idx <10){
-                                var idx2 = str.length
-                            }
-                            else{
-                                var idx2 = idx+20+this.search.length
-                            }
-                            var substr = str.substring(idx1,idx2);
+                            var substr = this.getBriefInfo(this.info['description'], this.search, 10)
 
                                 
                             
