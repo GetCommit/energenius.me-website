@@ -155,7 +155,7 @@ class Country extends Component {
             api += checkedProd.join("|");
         }
 
-        fetch("https://www.energenius.me/api/search/country?" + api)
+        fetch("https://www.energenius.me/api/filter/country?" + api)
             .then(response => response.json())
             .then(data => this.setState({info: data}));
     }

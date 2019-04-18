@@ -1520,6 +1520,112 @@
 					"body": "[\n    {\n        \"Name\": \"Medical\",\n        \"Usage_Field\": \"Electric power\",\n        \"Year_of_Invention\": 1928,\n        \"Related_Energy\": \"Nuclear Power\",\n        \"Carbon_Emission\": 0,\n        \"API\": \"Radioactive_tracer\",\n        \"Type\": \"Usage\"\n    }\n]"
 				}
 			]
+		},
+		{
+			"name": "Filter Country",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d6b544f-c1b1-4af3-b2ff-50eac065cf0f",
+						"exec": [
+							"",
+							"pm.test(\"Test1: response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Test2: Return content checking\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Virbranium\");",
+							"});",
+							"",
+							"pm.test(\"Test3: Response must be valid and have a body\", function () {",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"Test4: Check the Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    // Find the array index for the COUNTRY",
+							"    var index = jsonData.map(",
+							"            function(filter) {",
+							"                return filter.Name;",
+							"            }",
+							"        ).indexOf('Wakanda');",
+							"        ",
+							"    // Get the target from the list",
+							"    var target = jsonData[index];",
+							"",
+							"    pm.expect(target).to.exist;",
+							"    pm.expect(target.Region).equal(\"Africa\")",
+							"});",
+							"",
+							"pm.test(\"Test5: Should include object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var target = jsonData[0]",
+							"    var expectedObject = {",
+							"        \"Region\": \"Africa\",",
+							"        \"Total_Production\": 10000000,",
+							"        \"Production_API\": \"Save Avengers\",",
+							"        \"API\": \"Wakanda\",",
+							"        \"Energy_Shortage\": 0,",
+							"        \"Population\": 3,",
+							"        \"Video_API\": \"r8nxdAGg2FY\",",
+							"        \"Name\": \"Wakanda\"",
+							"    }",
+							"    pm.expect(target).to.include(expectedObject);",
+							"    pm.expect(target).to.have.property('Name');",
+							"});",
+							"",
+							"pm.test(\"Test6: Response should be okay to process\", function () { ",
+							"    pm.response.to.not.be.error; ",
+							"    pm.response.to.not.have.jsonBody(\"error\"); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://www.energenius.me/api/filter/country?Region=all&Population=0-100&Total_Production=%3E2000",
+					"protocol": "https",
+					"host": [
+						"www",
+						"energenius",
+						"me"
+					],
+					"path": [
+						"api",
+						"filter",
+						"country"
+					],
+					"query": [
+						{
+							"key": "Region",
+							"value": "all"
+						},
+						{
+							"key": "Population",
+							"value": "0-100"
+						},
+						{
+							"key": "Total_Production",
+							"value": "%3E2000"
+						}
+					]
+				},
+				"description": "Request target data from the server by filtering three different fields: Region, Population, and Total Production of Electricity. "
+			},
+			"response": []
 		}
 	],
 	"event": [

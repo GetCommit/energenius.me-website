@@ -155,7 +155,7 @@ class Production extends Component {
             api += checkedUse.join("|");
         }
 
-        fetch("https://www.energenius.me/api/search/production?" + api)
+        fetch("https://www.energenius.me/api/filter/production?" + api)
             .then(response => response.json())
             .then(data => this.setState({info: data}));
     }
