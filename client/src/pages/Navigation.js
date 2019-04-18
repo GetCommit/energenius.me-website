@@ -28,11 +28,8 @@ export default class Navigation extends Component {
       }
     };
     this.onInputChange = this.onInputChange.bind(this);
-
-
-  
   }
-  
+
   onInputChange (nativeEvent){
     this.setState({ searchValue: nativeEvent.target.value });
   };
@@ -56,38 +53,41 @@ export default class Navigation extends Component {
 
     this.setState({ formErrors, [name]: value }, () => console.log(this.state));
   };
-  
+
   render(){
     return (
-      <Nav class="navbar navbar-light" style={{ backgroundColor: '#e3f2fd' }}>
-        <Navbar default to collapseOnSelect >
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
-          <Navbar.Brand href = '/'>Energeinus</Navbar.Brand>
-          <Navbar.Collapse id = "responsive-navbar-nav">
+        <Nav variant="pills" defaultActiveKey="/" style={{ padding: "10px", backgroundColor: "#d9e6f2" }}>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
 
-            <Nav variant="pills" >
-              <Link to="/energy" style={{ textDecoration: 'none'}}>
+            <Nav.Item>
+                <Link to="/" style={{ textDecoration: 'none'}}>
+                <Nav.Link href="/">Energeinus</Nav.Link>
+                </Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Link to="/energy" style={{ textDecoration: 'none'}}>
                 <Nav.Link href="/energy" eventKey="1">Energy</Nav.Link>
-              </Link>
-
-              <Link to="/production" style={{ textDecoration: 'none'}}>
+                </Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Link to="/production" style={{ textDecoration: 'none'}}>
                 <Nav.Link href="/production" eventKey="2">Production & Usage</Nav.Link>
-              </Link>
-
-              <Link to="/country" style={{ textDecoration: 'none'}}>
+                </Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Link to="/country" style={{ textDecoration: 'none'}}>
                 <Nav.Link href="/country" eventKey="3">Country</Nav.Link>
-              </Link>
-
-              <Link to="/about" style={{ textDecoration: 'none' }}>
+                </Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Link to="/about" style={{ textDecoration: 'none' }}>
                 <Nav.Link href="/about" eventKey="4">About Us</Nav.Link>
-              </Link>
+                </Link>
+            </Nav.Item>
 
-            </Nav>
-
-            <Nav fill className="justify-content-end" alignRight>
-
+            <Nav.Item  style={{ paddingLeft: "33%" }}>
               <Form  onSubmit={this.handleChange} noValidate inline className="justify-content-left col-xs-6" alignRight >
-                <FormControl 
+                <FormControl
 
                   placeholder=""
                   type="text"
@@ -104,16 +104,13 @@ export default class Navigation extends Component {
                     Search
                   </Button>
 
-                </Link> 
-                
-              </Form>
-            </Nav>
+                </Link>
 
-          </Navbar.Collapse>
-        </Navbar>
+              </Form>
+            </Nav.Item>
       </Nav>
     )
 
   }
-  
+
 }
