@@ -303,7 +303,7 @@ class SearchCountry(webapp2.RequestHandler):
                         listOFResult.append(each)
                     elif rang == "1000-2000" and each.Total_Production < 2000 and each.Total_Production >= 1000:
                         listOFResult.append(each)
-                    elif each.Total_Production >= 2000:
+                    elif rang == ">2000" and each.Total_Production >= 2000:
                         listOFResult.append(each)
             country_query = listOFResult
 
