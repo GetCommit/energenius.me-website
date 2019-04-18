@@ -24,7 +24,7 @@ export default class instanceSearch extends Component {
             for(let index in info){
                 if(info[index] === target){
                 targetIndex = index;
-                info[index] = "<b>" + target + "</b>";
+                info[index] = target;
                 break;
                 }
             }
@@ -64,7 +64,9 @@ export default class instanceSearch extends Component {
                             var str = this.info['description'];
                             
                             var substr = this.getBriefInfo(this.info['description'], this.search, 10)
-                                
+                            var left = substr.substring(0,substr.indexOf(this.search)) 
+                            var right = substr.substring(substr.indexOf(this.search)+this.search.length+1, substr.length)
+
                             
                             this.search_results.push(
                             <div>
@@ -74,7 +76,7 @@ export default class instanceSearch extends Component {
                                 
 
                                 <div >
-                                    {substr}
+                                    <div className = "Button">{left} <b>{this.search}</b> {right} </div>
                                     <br/>
                                     <br/>
 
