@@ -4,8 +4,8 @@ import requests
 
 url = "https://www.energenius.me/api/"
 
-
 class TestBeckendAPIMethods(unittest.TestCase):
+
     def test_API_Page_1(self):
         r = requests.get(url + "add/energy")
         self.assertEqual(r.status_code, 200)
@@ -60,6 +60,5 @@ class TestBeckendAPIMethods(unittest.TestCase):
         d = json.loads(r.text)
         self.assertEqual(d[0]["Carbon_Emission"], 2338)
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

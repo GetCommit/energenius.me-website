@@ -13,48 +13,32 @@ export default class instanceSearch extends Component {
 
         }
         
-        getBriefInfo(str, target, length) {
-            // Target must be lower case
+        getBriefInfo(str, target, length)
+        {
+            var brief = [];
             var targetIndex;
-
+            
             var info = str.split(" ");
-
+            
             // find highlight
             for(let index in info){
-                if(info[index].toLowerCase() === target.toLowerCase()){
+                if(info[index] === target){
                 targetIndex = index;
+                info[index] = target;
                 break;
                 }
             }
-
-            var left = [];
-            var mid = [];
-            var right = [];
-
-
+            
             for(var i = (+targetIndex - length/2); i < (+targetIndex+length/2); i++){
-
+            
+                // console.log(i < (targetIndex + 5))
                 if( 0 <= i  && i < info.length){
-                    if( i < targetIndex){
-                        left.push(info[i]);
-                    }
-                    if(i == targetIndex){
-                        mid=info[i];
-                    }
-                    if(i > targetIndex){
-                        right.push(info[i]);
-                    }
+                brief.push(info[i]);
                 }
             }
-
-            var brief = [];
-            brief.push(left);
-            brief.push(mid);
-            brief.push(right);
-            // return "..."+brief.join(' ')+"...";
-            return brief;
+            
+            return "..."+brief.join(' ')+"...";
         }
-
         componentDidMount (){
             document.title = this.img;
         
@@ -73,17 +57,15 @@ export default class instanceSearch extends Component {
 
                         this.state[elem[1]['Name']] = this.info
                         var str = elem[1]['description'].replace('\n','')
-                        var des = str.toLowerCase().split(" ");
+                        var des = str.split(" ");
 
-                        if(des.includes(this.search.toLowerCase())){
+                        if(des.includes(this.search)){
 
                             var str = this.info['description'];
                             
-                            var brief = this.getBriefInfo(this.info['description'], this.search, 20)
-
-                            var mid = brief[1];
-                            var left = "..."+brief[0].join(" ")
-                            var right = brief[2].join(" ")+"..."
+                            var substr = this.getBriefInfo(this.info['description'], this.search, 10)
+                            var left = substr.substring(0,substr.indexOf(this.search)) 
+                            var right = substr.substring(substr.indexOf(this.search)+this.search.length+1, substr.length)
 
                             
                             this.search_results.push(
@@ -94,7 +76,7 @@ export default class instanceSearch extends Component {
                                 
 
                                 <div >
-                                    <div className = "Button">{left} <b>{mid}</b> {right} </div>
+                                    <div className = "Button">{left} <b>{this.search}</b> {right} </div>
                                     <br/>
                                     <br/>
 
