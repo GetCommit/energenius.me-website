@@ -100,7 +100,7 @@ export default class Navigation extends Component {
 
 
                   <Button variant="outline-primary" className="mt-2 mt-sm-0">
-                    Search
+                    Global Search
                   </Button>
 
                 </Link> 
