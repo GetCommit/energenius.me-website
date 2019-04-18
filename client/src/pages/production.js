@@ -87,7 +87,7 @@ class Production extends Component {
       };
 
       this.handlePageChange = this.handlePageChange.bind(this);
-      // this.handleFilter = this.handleFilter.bind(this);
+      this.handleFilter = this.handleFilter.bind(this);
       this.handleSort = this.handleSort.bind(this);
     }
 
