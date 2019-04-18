@@ -232,12 +232,12 @@ componentDidMount (){
         <div class = "container">
             <h1 class = "jumbotron-deading">Tools Used</h1>
             <ul>
-                <li>GitLab</li>
-                <li>Google Cloud Platform</li>
-                <li>Postman</li>
-                <li>Bootstrap</li>
-                <li>Grammarly</li>
-                <li>Brackets</li>
+                <li><b>GitLab:</b> Gitlab CI was deployed for autonomous testing for each Gitlab commit. </li>
+                <li><b>Google Cloud Platform:</b> Google App Engine is the main service we used for the website’s backend environment.</li>
+                <li><b>Postman:</b> Postman was used to displaying our API function and testing the API calls.</li>
+                <li><b>Bootstrap:</b> We use React-Bootstrap as the CSS framework for our React application.</li>
+                <li><b>Grammarly:</b> Grammarly was used for documentation grammar and spelling checkings.</li>
+                <li><b>Brackets:</b> Brackets was the IDE we used for most of our development. </li>
             </ul>
         </div>
 
@@ -245,8 +245,9 @@ componentDidMount (){
         <div class = "container">
             <h1 class = "jumbotron-deading">API Used</h1>
             <ul>
-                <li>Energy Information <a href="https://www.eia.gov/opendata/">https://www.eia.gov/opendata/</a> <a href="https://openei.org/services/">https://openei.org/services/</a></li>
-                <li>Production and Country Information <a href="https://en.wikipedia.org/api/rest_v1/">https://en.wikipedia.org/api/rest_v1/</a></li>
+                <li><b>Energy Information</b> <a href="https://www.eia.gov/opendata/">https://www.eia.gov/opendata/</a> <a href="https://openei.org/services/">https://openei.org/services/</a></li>
+                <li><b>Production and Country Information</b> <a href="https://en.wikipedia.org/api/rest_v1/">https://en.wikipedia.org/api/rest_v1/</a></li>
+                <li><b>Video Media</b> <a href="https://developers.google.com/youtube/v3/">https://developers.google.com/youtube/v3/</a></li>
             </ul>
         </div>
 
