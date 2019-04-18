@@ -8,65 +8,73 @@ export default class instanceSearch extends Component {
         this.title = this.id
         this.id = this.props.match.params;
         this.search = this.id['id']
-
         this.state = {};
         this.search_results = []
+
         }
         
+        getBriefInfo(str, target, length)
+        {
+            var brief = [];
+            var targetIndex;
+            
+            var info = str.split(" ");
+            
+            // find highlight
+            for(let index in info){
+                if(info[index] === target){
+                targetIndex = index;
+                info[index] = "<b>" + target + "</b>";
+                break;
+                }
+            }
+            
+            for(var i = (+targetIndex - length/2); i < (+targetIndex+length/2); i++){
+            
+                // console.log(i < (targetIndex + 5))
+                if( 0 <= i  && i < info.length){
+                brief.push(info[i]);
+                }
+            }
+            
+            return "..."+brief.join(' ')+"...";
+        }
         componentDidMount (){
             document.title = this.img;
         
             fetch(
-                'https://www.energenius.me/api/energy?name=all'
+                'https://www.energenius.me/api/'+this.id['type']+'?name=all'
             )
                 .then(response => response.json())
                 .then(data => {
-                    this.search_results.push(
-                        <h2>
-                            Energy Results for {this.search}
-                        </h2>
-                    )
+
                     for (const elem of data.entries()) {
+
                         this.info = {}
                         this.info['API'] = elem[1]['API']
                         this.info["description"] = elem[1]['description']
                         this.info["modelType"] = 'energy'
 
                         this.state[elem[1]['Name']] = this.info
+                        var str = elem[1]['description'].replace('\n','')
+                        var des = str.split(" ");
 
-                        if(elem[1]['description'].includes(this.search)){
+                        if(des.includes(this.search)){
 
                             var str = this.info['description'];
                             
-                            var idx = str.indexOf(this.search);
-
-                            if(idx<20){
-                                var idx1 = 0
-                            }
-                            else{
-                                var idx1 = idx - 20
-                            }
-                            if(str.length - idx <10){
-                                var idx2 = str.length
-                            }
-                            else{
-                                var idx2 = idx+20+this.search.length
-                            }
-                            // var substr = str.substring(idx1,idx2);
-
-                            var substr= str.substring(idx1,idx2);
-
+                            var substr = this.getBriefInfo(this.info['description'], this.search, 10)
                                 
                             
                             this.search_results.push(
                             <div>
                                 <h5>
-                                <li><Link to={'/energy/'+elem[1]['Name']}>{elem[1]['Name']}</Link></li>
+                                <li><Link to={'/energy/'+elem[1]['Name']}> {elem[1]['Name']} </Link></li>
                                 </h5>
                                 
 
                                 <div >
-                                    <font color="red" className = {this.search} > {substr} </font>
+                                    {substr}
                                     <br/>
                                     <br/>
 
@@ -112,7 +120,7 @@ export default class instanceSearch extends Component {
 
             {/* Reset */}
             <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left col-xs-6" alignRight >
-                <Link to={'/'}>
+                <Link to={'/'+this.id['type']}>
 
                   <Button variant="outline-primary" className="mt-2 mt-sm-0">
                     Reset

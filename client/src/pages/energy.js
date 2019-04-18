@@ -7,6 +7,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import {Navbar,Nav, NavbarBrand} from 'react-bootstrap'
+import { fade } from '@material-ui/core/styles/colorManipulator';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -24,6 +26,21 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Instance from './Instance.js'
 import Pagination from "react-js-pagination";
 import Form from 'react-bootstrap/Form';
+const formValid = ({ formErrors, ...rest }) => {
+  let valid = true;
+
+  // validate form errors being empty
+  Object.values(formErrors).forEach(val => {
+    val.length > 0 && (valid = false);
+  });
+
+  // validate the form was filled out
+  Object.values(rest).forEach(val => {
+    val === null && (valid = false);
+  });
+
+  return valid;
+};
 
 const styles = theme => ({
     appBar: {
@@ -71,6 +88,47 @@ const styles = theme => ({
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing.unit * 6,
     },
+
+    search: {
+      position: 'relative',
+      borderRadius: theme.shape.borderRadius,
+      backgroundColor: fade(theme.palette.common.white, 0.15),
+      '&:hover': {
+        backgroundColor: fade(theme.palette.common.white, 0.25),
+      },
+      marginRight: theme.spacing.unit * 2,
+      marginLeft: 0,
+      width: '100%',
+      [theme.breakpoints.up('sm')]: {
+        marginLeft: theme.spacing.unit * 3,
+        width: 'auto',
+      },
+    },
+    searchIcon: {
+      width: theme.spacing.unit * 9,
+      height: '100%',
+      position: 'absolute',
+      pointerEvents: 'none',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    inputRoot: {
+      color: 'inherit',
+      width: '100%',
+    },
+    inputInput: {
+      paddingTop: theme.spacing.unit,
+      paddingRight: theme.spacing.unit,
+      paddingBottom: theme.spacing.unit,
+      paddingLeft: theme.spacing.unit * 10,
+      transition: theme.transitions.create('width'),
+      width: '100%',
+      [theme.breakpoints.up('md')]: {
+        width: 200,
+      },
+    },
+
   });
 
 class Energy extends Component {
@@ -83,13 +141,38 @@ class Energy extends Component {
           activePage: 1,
           info: undefined,
           shownIdx: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-          sort: ''
+          sort: '',
+          query: null,
+          formErrors: {
+            query: ""
+          }
       };
 
       this.handlePageChange = this.handlePageChange.bind(this);
       this.handleFilter = this.handleFilter.bind(this);
       this.handleSort = this.handleSort.bind(this);
     }
+
+    handleSubmit = e => {
+      e.preventDefault();
+
+      if (formValid(this.state)) {
+        console.log(`
+          --SUBMITTING--
+          Query: ${this.state.query}
+        `);
+      } else {
+        console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
+      }
+    };
+    handleChange = e => {
+      e.preventDefault();
+      const { name, value } = e.target;
+      let formErrors = { ...this.state.formErrors };
+
+      this.setState({ formErrors, [name]: value }, () => console.log(this.state));
+    };
+  
 
     componentDidMount() {
       document.title = "Energy";
@@ -268,6 +351,32 @@ class Energy extends Component {
             </div>
 
             <aside class="col-md-2">
+
+              {/* Local search */}
+              <Nav fill className="justify-content-end" alignRight>
+                <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left col-xs-6" alignRight >
+                  <input alightLeft
+
+                    placeholder=""
+                    type="text"
+                    name="query"
+                    noValidate
+                    onChange={this.handleChange}
+
+                  />
+
+                  <Link to={'/instanceSearch/'+'energy/'+this.state.query}>
+
+                    <Button  variant="outlined" color="primary">
+                      Search
+                    </Button>
+
+                  </Link> 
+
+                  
+                </Form>
+              </Nav>
+
             <Form noValidate onSubmit={this.handleFilter}>
                 <Form.Label>Type</Form.Label>
                 <div key={'type'} className="mb-3">
@@ -305,6 +414,8 @@ class Energy extends Component {
             </Form>
             
 
+
+
             <Form>
             <FormControl variant="outlined" color="primary" style={{ width: '10rem'}}>
             <InputLabel> Sort by</InputLabel>
@@ -315,6 +426,8 @@ class Energy extends Component {
             </Select>
             </FormControl>
             </Form>
+
+            
 
             </aside>
             </div>

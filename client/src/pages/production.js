@@ -7,6 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import {Navbar,Nav, NavbarBrand} from 'react-bootstrap'
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -25,6 +26,22 @@ import Instance from './Instance.js'
 import Pagination from "react-js-pagination";
 import Form from 'react-bootstrap/Form';
 
+
+const formValid = ({ formErrors, ...rest }) => {
+  let valid = true;
+
+  // validate form errors being empty
+  Object.values(formErrors).forEach(val => {
+    val.length > 0 && (valid = false);
+  });
+
+  // validate the form was filled out
+  Object.values(rest).forEach(val => {
+    val === null && (valid = false);
+  });
+
+  return valid;
+};
 const styles = theme => ({
     appBar: {
       position: 'relative',
@@ -91,6 +108,26 @@ class Production extends Component {
       this.handleSort = this.handleSort.bind(this);
     }
 
+    handleSubmit = e => {
+      e.preventDefault();
+
+      if (formValid(this.state)) {
+        console.log(`
+          --SUBMITTING--
+          Query: ${this.state.query}
+        `);
+      } else {
+        console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
+      }
+    };
+    handleChange = e => {
+      e.preventDefault();
+      const { name, value } = e.target;
+      let formErrors = { ...this.state.formErrors };
+
+      this.setState({ formErrors, [name]: value }, () => console.log(this.state));
+    };
+  
     componentDidMount() {
       document.title = "Production and Usage";
       fetch('https://www.energenius.me/api/production?name=all')
@@ -268,6 +305,30 @@ class Production extends Component {
             </div>
 
             <aside class="col-md-2">
+              {/* Local search */}
+              <Nav fill className="justify-content-end" alignRight>
+                <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left col-xs-6" alignRight >
+                  <input alightLeft
+
+                    placeholder=""
+                    type="text"
+                    name="query"
+                    noValidate
+                    onChange={this.handleChange}
+
+                  />
+
+                  <Link to={'/instanceSearch/'+'production/'+this.state.query}>
+
+                    <Button  variant="outlined" color="primary">
+                      Search
+                    </Button>
+
+                  </Link> 
+                  
+                  
+                </Form>
+              </Nav>
             <Form noValidate onSubmit={this.handleFilter}>
                 <Form.Label>Type</Form.Label>
                 <div key={'type'} className="mb-3">

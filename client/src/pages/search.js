@@ -11,6 +11,7 @@ export default class search extends Component {
 
         this.state = {};
         this.search_results = []
+        console.log("GLOBAL SEARCH")
         }
         
         getBriefInfo(str, target, length)
@@ -90,6 +91,7 @@ export default class search extends Component {
                         
 
                     }
+
                     this.setState({})
 
                     
@@ -278,13 +280,8 @@ export default class search extends Component {
         //     }
 
     render() {
-        console.log("HEY HEY")
         return (
         <div>
-
-            <script>
-                console.log("Helllo");
-            </script>
 
             <h1>Search results for <b>{this.search}</b></h1>
 
