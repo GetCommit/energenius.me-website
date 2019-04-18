@@ -1535,7 +1535,7 @@
 							"});",
 							"",
 							"pm.test(\"Test2: Return content checking\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"Virbranium\");",
+							"    pm.expect(pm.response.text()).to.include(\"Wakanda\");",
 							"});",
 							"",
 							"pm.test(\"Test3: Response must be valid and have a body\", function () {",
@@ -1565,14 +1565,14 @@
 							"    var jsonData = pm.response.json();",
 							"    var target = jsonData[0]",
 							"    var expectedObject = {",
-							"        \"Region\": \"Africa\",",
-							"        \"Total_Production\": 10000000,",
-							"        \"Production_API\": \"Save Avengers\",",
-							"        \"API\": \"Wakanda\",",
+							"        \"Region\": \"North America\",",
+							"        \"Total_Production\": 4095,",
+							"        \"Production_API\": \"Land Rig\",",
+							"        \"API\": \"Energy_in_the_United_States\",",
 							"        \"Energy_Shortage\": 0,",
-							"        \"Population\": 3,",
-							"        \"Video_API\": \"r8nxdAGg2FY\",",
-							"        \"Name\": \"Wakanda\"",
+							"        \"Population\": 327,",
+							"        \"Video_API\": \"zN4jaRoP2AA\",",
+							"        \"Name\": \"United States\"",
 							"    }",
 							"    pm.expect(target).to.include(expectedObject);",
 							"    pm.expect(target).to.have.property('Name');",
@@ -1596,7 +1596,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://www.energenius.me/api/filter/country?Region=all&Population=0-100&Total_Production=%3E2000",
+					"raw": "https://www.energenius.me/api/filter/country?Region=all&Population=all&Total_Production=>2000",
 					"protocol": "https",
 					"host": [
 						"www",
@@ -1611,21 +1611,466 @@
 					"query": [
 						{
 							"key": "Region",
-							"value": "all"
+							"value": "all",
+							"description": "Filter in terms of Region \n(Africa,\nAsia,\nEurope,\nLatin America,\nMiddle East,\nNorth America,\nPacific)"
 						},
 						{
 							"key": "Population",
-							"value": "0-100"
+							"value": "all",
+							"description": "Filter in terms of Population (0-100, 100-500, >500)"
 						},
 						{
 							"key": "Total_Production",
-							"value": "%3E2000"
+							"value": ">2000",
+							"description": "Filter in terms of Total Production(0-1000, 1000-2000, >2000)"
 						}
 					]
 				},
 				"description": "Request target data from the server by filtering three different fields: Region, Population, and Total Production of Electricity. "
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Filter Country",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://www.energenius.me/api/filter/country?Region=all&Population=all&Total_Production=>2000",
+							"protocol": "https",
+							"host": [
+								"www",
+								"energenius",
+								"me"
+							],
+							"path": [
+								"api",
+								"filter",
+								"country"
+							],
+							"query": [
+								{
+									"key": "Region",
+									"value": "all",
+									"description": "Filter in terms of Region \n(Africa,\nAsia,\nEurope,\nLatin America,\nMiddle East,\nNorth America,\nPacific)"
+								},
+								{
+									"key": "Population",
+									"value": "all",
+									"description": "Filter in terms of Population (0-100, 100-500, >500)"
+								},
+								{
+									"key": "Total_Production",
+									"value": ">2000",
+									"description": "Filter in terms of Total Production(0-1000, 1000-2000, >2000)"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "1cff0fb972c4d36ce9943c512eecc99e"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Apr 2019 20:09:12 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2970"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"Total_Usage\": 3902,\n        \"Energy_API\": \"Petroleum\",\n        \"description\": \"The United States was the second-largest energy consumer in 2010 after China. \\nThe country is ranked seventh in energy consumption per-capita after Canada and several small nations. \\nNot included is the significant amount of energy used overseas in the production of retail and industrial goods consumed in the United States.\\nMost of this energy comes from fossil fuels: in 2010, data showed that 25% of the nation's energy originates from petroleum, 22% from coal, and 22% from natural gas. \\nNuclear power supplied 8.4% and renewable energy supplied 8%, mainly from hydroelectric dams and biomass; however, this also includes other renewable sources like wind power, geothermal, and solar energy. \\nAs of 2006, energy consumption had increased more rapidly than domestic energy production over the last 50 years in the nation (when they were roughly equal).\",\n        \"Region\": \"North America\",\n        \"Total_Production\": 4095,\n        \"Production_API\": \"Land Rig\",\n        \"API\": \"Energy_in_the_United_States\",\n        \"Energy_Shortage\": 0,\n        \"Population\": 327,\n        \"Video_API\": \"zN4jaRoP2AA\",\n        \"Name\": \"United States\"\n    },\n    {\n        \"Total_Usage\": 0,\n        \"Energy_API\": \"Vibranium\",\n        \"description\": \"Wakanda is a fictional country located in Sub-Saharan Africa created by Marvel Comics. It is home to the superhero Black Panther. Wakanda first appeared in Fantastic Four #52 (July 1966), and was created by Stan Lee and Jack Kirby.Wakanda has appeared in various media adaptations, including the 2016 Marvel Cinematic Universe film Captain America: Civil War as well as the 2018 films Black Panther and Avengers: Infinity War.\",\n        \"Region\": \"Africa\",\n        \"Total_Production\": 10000000,\n        \"Production_API\": \"Save Avengers\",\n        \"API\": \"Wakanda\",\n        \"Energy_Shortage\": 0,\n        \"Population\": 3,\n        \"Video_API\": \"r8nxdAGg2FY\",\n        \"Name\": \"Wakanda\"\n    },\n    {\n        \"Total_Usage\": 5564,\n        \"Energy_API\": \"Coal\",\n        \"description\": \"Ensuring adequate energy supply to sustain economic growth has been a core concern of the Chinese government since 1949.  Primary energy use in China was 26,250 TWh and 20 TWh per million persons in 2009. According to the International Energy Agency, the primary energy use grew 40% and electricity use 70% from 2004 to 2009.The energy import was three times bigger in 2009 compared to 2004.  The share of energy import of the primary energy use was 12% in 2009.The country is the world's largest emitter of greenhouse gases, with carbon emission growth of 44% from 2004 to 2009.  However, from 2010 to 2015 China reduced energy consumption per unit of GDP by 18%, and CO2 emissions per unit of GDP by 20%. On a per-capita basis, it was the world's 42nd largest emitter of greenhouse gases in 2014.China is also the world's largest renewable energy producer.\",\n        \"Region\": \"Asia\",\n        \"Total_Production\": 5883,\n        \"Production_API\": \"Coal mining\",\n        \"API\": \"Energy_policy_of_China\",\n        \"Energy_Shortage\": 0,\n        \"Population\": 1386,\n        \"Video_API\": \"0Tvgp4Se_n8\",\n        \"Name\": \"China\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Filter Production & Usage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8598c6ac-c503-4b6d-86fe-0c44b93342c2",
+						"exec": [
+							"",
+							"pm.test(\"Test1: response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Test2: Return content checking\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Gas Drilling\");",
+							"});",
+							"",
+							"pm.test(\"Test3: Response must be valid and have a body\", function () {",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"Test4: Check the Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    // Find the array index for the COUNTRY",
+							"    var index = jsonData.map(",
+							"            function(filter) {",
+							"                return filter.Name;",
+							"            }",
+							"        ).indexOf('Gas Drilling');",
+							"        ",
+							"    // Get the target from the list",
+							"    var target = jsonData[index];",
+							"",
+							"    pm.expect(target).to.exist;",
+							"    pm.expect(target.Type).equal(\"Production\")",
+							"});",
+							"",
+							"pm.test(\"Test5: Should include object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var target = jsonData[0]",
+							"    var expectedObject = {",
+							"        \"Type\": \"Production\",",
+							"        \"Usage_Field\": \"Industrial\",",
+							"        \"Related_Energy\": \"Natural Gas\",",
+							"        \"Carbon_Emission\": 1472,",
+							"        \"API\": \"Hydrocarbon_exploration\",",
+							"        \"Country_API\": \"United States\",",
+							"        \"Video_API\": \"eBOtXD_UQSo\",",
+							"        \"Name\": \"Gas Drilling\"",
+							"    }",
+							"    pm.expect(target).to.include(expectedObject);",
+							"    pm.expect(target).to.have.property('Name');",
+							"});",
+							"",
+							"pm.test(\"Test6: Response should be okay to process\", function () { ",
+							"    pm.response.to.not.be.error; ",
+							"    pm.response.to.not.have.jsonBody(\"error\"); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://www.energenius.me/api/filter/production?Type=all&Year_of_Invention=all&Usage_Field=Industrial",
+					"protocol": "https",
+					"host": [
+						"www",
+						"energenius",
+						"me"
+					],
+					"path": [
+						"api",
+						"filter",
+						"production"
+					],
+					"query": [
+						{
+							"key": "Type",
+							"value": "all",
+							"description": "Filter in terms of Usage/ Profuction Type"
+						},
+						{
+							"key": "Year_of_Invention",
+							"value": "all",
+							"description": "Filter in terms of Year of Invention"
+						},
+						{
+							"key": "Usage_Field",
+							"value": "Industrial",
+							"description": "Filter in terms of Energy Usage Field"
+						}
+					]
+				},
+				"description": "Filter the Production & Usage instances in terms of the Type, Year of Invention, and Usage field. "
+			},
+			"response": [
+				{
+					"name": "Filter Production & Usage",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://www.energenius.me/api/filter/production?Type=all&Year_of_Invention=all&Usage_Field=Industrial",
+							"protocol": "https",
+							"host": [
+								"www",
+								"energenius",
+								"me"
+							],
+							"path": [
+								"api",
+								"filter",
+								"production"
+							],
+							"query": [
+								{
+									"key": "Type",
+									"value": "all",
+									"description": "Filter in terms of Usage/ Profuction Type"
+								},
+								{
+									"key": "Year_of_Invention",
+									"value": "all",
+									"description": "Filter in terms of Year of Invention"
+								},
+								{
+									"key": "Usage_Field",
+									"value": "Industrial",
+									"description": "Filter in terms of Energy Usage Field"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "10be4fd19d85d56558e70e71b5e582f2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Apr 2019 20:14:12 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "5860"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"Energy_API\": \"Petroleum\",\n        \"description\": \"Hydrocarbon exploration (or oil and gas exploration) is the search by petroleum geologists and geophysicists for deposits of hydrocarbons, particularly petroleum and natural gas, in the Earth using petroleum geology.\\n\\n\\n== Exploration methods ==\\nVisible surface features such as oil seeps, natural gas seeps, pockmarks (underwater craters caused by escaping gas) provide basic evidence of hydrocarbon generation (be it shallow or deep in the Earth). However, most exploration depends on highly sophisticated technology to detect and determine the extent of these deposits using exploration geophysics. Areas thought to contain hydrocarbons are initially subjected to a gravity survey, magnetic survey, passive seismic or regional seismic reflection surveys to detect large-scale features of the sub-surface geology. Features of interest (known as leads) are subjected to more detailed seismic surveys which work on the principle of the time it takes for reflected sound waves to travel through matter (rock) of varying densities and using the process of depth conversion to create a profile of the substructure. Finally, when a prospect has been identified and evaluated and passes the oil company's selection criteria, an exploration well is drilled in an attempt to conclusively determine the presence or absence of oil or gas.Offshore the risk can be reduced by using electromagnetic methods Oil exploration is an expensive, high-risk operation.\",\n        \"Year_of_Invention\": 1806,\n        \"Type\": \"Production\",\n        \"Usage_Field\": \"Industrial\",\n        \"Related_Energy\": \"Natural Gas\",\n        \"Carbon_Emission\": 1472,\n        \"API\": \"Hydrocarbon_exploration\",\n        \"Country_API\": \"United States\",\n        \"Video_API\": \"eBOtXD_UQSo\",\n        \"Name\": \"Gas Drilling\"\n    },\n    {\n        \"Energy_API\": \"Tidal Power\",\n        \"description\": \"Longwall mining is a form of underground coal mining where a long wall of coal is mined in a single slice (typically 0.6 – 1.0 m thick). The longwall panel (the block of coal that is being mined) is typically 3 – 4 km long and 250 – 400 m wide.\\n\\n\\n== History ==\\n\\nThe basic idea of longwall mining was developed in England in the late 17th century. Miners undercut the coal along the width of the coal face, removing coal as it fell, and used wooden props to control the fall of the roof behind the face. This was known as the Shropshire method of mining. While the technology has changed considerably, the basic idea remains the same, to remove essentially all of the coal from a broad coal face and allow the roof and overlying rock to collapse into the void behind, while maintaining a safe working space along the face for the miners.\",\n        \"Year_of_Invention\": 1940,\n        \"Type\": \"Production\",\n        \"Usage_Field\": \"Industrial\",\n        \"Related_Energy\": \"Coal\",\n        \"Carbon_Emission\": 1318,\n        \"API\": \"Longwall_mining\",\n        \"Country_API\": \"Egypt\",\n        \"Video_API\": \"N8hXAGNfQmU\",\n        \"Name\": \"Longwall Mining\"\n    },\n    {\n        \"Energy_API\": \"Petroleum\",\n        \"description\": \"A drilling rig is a machine that creates holes in the earth's subsurface. Drilling rigs can be massive structures housing equipment used to drill water wells, oil wells, or natural gas extraction wells, or they can be small enough to be moved manually by one person and such are called augers. Drilling rigs can sample subsurface mineral deposits, test rock, soil and groundwater physical properties, and also can be used to install sub-surface fabrications, such as underground utilities, instrumentation, tunnels or wells. Drilling rigs can be mobile equipment mounted on trucks, tracks or trailers, or more permanent land or marine-based structures (such as oil platforms, commonly called 'offshore oil rigs' even if they don't contain a drilling rig). The term \\\"rig\\\" therefore generally refers to the complex equipment that is used to penetrate the surface of the Earth's crust.\\nSmall to medium-sized drilling rigs are mobile, such as those used in mineral exploration drilling, blast-hole, water wells and environmental investigations.\",\n        \"Year_of_Invention\": 1924,\n        \"Type\": \"Production\",\n        \"Usage_Field\": \"Industrial\",\n        \"Related_Energy\": \"Petroleum\",\n        \"Carbon_Emission\": 2338,\n        \"API\": \"Drilling_rig\",\n        \"Country_API\": \"United States\",\n        \"Video_API\": \"ttx6PtZnl10\",\n        \"Name\": \"Land Rig\"\n    },\n    {\n        \"Energy_API\": \"Natural Gas\",\n        \"description\": \"Hydraulic fracturing (also fracking, fraccing, frac'ing, hydrofracturing or hydrofracking) is a well stimulation technique in which rock is fractured by a pressurized liquid. The process involves the high-pressure injection of 'fracking fluid' (primarily water, containing sand or other proppants suspended with the aid of thickening agents) into a wellbore to create cracks in the deep-rock formations through which natural gas, petroleum, and brine will flow more freely. When the hydraulic pressure is removed from the well, small grains of hydraulic fracturing proppants (either sand or aluminium oxide) hold the fractures open.Hydraulic fracturing began as an experiment in 1947, and the first commercially successful application followed in 1950. As of 2012, 2.5 million \\\"frac jobs\\\" had been performed worldwide on oil and gas wells; over one million of those within the U.S. Such treatment is generally necessary to achieve adequate flow rates in shale gas, tight gas, tight oil, and coal seam gas wells. Some hydraulic fractures can form naturally in certain veins or dikes.Hydraulic fracturing is highly controversial in many countries. Its proponents advocate the economic benefits of more extensively accessible hydrocarbons, \\nas well as replacing coal with gas, which is cleaner and emits less carbon dioxide (CO2).\",\n        \"Year_of_Invention\": 1865,\n        \"Type\": \"Production\",\n        \"Usage_Field\": \"Industrial\",\n        \"Related_Energy\": \"Natural Gas\",\n        \"Carbon_Emission\": 1472,\n        \"API\": \"Hydraulic_fracturing\",\n        \"Country_API\": \"United States\",\n        \"Video_API\": \"Uti2niW2BRA\",\n        \"Name\": \"Hydraulic fracturing\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Filter Energy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7514532d-1e7a-42da-9b96-b23c399a81db",
+						"exec": [
+							"",
+							"pm.test(\"Test1: response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Test2: Return content checking\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"China\");",
+							"});",
+							"",
+							"pm.test(\"Test3: Response must be valid and have a body\", function () {",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"Test4: Check the Content\", function () {",
+							"    var jsonData = pm.response.json();",
+							"",
+							"    // Find the array index for the COUNTRY",
+							"    var index = jsonData.map(",
+							"            function(filter) {",
+							"                return filter.Name;",
+							"            }",
+							"        ).indexOf('Chemical Energy');",
+							"        ",
+							"    // Get the target from the list",
+							"    var target = jsonData[index];",
+							"",
+							"    pm.expect(target).to.exist;",
+							"    pm.expect(target.Type).equal(\"Physical Energy\")",
+							"});",
+							"",
+							"pm.test(\"Test5: Should include object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var target = jsonData[0]",
+							"    var expectedObject = {",
+							"        \"Type\": \"Physical Energy\",",
+							"        \"Top_Producing_Country\": \"China\",",
+							"        \"Production_API\": \"Battery\",",
+							"        \"API\": \"Chemical_energy\",",
+							"        \"Electrical_Generating_Rank\": 1,",
+							"        \"Consumption_Rank_in_US\": 5,",
+							"        \"Major_Use\": \"Industrial\",",
+							"        \"Country_API\": \"China\",",
+							"        \"Video_API\": \"y_omJiYB2gk\",",
+							"        \"Name\": \"Chemical Energy\"",
+							"    }",
+							"    pm.expect(target).to.include(expectedObject);",
+							"    pm.expect(target).to.have.property('Name');",
+							"});",
+							"",
+							"pm.test(\"Test6: Response should be okay to process\", function () { ",
+							"    pm.response.to.not.be.error; ",
+							"    pm.response.to.not.have.jsonBody(\"error\"); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://www.energenius.me/api/filter/energy?Type=Physical Energy&Major_Use=Industrial&Top_Producing_Country=China",
+					"protocol": "https",
+					"host": [
+						"www",
+						"energenius",
+						"me"
+					],
+					"path": [
+						"api",
+						"filter",
+						"energy"
+					],
+					"query": [
+						{
+							"key": "Type",
+							"value": "Physical Energy",
+							"description": "Filter in terms of Energy Type (Physical Energy, Non-Renewable Energy, Renewable Energy) "
+						},
+						{
+							"key": "Major_Use",
+							"value": "Industrial",
+							"description": "Filter in terms of Major Usage Types (Industrial, Electric Power, Residential, High Technology, Transportation, Shield)"
+						},
+						{
+							"key": "Top_Producing_Country",
+							"value": "China",
+							"description": "Filter in terms of Country Name (Australia, China, France, India, Japan, Kuwait, United States, Wakanda)"
+						}
+					]
+				},
+				"description": "Filter energy instances in terms of th energy type, major usage, and the top producing country. "
+			},
+			"response": [
+				{
+					"name": "Filter Energy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://www.energenius.me/api/filter/energy?Type=Physical Energy&Major_Use=Industrial&Top_Producing_Country=China",
+							"protocol": "https",
+							"host": [
+								"www",
+								"energenius",
+								"me"
+							],
+							"path": [
+								"api",
+								"filter",
+								"energy"
+							],
+							"query": [
+								{
+									"key": "Type",
+									"value": "Physical Energy",
+									"description": "Filter in terms of Energy Type (Physical Energy, Non-Renewable Energy, Renewable Energy) "
+								},
+								{
+									"key": "Major_Use",
+									"value": "Industrial",
+									"description": "Filter in terms of Major Usage Types (Industrial, Electric Power, Residential, High Technology, Transportation, Shield)"
+								},
+								{
+									"key": "Top_Producing_Country",
+									"value": "China",
+									"description": "Filter in terms of Country Name (Australia, China, France, India, Japan, Kuwait, United States, Wakanda)"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "3be6be4e0b3776f027c658f6316a35d4;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Apr 2019 20:31:52 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "628"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"description\": \"Chemical energy is the potential of a chemical substance to undergo a transformation through a chemical reaction to transform other chemical substances. Examples include batteries, food, gasoline, and etc. Breaking or making of chemical bonds involves energy, which may be either absorbed or evolved from a chemical system.\",\n        \"Type\": \"Physical Energy\",\n        \"Top_Producing_Country\": \"China\",\n        \"Production_API\": \"Battery\",\n        \"API\": \"Chemical_energy\",\n        \"Electrical_Generating_Rank\": 1,\n        \"Consumption_Rank_in_US\": 5,\n        \"Major_Use\": \"Industrial\",\n        \"Country_API\": \"China\",\n        \"Video_API\": \"y_omJiYB2gk\",\n        \"Name\": \"Chemical Energy\"\n    }\n]"
+				}
+			]
 		}
 	],
 	"event": [
