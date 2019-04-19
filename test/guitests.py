@@ -62,7 +62,32 @@ class GUI_tests(unittest.TestCase):
         print driver.title
         self.assertIn(about_page_name, driver.title)
 
+    def test_Energy_Local_Search(self):
+        about_page_name = "undefined"
+        driver = self.driver
+        driver.get("https://www.energenius.me/energy")
+        about_link = driver.find_element_by_link_text('SEARCH')
+        about_link.click()
+        print driver.title
+        self.assertIn(about_page_name, driver.title)
 
+    def test_Production_Local_Search(self):
+        about_page_name = "undefined"
+        driver = self.driver
+        driver.get("https://www.energenius.me/production")
+        about_link = driver.find_element_by_link_text('SEARCH')
+        about_link.click()
+        print driver.title
+        self.assertIn(about_page_name, driver.title)
+
+    def test_Country_Local_Search(self):
+        about_page_name = "undefined"
+        driver = self.driver
+        driver.get("https://www.energenius.me/country")
+        about_link = driver.find_element_by_link_text('SEARCH')
+        about_link.click()
+        print driver.title
+        self.assertIn(about_page_name, driver.title)
     
     def tearDown(self):
         self.driver.close()
