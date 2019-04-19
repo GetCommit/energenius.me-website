@@ -16,7 +16,7 @@ Phase one: 4d37e6b10f894e15e8d9bce2e46555b8131597f6
 
 Phase two: 7c06970663265dc8396c5c0893fd67cb2cce5c3a
 
-Phase three:
+Phase three: c54fb6d7a27905dd5f5d8f8d096864f5c4fe93e7
 
 ## GitLab pipelines:
 https://gitlab.com/LuculentDig/energiziousness/pipelines
