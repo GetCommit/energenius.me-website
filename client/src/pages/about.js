@@ -33,24 +33,24 @@ class Person extends Component {
             <p><large>{this.props.bio}</large></p>
 
             <div className='card-text text-black-50'>
-              Number of Issues: {this.props.issues}
+            <b>Number of Issues:</b> {this.props.issues}
             </div>
             <p>
             </p>
 
             <div className='card-text text-black-50'>
-              Number of Commits: {this.props.commits}
+            <b>Number of Commits:</b> {this.props.commits}
             </div>
             <p>
             </p>
 
             <div className='card-text text-black-50'>
-              Number of Tests: {this.props.tests}
+            <b>Number of Tests:</b> {this.props.tests}
             </div>
             <p>
             </p>
             <p>
-              Responsibilities: {this.props.role}
+            <b>Responsibilities:</b> {this.props.role}
             </p>
           </div>
 
