@@ -62,6 +62,7 @@ class GUI_tests(unittest.TestCase):
         print driver.title
         self.assertIn(about_page_name, driver.title)
 
+
     
     def tearDown(self):
         self.driver.close()
