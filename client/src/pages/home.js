@@ -75,10 +75,29 @@ export default class Home extends Component {
           </p>
 
           <p>
+            <center>
+              <Button variant="primary" href="/about">Learn more</Button>
+            </center>
+          </p>
+
+          <p>
+          <center>
+              <Link to={'/search/'+this.state.query}>
+
+
+                  <Button variant="outline-primary" className="mt-2 btn btn-primary btn-lg">
+                    Global Search
+                  </Button>
+
+              </Link>
+            </center>
+          </p>
+
+          <p>
           <center>
             <Form noValidate className="justify-content-left col-xs-6 " alignRight >
                 <input
-                class="rounded border border-grey"
+                class="rounded border border-grey w-25 h-100"
                 type="text"
                 name="query"
                 noValidate
@@ -89,24 +108,7 @@ export default class Home extends Component {
               </Form>
             </center>
           </p>
-          <p>
-          <center>
-              <Link to={'/search/'+this.state.query}>
-
-
-                  <Button variant="outline-primary" className="mt-2 mt-sm-0 btn btn-primary btn-sm">
-                    Global Search
-                  </Button>
-
-              </Link>
-            </center>
-          </p>
-
-          <p>
-            <center>
-              <Button variant="primary" href="/about">Learn more</Button>
-            </center>
-          </p>
+          
         </Jumbotron>
       </div>
 
