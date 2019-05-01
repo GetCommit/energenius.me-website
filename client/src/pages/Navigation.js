@@ -96,7 +96,7 @@ export default class Navigation extends Component {
                 placeholder="Search" 
                 aria-label="Search"/>
                 <Link to={'/search/'+this.state.query}>
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Global Search</button>
                 </Link>
               </form>
             </Nav.Item>
