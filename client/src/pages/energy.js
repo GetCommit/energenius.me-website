@@ -4,7 +4,7 @@ import { CardMedia, Typography, CardContent, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import {Nav} from 'react-bootstrap'
+import {Nav, Collapse, Fade} from 'react-bootstrap'
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
 
@@ -131,6 +131,9 @@ class Energy extends Component {
       this.tmp_props = props;
 
       this.state = {
+          open1: false,
+          open2: false,
+          open3: false, 
           activePage: 1,
           info: undefined,
           shownIdx: [0, 1, 2, 3, 4, 5, 6, 7, 8],
@@ -254,6 +257,7 @@ class Energy extends Component {
     }
 
     render() {
+        const { open1, open2, open3 } = this.state;
         if (this.state.info === undefined) {
             return (<div>Loading</div>)
         }
@@ -345,83 +349,108 @@ class Energy extends Component {
 
             <aside class="col-md-2">
 
-
               {/* Local search */}
-              <Nav fill className="justify-content-end" alignRight>
-                <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left col-xs-6" alignRight >
-                  <input alightLeft
+              <br></br>
+              <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left col-xs-6" alignRight >
+                <input 
+                  class = "w-75"
+                  alightLeft
+                  placeholder=""
+                  type="text"
+                  name="query"l
+                  noValidate
+                  onChange={this.handleChange}
+                />
+                <Link to={'/instanceSearch/'+'energy/'+this.state.query}>
+                  <Button  variant="outlined" color="primary">
+                    Search
+                  </Button>
+                </Link> 
+              </Form>
+              <p></p>
 
-                    placeholder=""
-                    type="text"
-                    name="query"
-                    noValidate
-                    onChange={this.handleChange}
-
-                  />
-
-                  <Link to={'/instanceSearch/'+'energy/'+this.state.query}>
-
-                    <Button  variant="outlined" color="primary">
-                      Search
-                    </Button>
-
-                  </Link> 
-
-                  
-                </Form>
-              </Nav>
-
-            <Form noValidate onSubmit={this.handleFilter}>
-                <Form.Label>Type</Form.Label>
+              <Form noValidate onSubmit={this.handleFilter}>
+                <div>
+                <Form.Label><Button
+                  class="btn btn-light"
+                  onClick={() => this.setState({ open1: !open1 })}
+                  aria-controls="example-collapse-text"
+                  aria-expanded={open1}>
+                  Type
+                  </Button>
+                </Form.Label>
+                <Collapse in={this.state.open1}>
                 <div key={'type'} className="mb-3">
                   <Form.Check type={'checkbox'} id={'Physical Energy'} name={'Type'} label={'Physical Energy'} />
                   <Form.Check type={'checkbox'} id={'Non-Renewable Energy'} name={'Type'} label={'Non-Renewable Energy'} />
                   <Form.Check type={'checkbox'} id={'Renewable Energy'} name={'Type'} label={'Renewable Energy'} />
                 </div>
-
-                <Form.Label>Major Use</Form.Label>
-                <div key={'use'} className="mb-3">
-                  <Form.Check type={'checkbox'} id={'Industrial'} name={'Major_Use'} label={'Industrial'} />
-                  <Form.Check type={'checkbox'} id={'Electric Power'} name={'Major_Use'} label={'Electric Power'} />
-                  <Form.Check type={'checkbox'} id={'Residential'} name={'Major_Use'} label={'Residential'} />
-                  <Form.Check type={'checkbox'} id={'High Technology'} name={'Major_Use'} label={'High Technology'} />
-                  <Form.Check type={'checkbox'} id={'Transportation'} name={'Major_Use'} label={'Transportation'} />
-                  <Form.Check type={'checkbox'} id={'Shield'} name={'Major_Use'} label={'Shield'} />
+                </Collapse>
                 </div>
 
-                <Form.Label>Top Producing Country</Form.Label>
-                <div key={'country'} className="mb-3">
-                  <Form.Check type={'checkbox'} id={'Australia'} name={'Top_Producing_Country'} label={'Australia'} />
-                  <Form.Check type={'checkbox'} id={'China'} name={'Top_Producing_Country'} label={'China'} />
-                  <Form.Check type={'checkbox'} id={'France'} name={'Top_Producing_Country'} label={'France'} />
-                  <Form.Check type={'checkbox'} id={'India'} name={'Top_Producing_Country'} label={'India'} />
-                  <Form.Check type={'checkbox'} id={'Japan'} name={'Top_Producing_Country'} label={'Japan'} />
-                  <Form.Check type={'checkbox'} id={'Kuwait'} name={'Top_Producing_Country'} label={'Kuwait'} />
-                  <Form.Check type={'checkbox'} id={'United States'} name={'Top_Producing_Country'} label={'United States'} />
-                  <Form.Check type={'checkbox'} id={'Wakanda'} name={'Top_Producing_Country'} label={'Wakanda'} />
-                </div>
+                <div>
+                <Form.Label><Button
+                    class="btn btn-light btn-block"
+                    onClick={() => this.setState({ open2: !open2 })}
+                    aria-controls="example-collapse-text"
+                    aria-expanded={open2}>
+                    Major Use
+                    </Button>
+                  </Form.Label>
+                  <Collapse in={this.state.open2}>
+                  <div key={'use'} className="mb-3">
+                    <Form.Check type={'checkbox'} id={'Industrial'} name={'Major_Use'} label={'Industrial'} />
+                    <Form.Check type={'checkbox'} id={'Electric Power'} name={'Major_Use'} label={'Electric Power'} />
+                    <Form.Check type={'checkbox'} id={'Residential'} name={'Major_Use'} label={'Residential'} />
+                    <Form.Check type={'checkbox'} id={'High Technology'} name={'Major_Use'} label={'High Technology'} />
+                    <Form.Check type={'checkbox'} id={'Transportation'} name={'Major_Use'} label={'Transportation'} />
+                    <Form.Check type={'checkbox'} id={'Shield'} name={'Major_Use'} label={'Shield'} />
+                  </div>
+                  </Collapse>
+                  </div>
+
+
+                  <div>              
+                  <Form.Label><Button
+                    class="btn btn-light"
+                    onClick={() => this.setState({ open3: !open3 })}
+                    aria-controls="example-collapse-text"
+                    aria-expanded={open3}>
+                    Top Country
+                    </Button>
+                  </Form.Label>
+                  <Collapse in={this.state.open3}>
+                  <div key={'country'} className="mb-3">
+                    <Form.Check type={'checkbox'} id={'Australia'} name={'Top_Producing_Country'} label={'Australia'} />
+                    <Form.Check type={'checkbox'} id={'China'} name={'Top_Producing_Country'} label={'China'} />
+                    <Form.Check type={'checkbox'} id={'France'} name={'Top_Producing_Country'} label={'France'} />
+                    <Form.Check type={'checkbox'} id={'India'} name={'Top_Producing_Country'} label={'India'} />
+                    <Form.Check type={'checkbox'} id={'Japan'} name={'Top_Producing_Country'} label={'Japan'} />
+                    <Form.Check type={'checkbox'} id={'Kuwait'} name={'Top_Producing_Country'} label={'Kuwait'} />
+                    <Form.Check type={'checkbox'} id={'United States'} name={'Top_Producing_Country'} label={'United States'} />
+                    <Form.Check type={'checkbox'} id={'Wakanda'} name={'Top_Producing_Country'} label={'Wakanda'} />
+                  </div>
+                  </Collapse>
+                  </div>
                 <Button variant="outlined" color="primary" type="submit">Apply Filter</Button>
-
                 <p>
-
+                  
                 </p>
-            </Form>
-            
+              </Form>
 
 
+              <Form>
+                <FormControl variant="outlined" color="primary" style={{ width: '10rem'}}>
+                <InputLabel> Sort by</InputLabel>
+                <Select value={this.state.sort} onChange={this.handleSort} input={<OutlinedInput name="sort" id="sort" />} >
+                    <MenuItem value=""> <em>None</em> </MenuItem>
+                    <MenuItem value="Consumption_Rank_in_US">Consumption Rank in US</MenuItem>
+                    <MenuItem value="Electrical_Generating_Rank">Electrical Generating Rank</MenuItem>
+                </Select>
+                </FormControl>
+              </Form>
 
-            <Form>
-            <FormControl variant="outlined" color="primary" style={{ width: '10rem'}}>
-            <InputLabel> Sort by</InputLabel>
-            <Select value={this.state.sort} onChange={this.handleSort} input={<OutlinedInput name="sort" id="sort" />} >
-                <MenuItem value=""> <em>None</em> </MenuItem>
-                <MenuItem value="Consumption_Rank_in_US">Consumption Rank in US</MenuItem>
-                <MenuItem value="Electrical_Generating_Rank">Electrical Generating Rank</MenuItem>
-            </Select>
-            </FormControl>
-            </Form>
 
-            
 
             </aside>
             </div>

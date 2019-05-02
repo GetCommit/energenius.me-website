@@ -73,8 +73,8 @@ class Navigation extends Component {
 
             <Navbar>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
 
+            <Navbar.Collapse id="responsive-navbar-nav">
               {
               <Nav className="justify-content-end">
                   <Form.Control

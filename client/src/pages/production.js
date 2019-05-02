@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import { CardMedia, Typography, CardContent, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import CssBaseline from "@material-ui/core/CssBaseline";
-import {Nav} from 'react-bootstrap'
+import {Nav, Collapse, Fade} from 'react-bootstrap'
 
 import classNames from 'classnames';
 import Button from '@material-ui/core/Button';
@@ -88,6 +88,9 @@ class Production extends Component {
       this.tmp_props = props;
 
       this.state = {
+          open1: false,
+          open2: false,
+          open3: false, 
           activePage: 1,
           info: undefined,
           shownIdx: [0, 1, 2, 3, 4, 5, 6, 7, 8],
@@ -206,6 +209,7 @@ class Production extends Component {
     }
 
     render() {
+        const { open1, open2, open3 } = this.state;
         if (this.state.info === undefined) {
             return (<div>Loading</div>)
         }
@@ -297,50 +301,81 @@ class Production extends Component {
 
             <aside class="col-md-2">
               {/* Local search */}
-              <Nav fill className="justify-content-end" alignRight>
+                <br></br>
                 <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left col-xs-6" alignRight >
-                  <input alightLeft
-
+                  <input 
+                    class = "w-75"
+                    alightLeft
                     placeholder=""
                     type="text"
                     name="query"
                     noValidate
                     onChange={this.handleChange}
-
                   />
-
                   <Link to={'/instanceSearch/'+'production/'+this.state.query}>
-
                     <Button  variant="outlined" color="primary">
                       Search
                     </Button>
-
                   </Link> 
-                  
-                  
                 </Form>
-              </Nav>
+
+              
+                <p></p>
+
             <Form noValidate onSubmit={this.handleFilter}>
-                <Form.Label>Type</Form.Label>
+              <div>
+                <Form.Label><Button
+                  class="btn btn-light"
+                  onClick={() => this.setState({ open1: !open1 })}
+                  aria-controls="example-collapse-text"
+                  aria-expanded={open1}>
+                  Type
+                  </Button>
+                </Form.Label>
+                <Collapse in={this.state.open1}>
                 <div key={'type'} className="mb-3">
                   <Form.Check type={'checkbox'} id={'Production'} name={'Type'} label={'Production'} />
                   <Form.Check type={'checkbox'} id={'Usage'} name={'Type'} label={'Usage'} />
                 </div>
-
-                <Form.Label>Year of Invention</Form.Label>
-                <div key={'year'} className="mb-3">
-                  <Form.Check type={'checkbox'} id={'BC'} name={'Year_of_Invention'} label={'BC'} />
-                  <Form.Check type={'checkbox'} id={'1700-1900'} name={'Year_of_Invention'} label={'1700-1900'} />
-                  <Form.Check type={'checkbox'} id={'1900-2000'} name={'Year_of_Invention'} label={'1900-2000'} />
-                  <Form.Check type={'checkbox'} id={'2000-now'} name={'Year_of_Invention'} label={'2000-now'} />
+                </Collapse>
                 </div>
 
-                <Form.Label>Usage Field</Form.Label>
+                <div>
+                <Form.Label><Button
+                    class="btn btn-light btn-block"
+                    onClick={() => this.setState({ open2: !open2 })}
+                    aria-controls="example-collapse-text"
+                    aria-expanded={open2}>
+                    Invented Year
+                    </Button>
+                  </Form.Label>
+                  <Collapse in={this.state.open2}>
+                  <div key={'year'} className="mb-3">
+                    <Form.Check type={'checkbox'} id={'BC'} name={'Year_of_Invention'} label={'BC'} />
+                    <Form.Check type={'checkbox'} id={'1700-1900'} name={'Year_of_Invention'} label={'1700-1900'} />
+                    <Form.Check type={'checkbox'} id={'1900-2000'} name={'Year_of_Invention'} label={'1900-2000'} />
+                    <Form.Check type={'checkbox'} id={'2000-now'} name={'Year_of_Invention'} label={'2000-now'} />
+                  </div>
+                </Collapse>
+                </div>
+
+                <div>              
+                  <Form.Label><Button
+                    class="btn btn-light"
+                    onClick={() => this.setState({ open3: !open3 })}
+                    aria-controls="example-collapse-text"
+                    aria-expanded={open3}>
+                    Usage Field
+                    </Button>
+                  </Form.Label>
+                <Collapse in={this.state.open3}>
                 <div key={'country'} className="mb-3">
                   <Form.Check type={'checkbox'} id={'Electric Power'} name={'Usage_Field'} label={'Electric Power'} />
                   <Form.Check type={'checkbox'} id={'Industrial'} name={'Usage_Field'} label={'Industrial'} />
                   <Form.Check type={'checkbox'} id={'Residential'} name={'Usage_Field'} label={'Residential'} />
                   <Form.Check type={'checkbox'} id={'Transportation'} name={'Usage_Field'} label={'Transportation'} />
+                </div>
+                </Collapse>
                 </div>
                 <Button variant="outlined" color="primary" type="submit">Apply Filter</Button>
 

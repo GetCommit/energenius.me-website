@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import { CardMedia, Typography, CardContent, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import CssBaseline from "@material-ui/core/CssBaseline";
-import {Nav} from 'react-bootstrap'
+import {Nav, Collapse, Fade} from 'react-bootstrap'
 
 import classNames from 'classnames';
 import Button from '@material-ui/core/Button';
@@ -88,6 +88,9 @@ class Country extends Component {
       this.tmp_props = props;
 
       this.state = {
+          open1: false,
+          open2: false,
+          open3: false, 
           activePage: 1,
           info: undefined,
           shownIdx: [0, 1, 2, 3, 4, 5, 6, 7, 8],
@@ -206,6 +209,8 @@ class Country extends Component {
     }
 
     render() {
+
+        const { open1, open2, open3 } = this.state;
         if (this.state.info === undefined) {
             return (<div>Loading</div>)
         }
@@ -297,10 +302,11 @@ class Country extends Component {
 
             <aside class="col-md-2">
               {/* Local search */}
-              <Nav fill className="justify-content-end" alignRight>
+              <br></br>
                 <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left col-xs-6" alignRight >
-                  <input alightLeft
-
+                  <input 
+                    class = "w-75"  
+                    alightLeft
                     placeholder=""
                     type="text"
                     name="query"
@@ -308,49 +314,83 @@ class Country extends Component {
                     onChange={this.handleChange}
 
                   />
-
                   <Link to={'/instanceSearch/'+'country/'+this.state.query}>
-
                     <Button  variant="outlined" color="primary">
                       Search
                     </Button>
-
                   </Link> 
-
-                  
                 </Form>
-              </Nav>
-              <Form noValidate onSubmit={this.handleFilter}>
-                <Form.Label>Region</Form.Label>
-                <div key={'type'} className="mb-3">
-                  <Form.Check type={'checkbox'} id={'Africa'} name={'Region'} label={'Africa'} />
-                  <Form.Check type={'checkbox'} id={'Asia'} name={'Region'} label={'Asia'} />
-                  <Form.Check type={'checkbox'} id={'Europe'} name={'Region'} label={'Europe'} />
-                  <Form.Check type={'checkbox'} id={'Latin America'} name={'Region'} label={'Latin America'} />
-                  <Form.Check type={'checkbox'} id={'Middle East'} name={'Region'} label={'Middle East'} />
-                  <Form.Check type={'checkbox'} id={'North America'} name={'Region'} label={'North America'} />
-                  <Form.Check type={'checkbox'} id={'Pacific'} name={'Region'} label={'Pacific'} />
-                </div>
+                <p></p>
 
-                <Form.Label>Population(Million)</Form.Label>
+
+              <Form noValidate onSubmit={this.handleFilter}>
+              <div>
+                <Form.Label><Button
+                  class="btn btn-light"
+                  onClick={() => this.setState({ open1: !open1 })}
+                  aria-controls="example-collapse-text"
+                  aria-expanded={open1}>
+                  Region
+                  </Button>
+                </Form.Label>
+                <Collapse in={this.state.open1}>
+                  <div key={'type'} className="mb-3">
+                    <Form.Check type={'checkbox'} id={'Africa'} name={'Region'} label={'Africa'} />
+                    <Form.Check type={'checkbox'} id={'Asia'} name={'Region'} label={'Asia'} />
+                    <Form.Check type={'checkbox'} id={'Europe'} name={'Region'} label={'Europe'} />
+                    <Form.Check type={'checkbox'} id={'Latin America'} name={'Region'} label={'Latin America'} />
+                    <Form.Check type={'checkbox'} id={'Middle East'} name={'Region'} label={'Middle East'} />
+                    <Form.Check type={'checkbox'} id={'North America'} name={'Region'} label={'North America'} />
+                    <Form.Check type={'checkbox'} id={'Pacific'} name={'Region'} label={'Pacific'} />
+                  </div>
+                </Collapse>
+              </div>
+
+              <div>
+                <Form.Label><Button
+                  class="btn btn-light"
+                  onClick={() => this.setState({ open2: !open2 })}
+                  aria-controls="example-collapse-text"
+                  aria-expanded={open2}>
+                  Population(Million)
+                  </Button>
+                </Form.Label>
+                <Collapse in={this.state.open2}>
                 <div key={'use'} className="mb-3">
                   <Form.Check type={'checkbox'} id={'0-100'} name={'Population'} label={'0-100'} />
                   <Form.Check type={'checkbox'} id={'100-500'} name={'Population'} label={'100-500'} />
                   <Form.Check type={'checkbox'} id={'>500'} name={'Population'} label={'>500'} />
                 </div>
+                </Collapse>
+              </div>
 
-                <Form.Label>Total Production(bn kWh)</Form.Label>
+
+              <div>
+                <Form.Label><Button
+                  class="btn btn-light"
+                  onClick={() => this.setState({ open3: !open3 })}
+                  aria-controls="example-collapse-text"
+                  aria-expanded={open3}>
+                  Production(bn/kWh)
+                  </Button>
+                </Form.Label>
+                <Collapse in={this.state.open3}>
                 <div key={'country'} className="mb-3">
                   <Form.Check type={'checkbox'} id={'0-1000'} name={'Total_Production'} label={'0-1000'} />
                   <Form.Check type={'checkbox'} id={'1000-2000'} name={'Total_Production'} label={'1000-2000'} />
                   <Form.Check type={'checkbox'} id={'>2000'} name={'Total_Production'} label={'>2000'} />
                 </div>
+                </Collapse>
+              </div>
+
                 <Button variant="outlined" color="primary" type="submit">Apply Filter</Button>
-
                 <p>
-
+                  
                 </p>
             </Form>
+
+
+
 
             <Form>
             <FormControl variant="outlined" color="primary" style={{ width: '10rem'}}>
