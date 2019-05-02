@@ -3,10 +3,13 @@ import {Navbar,Nav, Form, FormControl, Button, NavbarBrand} from 'react-bootstra
 import {Link} from 'react-router-dom'
 
 export default class search extends Component {
+
     constructor (props) {
         super(props)
         this.title = this.id
         this.id = this.props.match.params;
+        this.getBriefInfo = this.getBriefInfo.bind(this)
+        this.componentDidMount = this.componentDidMount.bind(this)
         this.search = this.id['id']
 
         this.state = {};
@@ -56,7 +59,7 @@ export default class search extends Component {
             return brief;
         }
 
-        componentDidMount (){
+        async componentDidMount (){
             document.title = this.img;
 
             fetch(
@@ -240,13 +243,10 @@ export default class search extends Component {
                     console.log(e);
                 })
 
-
             }
-
     render() {
         return (
         <div>
-
 
             <div>
 
@@ -269,8 +269,9 @@ export default class search extends Component {
 
 
 
-
         </div>
         )
+
+
     }
 }
