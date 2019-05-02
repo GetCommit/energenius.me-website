@@ -305,7 +305,7 @@ class Country extends Component {
               <br></br>
                 <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left col-xs-6" alignRight >
                   <input 
-                    class = "w-75"  
+                    class = "rounded border border-grey w-75"  
                     alightLeft
                     placeholder=""
                     type="text"
