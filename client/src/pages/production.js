@@ -293,8 +293,8 @@ class Production extends Component {
             <div>
             <Pagination
             activePage={this.state.activePage}
-            itemsCountPerPage={3}
-            totalItemsCount={9}
+            itemsCountPerPage={9}
+            totalItemsCount={Object.keys(this.state.info).length}
             pageRangeDisplayed={3}
             innerClass="pagination justify-content-center"
             linkClass="page-link"

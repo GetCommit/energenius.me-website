@@ -56,7 +56,8 @@ export default class Navigation extends Component {
 
   render(){
     return (
-        <Nav variant="pills" defaultActiveKey="/" style={{ padding: "10px", backgroundColor: "#d9e6f2" }}>
+        <Nav variant="pills"
+        defaultActiveKey="/" style={{ padding: "10px", backgroundColor: "#d9e6f2" }}>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
 
             <Nav.Item>
@@ -91,27 +92,18 @@ export default class Navigation extends Component {
             </Nav.Item>
 
             <Nav.Item  style={{ paddingLeft: "10px" }}>
-              <Form  onSubmit={this.handleChange} noValidate inline className="justify-content-left col-xs-6" alignRight >
-                <FormControl
-
-                  placeholder=""
-                  type="text"
-                  name="query"
-                  noValidate
-                  onChange={this.handleChange}
-
-                />
-
+              <form noValidate class="form-inline">
+                <input 
+                class="form-control mr-sm-2" 
+                onChange={this.handleChange} 
+                type="text" 
+                name="query"
+                placeholder="Search" 
+                aria-label="Search"/>
                 <Link to={'/search/'+this.state.query}>
-
-
-                  <Button variant="outline-primary" className="mt-2 mt-sm-0">
-                    Global Search
-                  </Button>
-
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Global Search</button>
                 </Link>
-
-              </Form>
+              </form>
             </Nav.Item>
       </Nav>
     )

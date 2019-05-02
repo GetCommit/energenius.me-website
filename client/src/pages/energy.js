@@ -341,7 +341,7 @@ class Energy extends Component {
             <Pagination
             activePage={this.state.activePage}
             itemsCountPerPage={9}
-            totalItemsCount={27}
+            totalItemsCount={Object.keys(this.state.info).length}
             pageRangeDisplayed={3}
             innerClass="pagination justify-content-center"
             linkClass="page-link"
