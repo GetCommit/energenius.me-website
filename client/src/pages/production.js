@@ -1,17 +1,11 @@
 import React, { Component } from 'react'
 import Card from '@material-ui/core/Card';
-import { CardActionArea, CardMedia, Typography, CardContent, Grid } from '@material-ui/core';
+import { CardMedia, Typography, CardContent, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import ReactDOM from "react-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import {Navbar,Nav, NavbarBrand} from 'react-bootstrap'
+import {Nav} from 'react-bootstrap'
 
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -19,10 +13,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import CardActions from '@material-ui/core/CardActions';
-import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/core/styles';
-import ButtonBase from '@material-ui/core/ButtonBase';
-import Instance from './Instance.js'
 import Pagination from "react-js-pagination";
 import Form from 'react-bootstrap/Form';
 
@@ -155,21 +146,21 @@ class Production extends Component {
         }
 
         var checkedYear = []
-        for (var i in form["Year_of_Invention"]) {
+        for (i in form["Year_of_Invention"]) {
             if (form["Year_of_Invention"][i].checked) {
                 checkedYear.push(String(form["Year_of_Invention"][i].id));
             }
         }
 
         var checkedUse = []
-        for (var i in form["Usage_Field"]) {
+        for (i in form["Usage_Field"]) {
             if (form["Usage_Field"][i].checked) {
                 checkedUse.push(String(form["Usage_Field"][i].id));
             }
         }
 
         var api = "";
-        if (checkedType.length == 0 || checkedType.length == 2) {
+        if (checkedType.length === 0 || checkedType.length === 2) {
             api += "Type=all";
         } else {
             api += "Type=";
@@ -177,7 +168,7 @@ class Production extends Component {
         }
         api += "&";
 
-        if (checkedYear.length == 0 || checkedYear.length == 4) {
+        if (checkedYear.length === 0 || checkedYear.length === 4) {
             api += "Year_of_Invention=all";
         } else {
             api += "Year_of_Invention=";
@@ -185,7 +176,7 @@ class Production extends Component {
         }
 
         api += "&";
-        if (checkedUse.length == 0 || checkedUse.length == 4) {
+        if (checkedUse.length === 0 || checkedUse.length === 4) {
             api += "Usage_Field=all";
         } else {
             api += "Usage_Field=";

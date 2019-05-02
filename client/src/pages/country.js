@@ -1,17 +1,11 @@
 import React, { Component } from 'react'
 import Card from '@material-ui/core/Card';
-import { CardActionArea, CardMedia, Typography, CardContent, Grid } from '@material-ui/core';
+import { CardMedia, Typography, CardContent, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import ReactDOM from "react-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import {Navbar,Nav, NavbarBrand} from 'react-bootstrap'
+import {Nav} from 'react-bootstrap'
 
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -19,10 +13,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import CardActions from '@material-ui/core/CardActions';
-import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/core/styles';
-import ButtonBase from '@material-ui/core/ButtonBase';
-import Instance from './Instance.js'
 import Pagination from "react-js-pagination";
 import Form from 'react-bootstrap/Form';
 
@@ -155,21 +146,21 @@ class Country extends Component {
         }
 
         var checkedPopulation = []
-        for (var i in form["Population"]) {
+        for (i in form["Population"]) {
             if (form["Population"][i].checked) {
                 checkedPopulation.push(String(form["Population"][i].id));
             }
         }
 
         var checkedProd = []
-        for (var i in form["Total_Production"]) {
+        for (i in form["Total_Production"]) {
             if (form["Total_Production"][i].checked) {
                 checkedProd.push(String(form["Total_Production"][i].id));
             }
         }
 
         var api = "";
-        if (checkedRegion.length == 0 || checkedRegion.length == 7) {
+        if (checkedRegion.length === 0 || checkedRegion.length === 7) {
             api += "Region=all";
         } else {
             api += "Region=";
@@ -177,7 +168,7 @@ class Country extends Component {
         }
         api += "&";
 
-        if (checkedPopulation.length == 0 || checkedPopulation.length == 3) {
+        if (checkedPopulation.length === 0 || checkedPopulation.length === 3) {
             api += "Population=all";
         } else {
             api += "Population=";
@@ -185,7 +176,7 @@ class Country extends Component {
         }
 
         api += "&";
-        if (checkedProd.length == 0 || checkedProd.length == 3) {
+        if (checkedProd.length === 0 || checkedProd.length === 3) {
             api += "Total_Production=all";
         } else {
             api += "Total_Production=";

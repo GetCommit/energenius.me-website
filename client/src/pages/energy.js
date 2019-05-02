@@ -1,19 +1,14 @@
 import React, { Component } from 'react'
 import Card from '@material-ui/core/Card';
-import { CardActionArea, CardMedia, Typography, CardContent, Grid } from '@material-ui/core';
+import { CardMedia, Typography, CardContent, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import ReactDOM from "react-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import {Navbar,Nav, NavbarBrand} from 'react-bootstrap'
+
+import {Nav} from 'react-bootstrap'
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
 
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -21,10 +16,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import CardActions from '@material-ui/core/CardActions';
-import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/core/styles';
-import ButtonBase from '@material-ui/core/ButtonBase';
-import Instance from './Instance.js'
 import Pagination from "react-js-pagination";
 import Form from 'react-bootstrap/Form';
 const formValid = ({ formErrors, ...rest }) => {
@@ -202,21 +194,21 @@ class Energy extends Component {
         }
 
         var checkedUse = []
-        for (var i in form["Major_Use"]) {
+        for (i in form["Major_Use"]) {
             if (form["Major_Use"][i].checked) {
                 checkedUse.push(String(form["Major_Use"][i].id));
             }
         }
 
         var checkedCountry = []
-        for (var i in form["Top_Producing_Country"]) {
+        for (i in form["Top_Producing_Country"]) {
             if (form["Top_Producing_Country"][i].checked) {
                 checkedCountry.push(String(form["Top_Producing_Country"][i].id));
             }
         }
 
         var api = "";
-        if (checkedType.length == 0 || checkedType.length == 3) {
+        if (checkedType.length === 0 || checkedType.length === 3) {
             api += "Type=all";
         } else {
             api += "Type=";
@@ -224,7 +216,7 @@ class Energy extends Component {
         }
         api += "&";
 
-        if (checkedUse.length == 0 || checkedUse.length == 6) {
+        if (checkedUse.length === 0 || checkedUse.length === 6) {
             api += "Major_Use=all";
         } else {
             api += "Major_Use=";
@@ -232,7 +224,7 @@ class Energy extends Component {
         }
 
         api += "&";
-        if (checkedCountry.length == 0 || checkedCountry.length == 8) {
+        if (checkedCountry.length === 0 || checkedCountry.length === 8) {
             api += "Top_Producing_Country=all";
         } else {
             api += "Top_Producing_Country=";

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Navbar,Nav, Form, FormControl, Button, NavbarBrand} from 'react-bootstrap'
+import {Navbar,Nav, Form, Button} from 'react-bootstrap'
 import {Link, withRouter} from 'react-router-dom'
 
 
@@ -33,29 +33,6 @@ class Navigation extends Component {
   }
 
 
-  // onInputChange (nativeEvent){
-  //   this.setState({ searchValue: nativeEvent.target.value });
-  // };
-
-  // handleSubmit = e => {
-  //   e.preventDefault();
-
-  //   if (formValid(this.state)) {
-  //     console.log(`
-  //       --SUBMITTING--
-  //       Query: ${this.state.query}
-  //     `);
-  //   } else {
-  //     console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
-  //   }
-  // };
-  // handleChange = e => {
-  //   e.preventDefault();
-  //   const { name, value } = e.target;
-  //   let formErrors = { ...this.state.formErrors };
-
-  //   this.setState({ formErrors, [name]: value }, () => console.log(this.state));
-  // };
 
   render(){
     return (
@@ -93,23 +70,6 @@ class Navigation extends Component {
                 <Nav.Link href="/about" eventKey="5">About Us</Nav.Link>
                 </Link>
             </Nav.Item>
-
-            {/* <Nav.Item  style={{ paddingLeft: "10px" }}>
-              <form noValidate class="form-inline">
-                <input 
-                class="form-control mr-sm-2" 
-                onChange={this.handleChange} 
-                type="text" 
-                name="query"
-                placeholder="Search" 
-                aria-label="Search"/>
-                <Link to={'/search/'+this.state.query}>
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Global Search</button>
-                </Link>
-              </form>
-            </Nav.Item> */}
-
-
 
             <Navbar>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />

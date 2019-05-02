@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Link from 'react-router-dom/Link';
-import {Jumbotron, Button, Carousel} from 'react-bootstrap'
 import * as d3 from 'd3'
 // import DocumentTitle from 'react-document-title/DocumentTitle';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
-import {Jumbotron, Button, Carousel, Form, FormControl} from 'react-bootstrap'
+import {Jumbotron, Button, Carousel, Form} from 'react-bootstrap'
 // import DocumentTitle from 'react-document-title/DocumentTitle';
 
 

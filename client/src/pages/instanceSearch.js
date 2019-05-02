@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Navbar,Nav, Form, FormControl, Button, NavbarBrand} from 'react-bootstrap'
+import {Form, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
 export default class instanceSearch extends Component {
@@ -38,7 +38,7 @@ export default class instanceSearch extends Component {
                     if( i < targetIndex){
                         left.push(info[i]);
                     }
-                    if(i == targetIndex){
+                    if(i === targetIndex){
                         mid=info[i];
                     }
                     if(i > targetIndex){
@@ -57,10 +57,9 @@ export default class instanceSearch extends Component {
 
         componentDidMount (){
             document.title = this.img;
-        
             fetch(
                 'https://www.energenius.me/api/'+this.id['type']+'?name=all'
-            )
+                )
                 .then(response => response.json())
                 .then(data => {
 
@@ -77,7 +76,7 @@ export default class instanceSearch extends Component {
 
                         if(des.includes(this.search.toLowerCase())){
 
-                            var str = this.info['description'];
+                            str = this.info['description'];
                             
                             var brief = this.getBriefInfo(this.info['description'], this.search, 20)
 

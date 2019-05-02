@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Grid } from '@material-ui/core';
 import yl from './../img/yl.jpg'
 import sz from './../img/sz.jpg'
 import ww from './../img/ww.jpg'
@@ -9,9 +8,6 @@ import bug from './../img/bug.jpg'
 
 //Class of person
 class Person extends Component {
-  constructor (props) {
-    super(props)
-  }
 
   render () {
     return (
@@ -171,8 +167,8 @@ componentDidMount (){
           }
         }
       }
-      for (var member in this.state.memData) {
-        if (member != 'Duck') {
+      for (member in this.state.memData) {
+        if (member !== 'Duck') {
           this.state.memData['Duck'].tests += this.state.memData[member].tests;
         }
       }

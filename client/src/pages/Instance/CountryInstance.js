@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
-import {Jumbotron, Button, Carousel} from 'react-bootstrap'
 
 class CountryInstance extends Component {
     constructor (props) {
@@ -53,8 +52,7 @@ class CountryInstance extends Component {
 
                     <aside class="col-md-4 blog-sidebar">
                         <div class="p-4">
-                        {/* <img class="img-rounded" src="../bootstrap/img/country/china/china1.png" width = "300"> */}
-                        <img src={require('../../img/country/instance/'+this.img+'.jpg')} width="80%" height="80%" />
+                        <img src={require('../../img/country/instance/'+this.img+'.jpg')} width="80%" height="80%" alt  ='' />
 
                         </div>
 

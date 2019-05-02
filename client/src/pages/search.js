@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Navbar,Nav, Form, FormControl, Button, NavbarBrand} from 'react-bootstrap'
+import {Form, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
 export default class search extends Component {
@@ -42,7 +42,7 @@ export default class search extends Component {
                     if( i < targetIndex){
                         left.push(info[i]);
                     }
-                    if(i == targetIndex){
+                    if(i === targetIndex){
                         mid=info[i];
                     }
                     if(i > targetIndex){
@@ -55,13 +55,11 @@ export default class search extends Component {
             brief.push(left);
             brief.push(mid);
             brief.push(right);
-            // return "..."+brief.join(' ')+"...";
             return brief;
         }
 
         async componentDidMount (){
             document.title = this.img;
-
             fetch(
                 'https://www.energenius.me/api/energy?name=all'
             )
@@ -83,7 +81,7 @@ export default class search extends Component {
                         var des = str.toLowerCase().split(" ");
                         if(des.includes(this.search.toLowerCase())){
 
-                            var str = this.info['description'];
+                            str = this.info['description'];
 
                             var brief = this.getBriefInfo(this.info['description'], this.search, 20)
 
@@ -145,7 +143,7 @@ export default class search extends Component {
                         var des = str.toLowerCase().split(" ");
                         if(des.includes(this.search.toLowerCase())){
 
-                            var str = this.info['description'];
+                            str = this.info['description'];
                             var brief = this.getBriefInfo(this.info['description'], this.search, 20)
 
                             var mid = brief[1];
@@ -202,9 +200,7 @@ export default class search extends Component {
                         var des = str.toLowerCase().split(" ");
                         if(des.includes(this.search.toLowerCase())){
 
-                            var str = this.info['description'];
-
-                            var idx = str.indexOf(this.search);
+                            str = this.info['description'];
 
                             var brief = this.getBriefInfo(this.info['description'], this.search, 20)
 

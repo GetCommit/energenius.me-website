@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
-import {Jumbotron, Button, Carousel} from 'react-bootstrap'
 
 class EnergyInstance extends Component {
     constructor (props) {
@@ -51,7 +50,7 @@ class EnergyInstance extends Component {
 
                     <aside class="col-md-4 blog-sidebar">
                         <div class="p-4">
-                            <img src={require('../../img/energy/instance/'+this.img+'.jpg')} width="80%" height="80%" />
+                            <img src={require('../../img/energy/instance/'+this.img+'.jpg')} width="80%" height="80%" alt = ''/>
                         </div>
 
                         <div class="p-4">
