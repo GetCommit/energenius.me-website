@@ -28,7 +28,7 @@ Object Country{
 }
 
 
-Energy .. Production_Usage: dependent
-Country .. Production_Usage: develop
-Energy .. Country: control
+Energy "1" *.."many" Production_Usage
+Country "1" o.."many" Production_Usage
+Energy "1" *--* "1" Country
 @enduml

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Form, Button} from 'react-bootstrap'
+import {Form, Button, Card} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
 export default class search extends Component {
@@ -66,9 +66,11 @@ export default class search extends Component {
                 .then(response => response.json())
                 .then(data => {
                     this.search_results.push(
+                        <div class = "mt-4">
                         <h2>
-                            Energy Results for {this.search}
+                            Energy Results for <b>"{this.search}"</b>
                         </h2>
+                        </div>
                     )
                     for (const elem of data.entries()) {
                         this.info = {}
@@ -92,20 +94,14 @@ export default class search extends Component {
                             console.log("HELLO WORLD")
 
                             this.search_results.push(
-                            <div>
-
-                                <h5>
-                                    <Link to={'/energy/'+elem[1]['Name']}> {elem[1]['Name']} </Link>
+                                <div class = "p-3">
+                                <h5 class = "px-2">
+                                    <Link to={'/country/'+elem[1]['Name']}> {elem[1]['Name']} </Link>
                                 </h5>
+                                <div className="px-2 text-success"> {'www.energenius.me/country/'+elem[1]['Name']}</div>
+                                
 
-
-                                <div >
-                                    <div className = "Button">{left} <b>{mid}</b> {right} </div>
-                                    <br/>
-                                    <br/>
-
-
-                                </div>
+                                <div class = "px-2 text-muted">{left} <b>{mid}</b> {right} </div>
                             </div>
                             )
                         }
@@ -128,9 +124,11 @@ export default class search extends Component {
                 .then(response => response.json())
                 .then(data => {
                     this.search_results.push(
+                        <div class = "mt-4">
                         <h2>
-                            Production Results for {this.search}
+                            Production Results for <b>"{this.search}"</b>
                         </h2>
+                        </div>
                     )
                     for (const elem of data.entries()) {
                         this.info = {}
@@ -152,19 +150,14 @@ export default class search extends Component {
 
 
                             this.search_results.push(
-                            <div>
-                                <h5>
-                                    <Link to={'/production/'+elem[1]['Name']}>{elem[1]['Name']}</Link>
+                                <div class = "p-3">
+                                <h5 class = "px-2">
+                                    <Link to={'/production/'+elem[1]['Name']}> {elem[1]['Name']} </Link>
                                 </h5>
+                                <div className="px-2 text-success"> {'www.energenius.me/production/'+elem[1]['Name']}</div>
+                                
 
-
-                                <div >
-                                    <div className = "Button">{left} <b>{mid}</b> {right} </div>
-                                    <br/>
-                                    <br/>
-
-
-                                </div>
+                                <div class = "px-2 text-muted">{left} <b>{mid}</b> {right} </div>
                             </div>
                             )
                         }
@@ -183,9 +176,11 @@ export default class search extends Component {
                 .then(response => response.json())
                 .then(data => {
                     this.search_results.push(
+                        <div class = "mt-4">
                         <h2>
-                            Country Results for {this.search}
+                            Country Results for <b>"{this.search}"</b>
                         </h2>
+                        </div>
                     )
                     for (const elem of data.entries()) {
                         this.info = {}
@@ -210,19 +205,14 @@ export default class search extends Component {
 
 
                             this.search_results.push(
-                            <div>
-                                <h5>
-                                    <Link to={'/country/'+elem[1]['Name']}>{elem[1]['Name']}</Link>
+                            <div class = "p-3">
+                                <h5 class = "px-2">
+                                    <Link to={'/country/'+elem[1]['Name']}> {elem[1]['Name']} </Link>
                                 </h5>
+                                <div className="px-2 text-success"> {'www.energenius.me/country/'+elem[1]['Name']}</div>
+                                
 
-
-                                <div >
-                                    <div className = "Button">{left} <b>{mid}</b> {right} </div>
-                                    <br/>
-                                    <br/>
-
-
-                                </div>
+                                <div class = "px-2 text-muted">{left} <b>{mid}</b> {right} </div>
                             </div>
                             )
                         }
@@ -244,10 +234,8 @@ export default class search extends Component {
         return (
         <div>
 
-            <div>
-
+            <div class="col-md-10">
                 <p>{this.search_results}</p>
-
             </div>
 
 
