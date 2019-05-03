@@ -9,6 +9,7 @@ import Energy from './pages/energy'
 import Production from './pages/production'
 import Country from './pages/country'
 import Visualization from './pages/visualization'
+import StateMap from './pages/StateMap'
 
 import CountryInstance from './pages/Instance/CountryInstance.js'
 import EnergyInstance from './pages/Instance/EnergyInstance.js'
@@ -48,6 +49,7 @@ class App extends Component {
           <Route exact path="/country/:id" component={CountryInstance}/>
 
           <Route exact path="/visualization" component={Visualization}/>
+          <Route exact path="/statemap" component={StateMap}/>
 
 
           <Route exact path="/search/:id" component={Search}/>
