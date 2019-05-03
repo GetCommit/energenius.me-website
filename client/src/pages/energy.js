@@ -131,6 +131,7 @@ class Energy extends Component {
       this.tmp_props = props;
 
       this.state = {
+          isReversed: false,
           open1: false,
           open2: false,
           open3: false, 
@@ -252,12 +253,18 @@ class Energy extends Component {
 
     handleSort(event) {
         event.preventDefault();
-        this.state.info.sort(this.GetSortOrder(event.target.value));
+        if(this.state["isReversed"]){
+          this.state.info.reverse(this.GetSortOrder(event.target.value));
+        }else{
+          this.state.info.sort(this.GetSortOrder(event.target.value));
+        }
         this.setState({ [event.target.name]: event.target.value });
     }
 
     render() {
-        const { open1, open2, open3 } = this.state;
+        const { open1, open2, open3, isReversed} = this.state;
+        let btn_text = this.state.isReversed ? "Ascend" : "Descend"
+        let btn_class = this.state.isReversed ? "btn-warning" : "btn-success"
         if (this.state.info === undefined) {
             return (<div>Loading</div>)
         }
@@ -447,7 +454,9 @@ class Energy extends Component {
                     <MenuItem value="Consumption_Rank_in_US">Consumption Rank in US</MenuItem>
                     <MenuItem value="Electrical_Generating_Rank">Electrical Generating Rank</MenuItem>
                 </Select>
+                <button type="button" class={"btn "+btn_class} onClick={() => this.setState({ isReversed: !isReversed })}>{btn_text}</button>
                 </FormControl>
+                
               </Form>
 
 

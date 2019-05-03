@@ -88,6 +88,7 @@ class Country extends Component {
       this.tmp_props = props;
 
       this.state = {
+          isReversed: false,
           open1: false,
           open2: false,
           open3: false, 
@@ -203,14 +204,20 @@ class Country extends Component {
     }
 
     handleSort(event) {
-        event.preventDefault();
+      event.preventDefault();
+      if(this.state["isReversed"]){
+        this.state.info.reverse(this.GetSortOrder(event.target.value));
+      }else{
         this.state.info.sort(this.GetSortOrder(event.target.value));
-        this.setState({ [event.target.name]: event.target.value });
+      }
+      this.setState({ [event.target.name]: event.target.value });
     }
 
     render() {
 
-        const { open1, open2, open3 } = this.state;
+      const { open1, open2, open3, isReversed} = this.state;
+      let btn_text = this.state.isReversed ? "Ascend" : "Descend"
+      let btn_class = this.state.isReversed ? "btn-warning" : "btn-success"
         if (this.state.info === undefined) {
             return (<div>Loading</div>)
         }
@@ -402,6 +409,7 @@ class Country extends Component {
                 <MenuItem value="Energy_Shortage">Energy Shortage(days/year)</MenuItem>
                 <MenuItem value="Population">Population(Million)</MenuItem>
             </Select>
+            <button type="button" class={"btn "+btn_class} onClick={() => this.setState({ isReversed: !isReversed })}>{btn_text}</button>
             </FormControl>
             </Form>
 
