@@ -91,7 +91,7 @@ class Country extends Component {
           isReversed: false,
           open1: false,
           open2: false,
-          open3: false, 
+          open3: false,
           activePage: 1,
           info: undefined,
           shownIdx: [0, 1, 2, 3, 4, 5, 6, 7, 8],
@@ -122,10 +122,10 @@ class Country extends Component {
 
       this.setState({ formErrors, [name]: value }, () => console.log(this.state));
     };
-  
+
     componentDidMount() {
       document.title = "Country";
-      fetch('https://www.energenius.me/api/country?name=all')
+      fetch('/api/country?name=all')
           .then(response => response.json())
           .then(data => this.setState({info: data}));
     }
@@ -187,7 +187,7 @@ class Country extends Component {
             api += checkedProd.join("|");
         }
 
-        fetch("https://www.energenius.me/api/filter/country?" + api)
+        fetch("/api/filter/country?" + api)
             .then(response => response.json())
             .then(data => this.setState({info: data}));
     }
@@ -311,8 +311,8 @@ class Country extends Component {
               {/* Local search */}
               <br></br>
                 <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left col-xs-6" alignRight >
-                  <input 
-                    class = "rounded border border-grey w-75"  
+                  <input
+                    class = "rounded border border-grey w-75"
                     alightLeft
                     placeholder=""
                     type="text"
@@ -325,7 +325,7 @@ class Country extends Component {
                     <Button  variant="outlined" color="primary">
                       Search
                     </Button>
-                  </Link> 
+                  </Link>
                 </Form>
                 <p></p>
 
@@ -392,7 +392,7 @@ class Country extends Component {
 
                 <Button variant="outlined" color="primary" type="submit">Apply Filter</Button>
                 <p>
-                  
+
                 </p>
             </Form>
 

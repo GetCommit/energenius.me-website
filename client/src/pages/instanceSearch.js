@@ -11,7 +11,7 @@ export default class instanceSearch extends Component {
         this.state = {};
         this.search_results = []
         }
-        
+
         getBriefInfo(str, target, length) {
             // Target must be lower case
             var targetIndex;
@@ -57,7 +57,7 @@ export default class instanceSearch extends Component {
         componentDidMount (){
             document.title = this.img;
             fetch(
-                'https://www.energenius.me/api/'+this.id['type']+'?name=all'
+                '/api/'+this.id['type']+'?name=all'
                 )
                 .then(response => response.json())
                 .then(data => {
@@ -76,43 +76,43 @@ export default class instanceSearch extends Component {
                         if(des.includes(this.search.toLowerCase())){
 
                             str = this.info['description'];
-                            
+
                             var brief = this.getBriefInfo(this.info['description'], this.search, 20)
 
                             var mid = brief[1];
                             var left = "..."+brief[0].join(" ")
                             var right = brief[2].join(" ")+"..."
 
-                            
+
                             this.search_results.push(
-                            
+
                             <div class = "p-3">
                                 <h5 class = "px-2">
                                     <Link to={'/'+this.id['type']+'/'+elem[1]['Name']}> {elem[1]['Name']} </Link>
                                 </h5>
                                 <div className="px-2 text-success"> {'www.energenius.me/'+this.id['type']+'/'+elem[1]['Name']}</div>
-                                
+
 
                                 <div class = "px-2 text-muted">{left} <b>{mid}</b> {right} </div>
                             </div>
                             )
                         }
 
-                        
+
 
                     }
                     this.setState({})
 
-                    
+
                 })                .catch(e => {
                     console.log(e);
                 })
 
 
 
-                
+
             }
-            
+
 
     render() {
         console.log("HEY HEY")
@@ -140,7 +140,7 @@ export default class instanceSearch extends Component {
                     Reset
                   </Button>
 
-                </Link> 
+                </Link>
             </Form>
 
 

@@ -12,7 +12,7 @@ class StateMap extends Component {
   componentDidMount() {
 
       fetch(
-        'http://www.energenius.me/api/getD3'
+        '/api/getD3'
         )
         .then(response => response.json())
         .then(data => {
@@ -79,7 +79,7 @@ class StateMap extends Component {
         "California":199,
         "Hawaii":198,
         "New York":185,
-        "Rhode Island":176   
+        "Rhode Island":176
     }
 
 
