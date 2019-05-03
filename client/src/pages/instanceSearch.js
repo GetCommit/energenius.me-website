@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Form, Button} from 'react-bootstrap'
+import {Form, Button, Card, CardColumns, CardDeck} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
 export default class instanceSearch extends Component {
@@ -10,7 +10,6 @@ export default class instanceSearch extends Component {
         this.search = this.id['id']
         this.state = {};
         this.search_results = []
-
         }
         
         getBriefInfo(str, target, length) {
@@ -86,19 +85,15 @@ export default class instanceSearch extends Component {
 
                             
                             this.search_results.push(
-                            <div>
-                                <h5>
-                                    <Link to={'/energy/'+elem[1]['Name']}> {elem[1]['Name']} </Link>
+                            
+                            <div class = "p-3">
+                                <h5 class = "px-2">
+                                    <Link to={'/'+this.id['type']+'/'+elem[1]['Name']}> {elem[1]['Name']} </Link>
                                 </h5>
+                                <div className="px-2 text-success"> {'www.energenius.me/'+this.id['type']+'/'+elem[1]['Name']}</div>
                                 
 
-                                <div >
-                                    <div className = "Button">{left} <b>{mid}</b> {right} </div>
-                                    <br/>
-                                    <br/>
-
-
-                                </div>
+                                <div class = "px-2 text-muted">{left} <b>{mid}</b> {right} </div>
                             </div>
                             )
                         }
@@ -128,12 +123,12 @@ export default class instanceSearch extends Component {
                 console.log("Helllo");
             </script>
 
-            <h1>Search results for <b>{this.search}</b></h1>
+            <div class="mt-4 px-3">
+            <h1>Search results for <b>"{this.search}"</b></h1>
+            </div>
 
-            <div>
-                
-                <p>{this.search_results}</p>
-                
+            <div class="col-md-10">
+            {this.search_results}
             </div>
 
 
