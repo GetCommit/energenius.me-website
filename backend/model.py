@@ -7,35 +7,18 @@ from google.appengine.api import users
 import json
 import webapp2
 
-# Database for the all instance page
-# class SectionContent(ndb.Model):
-#     title = ndb.StringProperty(required=True, indexed=True)
-#     content = ndb.StringProperty(required=True, indexed=True)
-#     if need image put here
-#     sectionimage = ndb.ndb.BlobProperty()
+# store the D3 data
 
-# class AllInstancePage(ndb.Model):
-#     pagename = ndb.StringProperty(required=True, indexed=True)
-#     intro = ndb.StringProperty(required=True, indexed=True)
-#     bodysection = ndb.StructuredProperty(SectionContent, repeated=True)
-#     uptitle = ndb.StringProperty(required=True)
-#     upcontent = ndb.StringProperty(repeated=True)
-# if need link or url, also could store here
-# downtitle = ndb.StringProperty(required=True)
-# downcontent = ndb.StringProperty(repeated=True)
+class D3visualization(ndb.Model):
+    name = ndb.StringProperty(required = True)
+    value = ndb.IntegerProperty()
 
-# country API
-# class Top3Energy (ndb.Model):
-#     t3energyname = ndb.StringProperty(required = True)
-#     t3energyproduce = ndb.StringProperty()
 # ---------------------------------------------------------
 #  No longer decide use instance page model use each model as instance
 # ---------------------------------------------------------
 # Three models
 
 # Model- country
-
-
 class Country(ndb.Model):
     Name = ndb.StringProperty(required=True)
     Total_Production = ndb.FloatProperty(required=True)
