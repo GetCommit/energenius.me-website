@@ -6,3 +6,4 @@
 /client/build
 package-lock.json
 /backend/www
+*.icloud

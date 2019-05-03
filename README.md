@@ -24,6 +24,14 @@ Phase four:
 https://gitlab.com/LuculentDig/energiziousness/pipelines
 
 
+## Visualization:
+Visualization 1: https://www.energenius.me/visualization1
+
+Visualization 2: https://www.energenius.me/visualization2
+
+Visualization 3: https://www.energenius.me/statemap
+
+
 ## Estimated Time
 
 |  Members | Estimated | Actual | Estimated | Actual | Estimated | Actual | Estimated | Actual |
