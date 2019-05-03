@@ -49,8 +49,8 @@ class App extends Component {
           <Route exact path="/country" component={Country}/>
           <Route exact path="/country/:id" component={CountryInstance}/>
 
-          <Route exact path="/visualization1" component={Visualization1}/>
-          <Route exact path="/visualization2" component={Visualization2}/>
+          <Route exact path="/carbonemission" component={Visualization1}/>
+          <Route exact path="/countryenergy" component={Visualization2}/>
 
           <Route exact path="/statemap" component={StateMap}/>
 
