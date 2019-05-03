@@ -3,13 +3,32 @@ import * as d3 from 'd3'
 // import DocumentTitle from 'react-document-title/DocumentTitle';
 
 export default class Visualization extends Component {
+    constructor(props) {
+      super(props);
 
+      this.state = {
+          vis1: undefined,
+          vis2: undefined
+      };
+
+    }
 
 
     componentDidMount() {
-        this.renderVis1();
-        this.renderVis2();
+        document.title = "Production and Usage";
+        fetch('https://www.energenius.me/api/production?name=all')
+            .then(response => response.json())
+            .then(data => this.setState({vis1: data}));
+
+
     }
+
+    componentDidUpdate() {
+        if (this.state.vis1) {
+            this.renderVis1();
+        }
+    }
+
 
     renderVis2() {
         var data = [
@@ -93,85 +112,81 @@ export default class Visualization extends Component {
     }
 
     renderVis1() {
-        var data  =
-        {
-          "name": "Renewable Energy",
-          "children": [
-              {
-                "name": "Wind Power",
-                "value": 1500
-              },
-              {
-                "name": "Solar Energy",
-                "value": 1000
-              },
-              {
-                "name": "Geothermal Energy",
-                "value": 400
-              },
-              {
-                "name": "Biomass",
-                "value": 200
-              },
-              {
-                "name": "Hydropower",
-                "value": 100
-              }
-          ]
-      };
+        var data  = {"name": "Production and Usage", "children": []};
 
-  var color = d3.scaleLinear()
-    .domain([0, 5])
-    .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
-    .interpolate(d3.interpolateHcl);
+        for (var i = 0; i < this.state.vis1.length; i++) {
+            var obj = {};
+            obj.name = this.state.vis1[i].Name;
+            obj.value = this.state.vis1[i].Carbon_Emission / 7 + 70;
 
-  var rootNode = d3.hierarchy(data);
-  var packLayout = d3.pack();
-  packLayout.size([900, 900]);
-  packLayout.padding(10)
+            data["children"].push(obj);
+        }
 
-  rootNode.sum(function(d) {
-    return d.value;
-  });
-  packLayout(rootNode);
-  var svg = d3.select("#vis1").append("svg")
-            .attr("width", 1000)
-            .attr("height",1000)
-            .append("g");
+        var color = d3.scaleLinear()
+        .domain([0, 5])
+        .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
+        .interpolate(d3.interpolateHcl);
 
-  var nodes = svg
-  .selectAll('g')
-  .data(rootNode.descendants())
-  .enter()
-  .append('g')
-  .attr('transform', function(d) {return 'translate(' + [d.x, d.y] + ')'})
+          var rootNode = d3.hierarchy(data);
+          var packLayout = d3.pack();
+          packLayout.size([1000, 1000]);
+          packLayout.padding(10)
 
-nodes
-  .append('circle')
-  .attr('r', function(d) { return d.r; })
-    .attr("fill", d => color(d.height));
+          rootNode.sum(function(d) {
+            return d.value;
+          });
 
-nodes
-.append('text')
-.attr("text-anchor", "middle")
-.attr('dx', -nodes.length)
-.attr('dy', 4)
-    .text(function(d) {
-      return d.children === undefined ? d.data.name : '';
-    })
+          packLayout(rootNode);
+
+          var margin = {
+             top: 20, right: 0, bottom: 30, left: 100
+          };
+
+        var width = 1500 - margin.left - margin.right,
+              height = 1500 - margin.top - margin.bottom;
+
+        var svg = d3.select("#vis1").append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+          var nodes = d3.select("#vis1 svg g")
+          .selectAll('g')
+          .data(rootNode.descendants())
+          .enter()
+          .append('g')
+          .attr('transform', function(d) {return 'translate(' + [d.x, d.y] + ')'})
+
+        nodes
+          .append('circle')
+          .attr('r', function(d) { return d.r; })
+            .attr("fill", d => color(d.height));
+
+        nodes
+        .append('text')
+        .style("font", "10px sans-serif")
+        .attr("text-anchor", "middle")
+        .attr('dx', -nodes.length)
+        .attr('dy', 4)
+            .text(function(d) {
+              return d.children === undefined ? d.data.name : '';
+            })
     }
 
 
 
   render() {
-
-
+      if (this.state.vis1 === undefined) {
+          return (<div>Loading</div>)
+      }
     return (
     <div>
 
     <div id="vis1"></div>
 
-<div id="vis2"></div>
+    <div id="vis2"></div>
 
     </div>
     )
