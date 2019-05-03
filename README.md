@@ -18,23 +18,25 @@ Phase two: 7c06970663265dc8396c5c0893fd67cb2cce5c3a
 
 Phase three: c54fb6d7a27905dd5f5d8f8d096864f5c4fe93e7
 
+Phase four:
+
 ## GitLab pipelines:
 https://gitlab.com/LuculentDig/energiziousness/pipelines
 
 
 ## Estimated Time
 
-|  Members | Estimated | Actual | Estimated | Actual | Estimated | Actual |
-| -------- | --------- | ------ | --------- | ------ | --------- | ------ |
-| Yaoyang  | 10        | 18     | 30        |  36    | 12        |  16    |
-| Yige     | 15        | 20     | 35        |  39    | 20        |  18    |
-| Wenyuan  | 15        | 18     | 25        |  43    | 30        |  25    |
-| Pengdi   | 10        | 19     | 26        |  31    | 25        |  23    |
-| Shijing  | 8         | 19     | 23        |  26    | 10        |  12    |
+|  Members | Estimated | Actual | Estimated | Actual | Estimated | Actual | Estimated | Actual |
+| -------- | --------- | ------ | --------- | ------ | --------- | ------ | --------- | ------ |
+| Yaoyang  | 10        | 18     | 30        |  36    | 12        |  16    | 15        |  13    |
+| Yige     | 15        | 20     | 35        |  39    | 20        |  18    | 10        |   8    |
+| Wenyuan  | 15        | 18     | 25        |  43    | 30        |  25    | 10        |  10    |
+| Pengdi   | 10        | 19     | 26        |  31    | 25        |  23    |  8        |   7    |
+| Shijing  | 8         | 19     | 23        |  26    | 10        |  12    | 13        |  11    |
 
 
 ## Comments:
-### Build and Deployment
+### Build
 
 `git clone https://gitlab.com/LuculentDig/energiziousness.git` Get our project
 
@@ -46,7 +48,8 @@ https://gitlab.com/LuculentDig/energiziousness/pipelines
 
 `npm start` Run the front-end at `localhost:3000`
 
--------------------------------------
+### Deployment
+
 `cd ..` `npm run build` Build the front-end deploy file
 
 `npm run deploy` Deploy both frontend and backend
