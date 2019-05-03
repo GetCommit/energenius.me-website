@@ -62,12 +62,17 @@ class Navigation extends Component {
             </Nav.Item>
             <Nav.Item>
                 <Link to="/visualization1" style={{ textDecoration: 'none' }}>
-                <Nav.Link href="/visualization1" eventKey="4">Visualization 1</Nav.Link>
+                <Nav.Link href="/visualization1" eventKey="4">Production Visualization</Nav.Link>
                 </Link>
             </Nav.Item>
             <Nav.Item>
                 <Link to="/visualization2" style={{ textDecoration: 'none' }}>
-                <Nav.Link href="/visualization2" eventKey="5">Visualization 2</Nav.Link>
+                <Nav.Link href="/visualization2" eventKey="5">Country Visualization</Nav.Link>
+                </Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Link to="/statemap" style={{ textDecoration: 'none' }}>
+                <Nav.Link href="/statemap" eventKey="5">Statemap</Nav.Link>
                 </Link>
             </Nav.Item>
             <Nav.Item>

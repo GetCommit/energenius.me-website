@@ -14,6 +14,7 @@ import urllib2
 from model import Energy
 from model import Country
 from model import ProductionAndUse
+from model import D3visualization
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -33,21 +34,6 @@ def default_json_serializer(obj):
         return millis
     raise TypeError("Not sure how to serialize %s" % (obj,))
 
-
-# [START search]
-# class Search(webapp2.RequestHandler):
-#
-#     def get(self):
-#
-#         options = search.QueryOptions(limit=10)
-#
-#         query_string = self.request.get('queryString')
-#         print("searching for ", query_string)
-#         query = search.Query(query_string=query_string, options=options)
-#         results = search.Index('tags').search(query)
-#         print(results)
-
-# [END search]
 wikiURL = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsentences=6&titles="
 
 # energy API
@@ -345,17 +331,47 @@ class FilterCountry(webapp2.RequestHandler):
             )
         )
 
+# D3 API
 
-# search function
-# class SearchEnergy(webapp2.RequestHandler):
-#     def get(self):
-#         target = self.request.get("search")
+class RequestD3(webapp2.RequestHandler):
+    def get(self):
 
-# class SearchProduction(webapp2.RequestHandler):
-#
-# class SearchCountry(webapp2.RequestHandler):
-#
-# class SearchHome(webapp2.RequestHandler):
+        states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
+          "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+          "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+          "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+          "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
+
+        for state in states:
+            post_D3 = D3visualization()
+            key = "SEDS.TETPB." + state + ".A"
+            eiaUrl = "https://api.eia.gov/series/?api_key=f00b0a318dd8db52982a5bd021c1a8d1&series_id="
+            try:
+                response = urllib2.urlopen(eiaUrl + key)
+                data = json.load(response)
+                temp = data["series"][0]["data"][0][1]
+                post_D3.name = state
+                post_D3.value = int(temp)
+                post_D3.put()
+            except urllib2.URLError:
+                temp = ""
+
+        self.redirect("/api/add/country")
+
+
+class GetD3(webapp2.RequestHandler):
+    def get(self):
+        query = D3visualization.query().fetch()
+        result = {}
+        for temp in query:
+            result[temp.name] = temp.value
+
+        self.response.headers["Content-Type"] = "application/json"
+        self.response.out.write(
+            json.dumps(result,
+                default=default_json_serializer,
+            )
+        )
 
 
 app = webapp2.WSGIApplication(
@@ -370,10 +386,9 @@ app = webapp2.WSGIApplication(
         ("/api/filter/energy", FilterEnergy),
         ("/api/filter/production", FilterProduction),
         ("/api/filter/country", FilterCountry),
-        # ("/api/search/energy", SearchEnergy),
-        # ("/api/search/production", SearchProduction),
-        # ("/api/search/country", SearchCountry),
-        # ("/api/search/home", SearchHome),
+        # D3
+        ("/api/requestD3", RequestD3),
+        ("/api/getD3", GetD3),
     ],
     debug=True,
 )
