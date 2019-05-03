@@ -21,7 +21,7 @@ export default class instanceSearch extends Component {
 
             // find highlight
             for(let index in info){
-                if(info[index].toLowerCase() === target.toLowerCase()){
+                if(info[index].toLowerCase() == target.toLowerCase()){
                 targetIndex = index;
                 break;
                 }
@@ -38,7 +38,7 @@ export default class instanceSearch extends Component {
                     if( i < targetIndex){
                         left.push(info[i]);
                     }
-                    if(i === targetIndex){
+                    if(i == targetIndex){
                         mid=info[i];
                     }
                     if(i > targetIndex){

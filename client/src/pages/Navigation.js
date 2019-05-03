@@ -71,11 +71,8 @@ class Navigation extends Component {
                 </Link>
             </Nav.Item>
 
-            <Navbar>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-            <Navbar.Collapse id="responsive-navbar-nav">
-              {
               <Nav className="justify-content-end">
                   <Form.Control
                     id="searchbar"
@@ -91,11 +88,8 @@ class Navigation extends Component {
                       }
                     }}
                   />
-                  <Button variant="outline-primary" className="mt-2 mt-sm-0" onClick={()=>this.globalSearch()}>Search</Button>
               </Nav>
-              }
-            </Navbar.Collapse>
-            </Navbar>
+              <Button variant="outline-primary" className="mt-2 mt-sm-0" onClick={()=>this.globalSearch()}>Global Search</Button>
 
 
 
