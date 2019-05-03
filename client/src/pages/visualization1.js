@@ -30,15 +30,13 @@ export default class Visualization1 extends Component {
     }
 
 
-
-
     renderVis1() {
         var data  = {"name": "Production and Usage", "children": []};
 
         for (var i = 0; i < this.state.vis1.length; i++) {
             var obj = {};
             obj.name = this.state.vis1[i].Name;
-            obj.value = this.state.vis1[i].Carbon_Emission / 7 + 70;
+            obj.value = this.state.vis1[i].Carbon_Emission + 100;
 
             data["children"].push(obj);
         }
@@ -51,7 +49,7 @@ export default class Visualization1 extends Component {
           var rootNode = d3.hierarchy(data);
           var packLayout = d3.pack();
           packLayout.size([1000, 1000]);
-          packLayout.padding(10)
+          packLayout.padding(100)
 
           rootNode.sum(function(d) {
             return d.value;
@@ -77,7 +75,7 @@ export default class Visualization1 extends Component {
                       .attr("y", 0 - (margin.top / 2))
                       .attr("text-anchor", "middle")
                       .style("font-size", "16px")
-                      .text("Production and Usage Based on Carbon Emission");
+                      .text("Carbon Emission of Energy Production and Usage");
 
           var nodes = d3.select("#vis svg g")
           .selectAll('g')
