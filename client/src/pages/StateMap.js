@@ -82,10 +82,8 @@ class StateMap extends Component {
 
     function tooltipHtml(data){ /* function to create html content string in tooltip div. */
 
-        console.log('HEY')
-        console.log(data)
       return "<h4>"+data+"</h4><table>"+
-        "<tr><td>" + ("Production: ") + "</td><td>"+(data)+"</td></tr>"+
+        "<tr><td>" + ("Production: ") + "</td><td>"+(states[data])+"</td></tr>"+
         "</table>";
     }
 
@@ -156,10 +154,14 @@ class StateMap extends Component {
     "CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN",
     "WI", "MO", "AR", "OK", "KS", "LA", "VA"]
       .forEach(function(d){
+        console.log("HEY ", d)
+
         var p = states[d];
+        p = states[map[d]]
+
 
         sampleData[d]={parks: p,
-                       color:d3.interpolate("#c7eaab", "#164406")(p/5)};
+                       color:d3.interpolate("white", "blue")(p/897)};
       });
 
     /* draw states on id #statesvg */
