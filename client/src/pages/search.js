@@ -61,7 +61,7 @@ export default class search extends Component {
         async componentDidMount (){
             document.title = this.img;
             fetch(
-                'https://www.energenius.me/api/energy?name=all'
+                '/api/energy?name=all'
             )
                 .then(response => response.json())
                 .then(data => {
@@ -99,7 +99,7 @@ export default class search extends Component {
                                     <Link to={'/country/'+elem[1]['Name']}> {elem[1]['Name']} </Link>
                                 </h5>
                                 <div className="px-2 text-success"> {'www.energenius.me/country/'+elem[1]['Name']}</div>
-                                
+
 
                                 <div class = "px-2 text-muted">{left} <b>{mid}</b> {right} </div>
                             </div>
@@ -119,7 +119,7 @@ export default class search extends Component {
 
 
             fetch(
-                'https://www.energenius.me/api/production?name=all'
+                '/api/production?name=all'
             )
                 .then(response => response.json())
                 .then(data => {
@@ -155,7 +155,7 @@ export default class search extends Component {
                                     <Link to={'/production/'+elem[1]['Name']}> {elem[1]['Name']} </Link>
                                 </h5>
                                 <div className="px-2 text-success"> {'www.energenius.me/production/'+elem[1]['Name']}</div>
-                                
+
 
                                 <div class = "px-2 text-muted">{left} <b>{mid}</b> {right} </div>
                             </div>
@@ -171,7 +171,7 @@ export default class search extends Component {
                 })
 
             fetch(
-                'https://www.energenius.me/api/country?name=all'
+                '/api/country?name=all'
             )
                 .then(response => response.json())
                 .then(data => {
@@ -210,7 +210,7 @@ export default class search extends Component {
                                     <Link to={'/country/'+elem[1]['Name']}> {elem[1]['Name']} </Link>
                                 </h5>
                                 <div className="px-2 text-success"> {'www.energenius.me/country/'+elem[1]['Name']}</div>
-                                
+
 
                                 <div class = "px-2 text-muted">{left} <b>{mid}</b> {right} </div>
                             </div>

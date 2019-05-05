@@ -134,7 +134,7 @@ class Energy extends Component {
           isReversed: false,
           open1: false,
           open2: false,
-          open3: false, 
+          open3: false,
           activePage: 1,
           info: undefined,
           shownIdx: [0, 1, 2, 3, 4, 5, 6, 7, 8],
@@ -169,11 +169,11 @@ class Energy extends Component {
 
       this.setState({ formErrors, [name]: value }, () => console.log(this.state));
     };
-  
+
 
     componentDidMount() {
       document.title = "Energy";
-      fetch('https://www.energenius.me/api/energy?name=all')
+      fetch('/api/energy?name=all')
           .then(response => response.json())
           .then(data => this.setState({info: data}));
     }
@@ -235,7 +235,7 @@ class Energy extends Component {
             api += checkedCountry.join("|");
         }
 
-        fetch("https://www.energenius.me/api/filter/energy?" + api)
+        fetch("/api/filter/energy?" + api)
             .then(response => response.json())
             .then(data => this.setState({info: data}));
     }
@@ -359,7 +359,7 @@ class Energy extends Component {
               {/* Local search */}
               <br></br>
               <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left col-xs-6" alignRight >
-                <input 
+                <input
                   class = "rounded border border-grey h-50 w-75"
                   alightLeft
                   placeholder=""
@@ -372,7 +372,7 @@ class Energy extends Component {
                   <Button  variant="outlined" color="primary">
                     Search
                   </Button>
-                </Link> 
+                </Link>
               </Form>
               <p></p>
 
@@ -417,7 +417,7 @@ class Energy extends Component {
                   </div>
 
 
-                  <div>              
+                  <div>
                   <Form.Label><Button
                     class="btn btn-light"
                     onClick={() => this.setState({ open3: !open3 })}
@@ -441,7 +441,7 @@ class Energy extends Component {
                   </div>
                 <Button variant="outlined" color="primary" type="submit">Apply Filter</Button>
                 <p>
-                  
+
                 </p>
               </Form>
 
@@ -456,7 +456,7 @@ class Energy extends Component {
                 </Select>
                 <button type="button" class={"btn "+btn_class} onClick={() => this.setState({ isReversed: !isReversed })}>{btn_text}</button>
                 </FormControl>
-                
+
               </Form>
 
 
