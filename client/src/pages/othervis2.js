@@ -14,124 +14,158 @@ class othervis2 extends Component {
 
       visLoaded: false,
       vis: undefined
-      
+
     };
 	}
 
-	rendervis () {
-		const sample = [
-		  {
-		    language: 'TX',
-		    value: this.state.items["TX"],
-		    color: '#000000'
-		  },
-		  {
-		    language: 'GA',
-		    value: this.state.items["GA"],
-		    color: '#00a2ee'
-		  },
-		  {
-		    language: 'PA',
-		    value: this.state.items["PA"],
-		    color: '#fbcb39'
-		  },
-		  {
-		    language: 'MA',
-		    value: this.state.items["MA"],
-		    color: '#007bc8'
-		  },
-		  {
-		    language: 'WA',
-		    value: this.state.items["WA"],
-		    color: '#65cedb'
-		  },
-		  {
-		    language: 'OH',
-		    value: this.state.items["OH"],
-		    color: '#ff6e52'
-		  },
-		  {
-		    language: 'AZ',
-		    value: this.state.items["AZ"],
-		    color: '#f9de3f'
-		  },
-		  {
-		    language: 'CA',
-		    value: this.state.items["CA"],
-		    color: '#5d2f8e'
-		  },
-		  {
-		    language: 'OR',
-		    value: this.state.items["OR"],
-		    color: '#008fc9'
-		  },
-		  {
-		    language: 'FL',
-		    value: this.state.items["FL"],
-		    color: '#507dca'
-		  },
-		  {
-		    language: 'MD',
-		    value: this.state.items["MD"],
-		    color: '#507dca'
-		  },
-		  {
-		    language: 'IN',
-		    value: this.state.items["IN"],
-		    color: '#507dca'
-		  },
-		  {
-		    language: 'CT',
-		    value: this.state.items["CT"],
-		    color: '#507dca'
-		  },
-		  {
-		    language: 'IL',
-		    value: this.state.items["IL"],
-		    color: '#507dca'
-		  },
-		  {
-		    language: 'MT',
-		    value: this.state.items["MT"],
-		    color: '#507dca'
-		  },
-		  {
-		    language: 'IA',
-		    value: this.state.items["IA"],
-		    color: '#507dca'
-		  },
-		  {
-		    language: 'MO',
-		    value: this.state.items["MO"],
-		    color: '#507dca'
-		  },
-		  {
-		    language: 'MI',
-		    value: this.state.items["MI"],
-		    color: '#507dca'
-		  },
-		  {
-		    language: 'UT',
-		    value: this.state.items["UT"],
-		    color: '#507dca'
-		  },
-		  {
-		    language: 'MO',
-		    value: this.state.items["MO"],
-		    color: '#507dca'
-		  },
-		  {
-		    language: 'VA',
-		    value: this.state.items["VA"],
-		    color: '#507dca'
-		  },
-		  {
-		    language: 'AL',
-		    value: this.state.items["AL"],
-		    color: '#507dca'
-		  }
-		];
+    componentDidMount() {
+        fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities')
+            .then(response => response.json())
+            .then(data => this.setState({vis: data}));
+            
 
+    }
+
+    componentDidUpdate() {
+
+        if (this.state.vis && !this.state.visLoaded) {
+            this.state.visLoaded = true;
+            this.rendervis();
+        }
+    }
+
+    
+	rendervis () {
+        const sample = []
+        console.log(this.state.vis)
+
+        for (const elem in this.state.vis) {
+            console.log(elem)
+            sample.push(
+                {
+                    language: elem,
+                    value: parseInt(this.state.vis[elem]['population']),
+                    color: '#507dca'
+
+                }
+            )
+        }
+        // console.log("SAMPLE2", sample2)
+
+		// const sample2 = [
+		//   {
+		//     language: 'TX',
+		//     value: this.state.items["TX"],
+		//     color: '#000000'
+		//   },
+		//   {
+		//     language: 'GA',
+		//     value: this.state.items["GA"],
+		//     color: '#00a2ee'
+		//   },
+		//   {
+		//     language: 'PA',
+		//     value: this.state.items["PA"],
+		//     color: '#fbcb39'
+		//   },
+		//   {
+		//     language: 'MA',
+		//     value: this.state.items["MA"],
+		//     color: '#007bc8'
+		//   },
+		//   {
+		//     language: 'WA',
+		//     value: this.state.items["WA"],
+		//     color: '#65cedb'
+		//   },
+		//   {
+		//     language: 'OH',
+		//     value: this.state.items["OH"],
+		//     color: '#ff6e52'
+		//   },
+		//   {
+		//     language: 'AZ',
+		//     value: this.state.items["AZ"],
+		//     color: '#f9de3f'
+		//   },
+		//   {
+		//     language: 'CA',
+		//     value: this.state.items["CA"],
+		//     color: '#5d2f8e'
+		//   },
+		//   {
+		//     language: 'OR',
+		//     value: this.state.items["OR"],
+		//     color: '#008fc9'
+		//   },
+		//   {
+		//     language: 'FL',
+		//     value: this.state.items["FL"],
+		//     color: '#507dca'
+		//   },
+		//   {
+		//     language: 'MD',
+		//     value: this.state.items["MD"],
+		//     color: '#507dca'
+		//   },
+		//   {
+		//     language: 'IN',
+		//     value: this.state.items["IN"],
+		//     color: '#507dca'
+		//   },
+		//   {
+		//     language: 'CT',
+		//     value: this.state.items["CT"],
+		//     color: '#507dca'
+		//   },
+		//   {
+		//     language: 'IL',
+		//     value: this.state.items["IL"],
+		//     color: '#507dca'
+		//   },
+		//   {
+		//     language: 'MT',
+		//     value: this.state.items["MT"],
+		//     color: '#507dca'
+		//   },
+		//   {
+		//     language: 'IA',
+		//     value: this.state.items["IA"],
+		//     color: '#507dca'
+		//   },
+		//   {
+		//     language: 'MO',
+		//     value: this.state.items["MO"],
+		//     color: '#507dca'
+		//   },
+		//   {
+		//     language: 'MI',
+		//     value: this.state.items["MI"],
+		//     color: '#507dca'
+		//   },
+		//   {
+		//     language: 'UT',
+		//     value: this.state.items["UT"],
+		//     color: '#507dca'
+		//   },
+		//   {
+		//     language: 'MO',
+		//     value: this.state.items["MO"],
+		//     color: '#507dca'
+		//   },
+		//   {
+		//     language: 'VA',
+		//     value: this.state.items["VA"],
+		//     color: '#507dca'
+		//   },
+		//   {
+		//     language: 'AL',
+		//     value: this.state.items["AL"],
+		//     color: '#507dca'
+		//   }
+		// ];
+
+        console.log("UEAH ", sample)
 	    const svg = d3.select('#bar-chart');
 	    const svgContainer = d3.select('#container');
 
@@ -149,7 +183,7 @@ class othervis2 extends Component {
 
 	    const yScale = d3.scaleLinear()
 	      .range([height, 0])
-	      .domain([0, 8]);
+	      .domain([0, 1000000]);
 
 	    const makeYLines = () => d3.axisLeft()
 	      .scale(yScale)
@@ -222,24 +256,24 @@ class othervis2 extends Component {
 
 	}
 
-    getOrgData() {
-    	let statecounts = {};
-	    axios.get('https://cors.io/?https://api.catastrophe.world/organizations/?page=1&per_page=40').then(response => {
-	      response.data.forEach(organization => {
-		      const name = organization.stateorprovince;
-		      if (!(name in statecounts)) {
-		        statecounts[name] = 0;
-		      }
-		      statecounts[name]++;
-	    	});
-	    	this.setState({isLoaded: true, items: statecounts});
-	    });
-	    return statecounts;
-    }
+    // getOrgData() {
+    // 	let statecounts = {};
+	//     axios.get('https://cors.io/?https://api.catastrophe.world/organizations/?page=1&per_page=40').then(response => {
+	//       response.data.forEach(organization => {
+	// 	      const name = organization.stateorprovince;
+	// 	      if (!(name in statecounts)) {
+	// 	        statecounts[name] = 0;
+	// 	      }
+	// 	      statecounts[name]++;
+	//     	});
+	//     	this.setState({isLoaded: true, items: statecounts});
+	//     });
+	//     return statecounts;
+    // }
 
-    componentDidMount(){
-    	this.getOrgData();
-    }
+    // componentDidMount(){
+    // 	this.getOrgData();
+    // }
 
     render () {
     	if(this.state.isLoaded)
