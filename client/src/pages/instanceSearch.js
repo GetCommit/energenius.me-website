@@ -62,7 +62,9 @@ export default class instanceSearch extends Component {
                 .then(response => response.json())
                 .then(data => {
 
-                    for (const elem of data.entries()) {
+                    const allData = data.entries()
+                    var emptySearch = true
+                    for (const elem of allData) {
 
                         this.info = {}
                         this.info['API'] = elem[1]['API']
@@ -74,7 +76,7 @@ export default class instanceSearch extends Component {
                         var des = str.toLowerCase().split(" ");
 
                         if(des.includes(this.search.toLowerCase())){
-
+                            emptySearch = false
                             str = this.info['description'];
 
                             var brief = this.getBriefInfo(this.info['description'], this.search, 20)
@@ -98,8 +100,14 @@ export default class instanceSearch extends Component {
                             )
                         }
 
+                    }
+                    if(emptySearch){
+                        this.search_results.push(
+                            <h5 class = "px-2">
+                                Oops, we can't find your search.
+                            </h5>
 
-
+                        )
                     }
                     this.setState({})
 
@@ -133,10 +141,10 @@ export default class instanceSearch extends Component {
 
 
             {/* Reset */}
-            <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left col-xs-6" alignRight >
+            <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left px-3 col-xs-6" alignRight >
                 <Link to={'/'+this.id['type']}>
 
-                  <Button variant="outline-primary" className="mt-2 mt-sm-0">
+                  <Button variant="outline-primary" className="px-5 mt-2 mt-sm-0">
                     Reset
                   </Button>
 

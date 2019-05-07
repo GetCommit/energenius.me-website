@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Form, Button, Card} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+// import SearchField from "react-search-field";
 
 export default class search extends Component {
 
@@ -72,7 +73,10 @@ export default class search extends Component {
                         </h2>
                         </div>
                     )
-                    for (const elem of data.entries()) {
+                    
+                    const allData = data.entries()
+                    var emptySearch = true;
+                    for (const elem of allData) {
                         this.info = {}
                         this.info['API'] = elem[1]['API']
                         this.info["description"] = elem[1]['description']
@@ -82,6 +86,7 @@ export default class search extends Component {
                         var str = elem[1]['description'].replace('\n','')
                         var des = str.toLowerCase().split(" ");
                         if(des.includes(this.search.toLowerCase())){
+                            emptySearch = false;
 
                             str = this.info['description'];
 
@@ -105,9 +110,13 @@ export default class search extends Component {
                             </div>
                             )
                         }
-
-
-
+                    }
+                    if (emptySearch){
+                        this.search_results.push(
+                            <h5 class = "px-2">
+                                Oops, we can't find your search.
+                            </h5>
+                        )
                     }
 
                     this.setState({})
@@ -130,6 +139,8 @@ export default class search extends Component {
                         </h2>
                         </div>
                     )
+                    const allData = data.entries()
+                    var emptySearch = true;
                     for (const elem of data.entries()) {
                         this.info = {}
                         this.info['API'] = elem[1]['API']
@@ -140,7 +151,7 @@ export default class search extends Component {
                         var str = elem[1]['description'].replace('\n','')
                         var des = str.toLowerCase().split(" ");
                         if(des.includes(this.search.toLowerCase())){
-
+                            emptySearch = false;
                             str = this.info['description'];
                             var brief = this.getBriefInfo(this.info['description'], this.search, 20)
 
@@ -162,6 +173,13 @@ export default class search extends Component {
                             )
                         }
                     }
+                    if (emptySearch){
+                        this.search_results.push(
+                            <h5 class = "px-2">
+                                Oops, we can't find your search.
+                            </h5>
+                        )
+                    }
 
                     this.setState({})
 
@@ -182,7 +200,9 @@ export default class search extends Component {
                         </h2>
                         </div>
                     )
-                    for (const elem of data.entries()) {
+                    const allData = data.entries()
+                    var emptySearch = true;
+                    for (const elem of allData) {
                         this.info = {}
                         this.info['API'] = elem[1]['API']
                         this.info["description"] = elem[1]['description']
@@ -194,7 +214,7 @@ export default class search extends Component {
                         var str = elem[1]['description'].replace('\n','')
                         var des = str.toLowerCase().split(" ");
                         if(des.includes(this.search.toLowerCase())){
-
+                            emptySearch = false;
                             str = this.info['description'];
 
                             var brief = this.getBriefInfo(this.info['description'], this.search, 20)
@@ -218,6 +238,14 @@ export default class search extends Component {
                         }
 
                     }
+                    
+                    if (emptySearch){
+                        this.search_results.push(
+                            <h5 class = "px-2">
+                                Oops, we can't find your search.
+                            </h5>
+                        )
+                    }
 
 
                     this.setState({})
@@ -240,10 +268,10 @@ export default class search extends Component {
 
 
             {/* Reset */}
-            <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left col-xs-6" alignRight >
+            <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left px-3 col-xs-6" alignRight >
                 <Link to={'/'}>
 
-                  <Button variant="outline-primary" className="mt-2 mt-sm-0">
+                  <Button variant="outline-primary" className="px-5 mt-2 mt-sm-0">
                     Reset
                   </Button>
 
