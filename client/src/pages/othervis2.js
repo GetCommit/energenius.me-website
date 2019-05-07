@@ -169,7 +169,7 @@ class othervis2 extends Component {
 	states = states2
   function tooltipHtml(data){ /* function to create html content string in tooltip div. */
     return "<h4>"+data+"</h4><table>"+
-      "<tr><td>" + ("Production:  ") + "</td><td>"+(states[map[data]])+"</td></tr>"+
+      "<tr><td>" + ("Cost of living:  ") + "</td><td>"+(states[map[data]])+"</td></tr>"+
       "</table>";
   }
 
