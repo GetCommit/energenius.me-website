@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Navbar,Nav, Form, Button} from 'react-bootstrap'
+import {Navbar,Nav, Form, Button, NavDropdown} from 'react-bootstrap'
 import {Link, withRouter} from 'react-router-dom'
 
 
@@ -36,7 +36,7 @@ class Navigation extends Component {
 
   render(){
     return (
-        <Nav variant="pills"
+        <Nav variant="pills"  bg="#d9e6f2"
         defaultActiveKey="/" style={{ padding: "10px", backgroundColor: "#d9e6f2" }}>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
 
@@ -60,21 +60,22 @@ class Navigation extends Component {
                 <Nav.Link href="/country" eventKey="3">Country</Nav.Link>
                 </Link>
             </Nav.Item>
-            <Nav.Item>
-                <Link to="/carbonemission" style={{ textDecoration: 'none' }}>
-                <Nav.Link href="/carbonemission" eventKey="4">Production Visualization</Nav.Link>
-                </Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Link to="/countryenergy" style={{ textDecoration: 'none' }}>
-                <Nav.Link href="/countryenergy" eventKey="7">Country Visualization</Nav.Link>
-                </Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Link to="/statemap" style={{ textDecoration: 'none' }}>
-                <Nav.Link href="/statemap" eventKey="5">Statemap</Nav.Link>
-                </Link>
-            </Nav.Item>
+
+
+
+            <NavDropdown title="Visualization" id="collasible-nav-dropdown">
+              <Link to="/carbonemission" style={{ textDecoration: 'none' }}>
+                <NavDropdown.Item href="/carbonemission">Production Visualization</NavDropdown.Item>
+              </Link>
+              <Link to="/countryenergy" style={{ textDecoration: 'none' }}>
+                <NavDropdown.Item href="/countryenergy">Country Visualization</NavDropdown.Item>
+              </Link>
+              <Link to="/statemap" style={{ textDecoration: 'none' }}>
+                <NavDropdown.Item href="/statemap">Statemap</NavDropdown.Item>
+              </Link>
+            </NavDropdown>
+            
+            
             <Nav.Item>
                 <Link to="/about" style={{ textDecoration: 'none' }}>
                 <Nav.Link href="/about" eventKey="6">About Us</Nav.Link>

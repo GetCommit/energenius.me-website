@@ -105,7 +105,7 @@ export default class Home extends Component {
                 noValidate
                 onChange={this.handleChange}
                 id = "inputEmail4"
-                placeholder = "Try your Search"
+                placeholder = ""
                 />
               </Form>
             </center>
