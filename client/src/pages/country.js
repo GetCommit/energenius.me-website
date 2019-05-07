@@ -149,10 +149,10 @@ class Country extends Component {
             }
         }
 
-        var checkedstate = []
-        for (i in form["state"]) {
-            if (form["state"][i].checked) {
-                checkedstate.push(String(form["state"][i].id));
+        var checkedPopulation = []
+        for (i in form["Population"]) {
+            if (form["Population"][i].checked) {
+                checkedPopulation.push(String(form["Population"][i].id));
             }
         }
 
@@ -172,11 +172,11 @@ class Country extends Component {
         }
         api += "&";
 
-        if (checkedstate.length === 0 || checkedstate.length === 3) {
-            api += "state=all";
+        if (checkedPopulation.length === 0 || checkedPopulation.length === 3) {
+            api += "Population=all";
         } else {
-            api += "state=";
-            api += checkedstate.join("|");
+            api += "Population=";
+            api += checkedPopulation.join("|");
         }
 
         api += "&";
@@ -268,7 +268,7 @@ class Country extends Component {
                                 <ul>
 
                                     <li><b>Region: </b>{this.state.info[idx]['Region']}</li>
-                                    <li><b>state: </b>{this.state.info[idx]['state']}</li>
+                                    <li><b>state: </b>{this.state.info[idx]['Population']}</li>
                                     <li><b>Total Production: </b>{this.state.info[idx]['Total_Production']}</li>
                                     <li><b>Total Usage: </b>{this.state.info[idx]['Total_Usage']}</li>
                                     <li><b>Energy Shortage: </b>{this.state.info[idx]['Energy_Shortage']}</li>
@@ -359,14 +359,14 @@ class Country extends Component {
                   onClick={() => this.setState({ open2: !open2 })}
                   aria-controls="example-collapse-text"
                   aria-expanded={open2}>
-                  state(Million)
+                  Population(Million)
                   </Button>
                 </Form.Label>
                 <Collapse in={this.state.open2}>
                 <div key={'use'} className="mb-3">
-                  <Form.Check type={'checkbox'} id={'0-100'} name={'state'} label={'0-100'} />
-                  <Form.Check type={'checkbox'} id={'100-500'} name={'state'} label={'100-500'} />
-                  <Form.Check type={'checkbox'} id={'>500'} name={'state'} label={'>500'} />
+                  <Form.Check type={'checkbox'} id={'0-100'} name={'Population'} label={'0-100'} />
+                  <Form.Check type={'checkbox'} id={'100-500'} name={'Population'} label={'100-500'} />
+                  <Form.Check type={'checkbox'} id={'>500'} name={'Population'} label={'>500'} />
                 </div>
                 </Collapse>
               </div>
@@ -407,7 +407,7 @@ class Country extends Component {
                 <MenuItem value="Total_Production">Total Production(bn kWh)</MenuItem>
                 <MenuItem value="Total_Usage">Total Usage(bn kWh)</MenuItem>
                 <MenuItem value="Energy_Shortage">Energy Shortage(days/year)</MenuItem>
-                <MenuItem value="state">state(Million)</MenuItem>
+                <MenuItem value="Population">state(Million)</MenuItem>
             </Select>
             <button type="button" class={"btn "+btn_class} onClick={() => this.setState({ isReversed: !isReversed })}>{btn_text}</button>
             </FormControl>
