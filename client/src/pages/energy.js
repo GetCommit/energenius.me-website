@@ -235,7 +235,7 @@ class Energy extends Component {
             api += checkedCountry.join("|");
         }
 
-        fetch("/api/filter/energy?" + api)
+        fetch("https://www.energenius.me/api/filter/energy?" + api)
             .then(response => response.json())
             .then(data => this.setState({info: data}));
     }
