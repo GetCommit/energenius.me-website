@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import * as d3 from "d3";
 import uStates from './uStates';
 import './StateMap.css';
+
+
 class StateMap extends Component {
   constructor(props) {
     super(props);
@@ -12,7 +14,7 @@ class StateMap extends Component {
    componentDidMount() {
 
       fetch(
-        '/api/getD3'
+        'https://www.energenius.me/api/getD3'
         )
         .then(response => response.json())
         .then(data => {
@@ -127,6 +129,7 @@ class StateMap extends Component {
 
     return (
       <div className="container">
+        <p>Energy Production by state</p>
         <div id="tooltip"></div>
         <svg width="960" height="600" id="statesvg"></svg>
       </div>

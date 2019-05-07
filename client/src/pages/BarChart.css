@@ -1,0 +1,71 @@
+div#layout {
+    text-align: center;
+  }
+  
+  #container {
+    width: 1000px;
+    height: 600px;
+    margin: auto;
+    background-color: #2F4A6D;
+    margin-top: 0;
+    margin-bottom: 15vh;
+  }
+  
+  #bar-chart {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .bar {
+    fill: #80cbc4;
+  }
+  
+  path {
+    stroke: #fff;
+  }
+  
+  line {
+    stroke: #fff;
+  }
+  
+  line#limit {
+    stroke: #FED966;
+    stroke-width: 3;
+    stroke-dasharray: 3 6;
+  }
+  
+  .grid path {
+    stroke-width: 0;
+  }
+  
+  .grid .tick line {
+    stroke: #fff;
+    stroke-opacity: 0.3;
+  }
+  
+  text.divergence {
+    font-size: 14px;
+    fill: #fff;
+  }
+  
+  text.value {
+    font-size: 14px;
+    fill: #fff;
+  }
+  
+  text.title {
+    font-size: 22px;
+    font-weight: 600;
+  }
+  
+  text.label {
+    font-size: 14px;
+    font-weight: 400;
+    fill: #fff;
+  }
+  
+  text.source {
+    font-size: 10px;
+    fill: #fff;
+  }
+  

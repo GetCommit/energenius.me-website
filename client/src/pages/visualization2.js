@@ -17,14 +17,13 @@ export default class Visualization2 extends Component {
 
 
     componentDidMount() {
-        fetch('/api/country?name=all')
+        fetch('https://www.energenius.me/api/country?name=all')
             .then(response => response.json())
             .then(data => this.setState({vis2: data}));
 
     }
 
     componentDidUpdate() {
-
         if (this.state.vis2 && !this.state.vis2Loaded) {
             this.state.vis2Loaded = true;
             this.renderVis2();
@@ -50,11 +49,8 @@ export default class Visualization2 extends Component {
           data = data.sort(function (a, b) {
                      return d3.ascending(b.production, a.production);
           })
-          console.log(data);
 
           var series = d3.stack().keys(Object.keys(data[0]).slice(1))(data)
-
-          console.log(series);
 
         //set up svg using margin conventions - we'll need plenty of room on the left for labels
         var margin = {
@@ -143,14 +139,13 @@ export default class Visualization2 extends Component {
 
 
     render() {
-        if (this.state.vis2 === undefined ) {
+        while (this.state.vis2 === undefined ) {
             return (<div>Loading</div>)
         }
 
       return (
-          <div>
-
-              <div id="vis" style={{paddingLeft: '10rem'}}><p>Total Energy Production and Usage (bn kWh) of Countries</p></div>
+            <div>
+                <div id="vis" style={{paddingLeft: '10rem'}}><p>Total Energy Production and Usage (bn kWh) of Countries</p></div>
             </div>
 
       )

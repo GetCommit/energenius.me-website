@@ -5,7 +5,7 @@ import {Tabs, Tab} from "react-bootstrap";
 
 
 
-export default class Visualization2 extends Component {
+export default class othervis1 extends Component {
     constructor(props) {
       super(props);
 
@@ -48,7 +48,6 @@ export default class Visualization2 extends Component {
           data = data.sort(function (a, b) {
                      return d3.ascending(a.salary, b.salary);
           })
-          console.log(data);
 
 
         //set up svg using margin conventions - we'll need plenty of room on the left for labels

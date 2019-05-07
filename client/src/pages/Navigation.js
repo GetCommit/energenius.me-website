@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Navbar,Nav, Form, Button} from 'react-bootstrap'
+import {Navbar, NavDropdown, Nav, Form, Button} from 'react-bootstrap'
 import {Link, withRouter} from 'react-router-dom'
 
 
@@ -60,24 +60,20 @@ class Navigation extends Component {
                 <Nav.Link href="/country" eventKey="3">Country</Nav.Link>
                 </Link>
             </Nav.Item>
-            <Nav.Item>
-                <Link to="/carbonemission" style={{ textDecoration: 'none' }}>
-                <Nav.Link href="/carbonemission" eventKey="4">Production Visualization</Nav.Link>
-                </Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Link to="/countryenergy" style={{ textDecoration: 'none' }}>
-                <Nav.Link href="/countryenergy" eventKey="7">Country Visualization</Nav.Link>
-                </Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Link to="/statemap" style={{ textDecoration: 'none' }}>
-                <Nav.Link href="/statemap" eventKey="5">Statemap</Nav.Link>
-                </Link>
-            </Nav.Item>
+
+            <NavDropdown title="Visualization" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/carbonemission">Visual 1</NavDropdown.Item>
+              <NavDropdown.Item href="/countryenergy">Visual 2</NavDropdown.Item>
+              <NavDropdown.Item href="/StateMap">Visual 3</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/othervis1">PerfectFit 1</NavDropdown.Item>
+              <NavDropdown.Item href="/othervis2">PerfectFit 2</NavDropdown.Item>
+              <NavDropdown.Item href="/othervis3">PerfectFit 3</NavDropdown.Item>
+            </NavDropdown>
+
             <Nav.Item>
                 <Link to="/about" style={{ textDecoration: 'none' }}>
-                <Nav.Link href="/about" eventKey="6">About Us</Nav.Link>
+                <Nav.Link href="/about" eventKey="4">About Us</Nav.Link>
                 </Link>
             </Nav.Item>
 
