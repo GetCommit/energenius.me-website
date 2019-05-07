@@ -17,7 +17,7 @@ export default class Visualization1 extends Component {
 
 
     componentDidMount() {
-        fetch('/api/production?name=all')
+        fetch('https://www.energenius.me/api/production?name=all')
             .then(response => response.json())
             .then(data => this.setState({vis1: data}));
     }

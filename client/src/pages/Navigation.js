@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import {Navbar,Nav, Form, Button, NavDropdown} from 'react-bootstrap'
+
+import {Navbar, NavDropdown, Nav, Form, Button} from 'react-bootstrap'
 import {Link, withRouter} from 'react-router-dom'
 
 
@@ -62,23 +63,19 @@ class Navigation extends Component {
             </Nav.Item>
 
 
-
-            <NavDropdown title="Visualization" id="collasible-nav-dropdown">
-              <Link to="/carbonemission" style={{ textDecoration: 'none' }}>
-                <NavDropdown.Item href="/carbonemission">Production Visualization</NavDropdown.Item>
-              </Link>
-              <Link to="/countryenergy" style={{ textDecoration: 'none' }}>
-                <NavDropdown.Item href="/countryenergy">Country Visualization</NavDropdown.Item>
-              </Link>
-              <Link to="/statemap" style={{ textDecoration: 'none' }}>
-                <NavDropdown.Item href="/statemap">Statemap</NavDropdown.Item>
-              </Link>
+            <NavDropdown title="Visualization" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/carbonemission">Visual 1</NavDropdown.Item>
+              <NavDropdown.Item href="/countryenergy">Visual 2</NavDropdown.Item>
+              <NavDropdown.Item href="/StateMap">Visual 3</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/othervis1">PerfectFit 1</NavDropdown.Item>
+              <NavDropdown.Item href="/othervis2">PerfectFit 2</NavDropdown.Item>
+              <NavDropdown.Item href="/othervis3">PerfectFit 3</NavDropdown.Item>
             </NavDropdown>
-            
-            
+
             <Nav.Item>
                 <Link to="/about" style={{ textDecoration: 'none' }}>
-                <Nav.Link href="/about" eventKey="6">About Us</Nav.Link>
+                <Nav.Link href="/about" eventKey="4">About Us</Nav.Link>
                 </Link>
             </Nav.Item>
 

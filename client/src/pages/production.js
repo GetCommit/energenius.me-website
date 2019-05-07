@@ -125,7 +125,7 @@ class Production extends Component {
 
     componentDidMount() {
       document.title = "Production and Usage";
-      fetch('/api/production?name=all')
+      fetch('https://www.energenius.me/api/production?name=all')
           .then(response => response.json())
           .then(data => this.setState({info: data}));
     }

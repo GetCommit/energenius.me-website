@@ -14,7 +14,7 @@ class CountryInstance extends Component {
         document.title = this.img;
 
         fetch(
-            '/api/country?name=' + this.img
+            'https://www.energenius.me/api/country?name=' + this.img
         )
             .then(response => response.json())
             .then(data => {

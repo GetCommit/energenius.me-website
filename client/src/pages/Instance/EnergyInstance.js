@@ -14,7 +14,7 @@ class EnergyInstance extends Component {
         document.title = this.img;
 
         fetch(
-            '/api/energy?name=' + this.img
+            'https://www.energenius.me/api/energy?name=' + this.img
         )
             .then(response => response.json())
             .then(data => {
