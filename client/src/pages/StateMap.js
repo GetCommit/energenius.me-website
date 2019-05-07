@@ -129,7 +129,7 @@ class StateMap extends Component {
 
     return (
       <div className="container">
-        <p>Energy Production by state</p>
+        <h5 style={{padding:'2rem 25rem'}}>Energy Production by state</h5>
         <div id="tooltip"></div>
         <svg width="960" height="600" id="statesvg"></svg>
       </div>

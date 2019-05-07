@@ -215,8 +215,8 @@ class Production extends Component {
 
     render() {
       const { open1, open2, open3, isReversed} = this.state;
-      let btn_text = this.state.isReversed ? "Ascend" : "Descend"
-      let btn_class = this.state.isReversed ? "btn-warning" : "btn-success"
+      let btn_text = this.state.isReversed ? "DESC" : "ASC"
+      let btn_class = this.state.isReversed ? "btn-success" : "btn-warning"
         if (this.state.info === undefined) {
             return (<div>Loading</div>)
         }
@@ -306,7 +306,9 @@ class Production extends Component {
             </div>
             </div>
 
-            <aside class="col-md-2">
+            <aside class="col-md-2 black" style={{ paddingTop:'4rem', paddingRight: '3rem' }}>
+              <Card style={{ padding: '1rem' }}>
+                <div style = {{color: "grey"}}>
               {/* Local search */}
                 <br></br>
                 <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left col-xs-6" alignRight >
@@ -398,10 +400,12 @@ class Production extends Component {
                 <MenuItem value="Carbon_Emission">Carbon Emission</MenuItem>
                 <MenuItem value="Year_of_Invention">Year of Invention</MenuItem>
             </Select>
-            </FormControl>
             <button type="button" class={"btn "+btn_class} onClick={() => this.setState({ isReversed: !isReversed })}>{btn_text}</button>
+            </FormControl>
             </Form>
 
+              </div>
+              </Card>
             </aside>
             </div>
             </main>

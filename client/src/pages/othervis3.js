@@ -316,9 +316,13 @@ const data = [
     	if(this.state.isLoaded)
     		this.rendervis();
 	    return (
-			  <div id='container'>
-			      <svg id="bar-chart"><p> Population Density </p></svg>
-			  </div>
+				<div>
+					
+					<div id='container'>
+							<h5 style={{paddingTop:'1rem', paddingLeft:'30rem',color:'white'} }>Population Density</h5>
+							<svg id="bar-chart"></svg>
+					</div>
+				</div>
 			);
     }
 

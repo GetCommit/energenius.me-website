@@ -71,10 +71,10 @@ export default class Visualization1 extends Component {
               .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
               svg.append("text")
-                      .attr("x", (width / 2 - 100))
+                      .attr("x", (width / 2 - 150))
                       .attr("y", 0 - (margin.top / 2))
                       .attr("text-anchor", "middle")
-                      .style("font-size", "16px")
+                      .style("font-size", "20px")
                       .text("Carbon Emission of Energy Production and Usage");
 
           var nodes = d3.select("#vis svg g")

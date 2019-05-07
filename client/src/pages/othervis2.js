@@ -211,7 +211,7 @@ class othervis2 extends Component {
 
     return (
       <div className="container">
-        <p>Average Cost of living per state</p>
+        <h5 style={{padding:'2rem 25rem'}}>Average Cost of living per state</h5>
         <div id="tooltip"></div>
         <svg width="960" height="600" id="statesvg"></svg>
       </div>

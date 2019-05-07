@@ -145,7 +145,8 @@ export default class Visualization2 extends Component {
 
       return (
             <div>
-                <div id="vis" style={{paddingLeft: '10rem'}}><p>Total Energy Production and Usage (bn kWh) of Countries</p></div>
+                <h5 style={{padding:'2rem 25rem'}}>Total Energy Production and Usage (bn kWh) of Countries</h5>
+                <div id="vis" style={{paddingLeft: '10rem'}}></div>
             </div>
 
       )

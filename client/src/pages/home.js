@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
 import {Jumbotron, Button, Carousel, Form} from 'react-bootstrap'
+import TextField from '@material-ui/core/TextField';
+
+import Visual1 from './visualization1';
+import Visual2 from './visualization2';
+import Visual3 from './StateMap';
+
 
 // import DocumentTitle from 'react-document-title/DocumentTitle';
 
@@ -82,12 +88,12 @@ export default class Home extends Component {
             </center>
           </p>
 
+        
+
           <p>
           <center>
               <Link to={'/search/'+this.state.query}>
-
-
-                  <Button variant="outline-primary" className="mt-2 btn btn-primary btn-lg">
+                  <Button variant="outline-primary" rounded size="sm" className="mt-2 btn btn-primary btn-lg">
                     Global Search
                   </Button>
 
@@ -98,8 +104,7 @@ export default class Home extends Component {
           <p>
           <center>
             <Form noValidate className="justify-content-left col-xs-6 " alignRight >
-                <input
-                class="rounded border border-grey w-25 h-100"
+                <TextField
                 type="text"
                 name="query"
                 noValidate
@@ -117,7 +122,7 @@ export default class Home extends Component {
 
 
 
-        </Jumbotron>
+    </Jumbotron>
       </div>
 
 
@@ -132,14 +137,13 @@ export default class Home extends Component {
             />
 
           </Carousel.Item>
+          
           <Carousel.Item>
-            <img
+          <img
               className="d-block w-100"
               src={require('../img/windmill.jpeg')}
               alt="Second slide"
             />
-
-
           </Carousel.Item>
           <Carousel.Item>
             <img
@@ -150,6 +154,15 @@ export default class Home extends Component {
 
 
           </Carousel.Item>
+
+          <Carousel.Item>
+            <Visual1/>
+          </Carousel.Item>
+
+          <Carousel.Item>
+            <Visual3/>
+          </Carousel.Item>
+
         </Carousel>;
 
       </div>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import {Navbar, NavDropdown, Nav, Form, Button} from 'react-bootstrap'
 import {Link, withRouter} from 'react-router-dom'
 
@@ -82,6 +81,7 @@ class Navigation extends Component {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
               <Nav className="justify-content-end">
+
                   <Form.Control
                     id="searchbar"
                     type="text"

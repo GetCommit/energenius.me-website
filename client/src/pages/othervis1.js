@@ -151,8 +151,8 @@ export default class othervis1 extends Component {
 
       return (
           <div>
-
-              <div id="vis" style={{paddingLeft: '10rem'}}><p>Salary Bar Graph Colored by Education Level</p></div>
+              <h5 style={{padding:'2rem 25rem'}}>Salary Bar Graph Colored by Education Level</h5>
+              <div id="vis" style={{paddingLeft: '10rem'}}></div>
             </div>
 
       )

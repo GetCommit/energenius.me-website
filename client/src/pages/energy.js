@@ -4,6 +4,9 @@ import { CardMedia, Typography, CardContent, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import CssBaseline from "@material-ui/core/CssBaseline";
 
+
+
+
 import {Nav, Collapse, Fade} from 'react-bootstrap'
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
@@ -263,8 +266,8 @@ class Energy extends Component {
 
     render() {
         const { open1, open2, open3, isReversed} = this.state;
-        let btn_text = this.state.isReversed ? "Ascend" : "Descend"
-        let btn_class = this.state.isReversed ? "btn-warning" : "btn-success"
+        let btn_text = this.state.isReversed ? "DESC" : "ASC"
+        let btn_class = this.state.isReversed ? "btn-success" : "btn-warning"
         if (this.state.info === undefined) {
             return (<div>Loading</div>)
         }
@@ -285,9 +288,7 @@ class Energy extends Component {
               <CssBaseline />
 
               <main>
-
               {/* Hero unit */}
-
               <div class="row">
               <div class="col-md-10">
 
@@ -354,8 +355,9 @@ class Energy extends Component {
             </div>
             </div>
 
-            <aside class="col-md-2">
-
+            <aside class="col-md-2 black" style={{ paddingTop:'4rem', paddingRight: '3rem' }}>
+              <Card style={{ padding: '1rem' }}>
+                <div style = {{color: "grey"}}>
               {/* Local search */}
               <br></br>
               <Form  onSubmit={this.handleSubmit} noValidate inline className="justify-content-left col-xs-6" alignRight >
@@ -460,7 +462,8 @@ class Energy extends Component {
               </Form>
 
 
-
+              </div>
+              </Card>
             </aside>
             </div>
             </main>
