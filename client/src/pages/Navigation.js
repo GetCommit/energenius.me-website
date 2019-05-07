@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import {Navbar, NavDropdown, Nav, Form, Button} from 'react-bootstrap'
 import {Link, withRouter} from 'react-router-dom'
 
@@ -36,7 +37,7 @@ class Navigation extends Component {
 
   render(){
     return (
-        <Nav variant="pills"
+        <Nav variant="pills"  bg="#d9e6f2"
         defaultActiveKey="/" style={{ padding: "10px", backgroundColor: "#d9e6f2" }}>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
 
@@ -60,6 +61,7 @@ class Navigation extends Component {
                 <Nav.Link href="/country" eventKey="3">Country</Nav.Link>
                 </Link>
             </Nav.Item>
+
 
             <NavDropdown title="Visualization" id="basic-nav-dropdown">
               <NavDropdown.Item href="/carbonemission">Visual 1</NavDropdown.Item>
