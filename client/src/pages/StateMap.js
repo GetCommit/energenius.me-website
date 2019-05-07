@@ -107,7 +107,7 @@ class StateMap extends Component {
 
           p = states[d]
           sampleData[d]={parks: p,
-            color:d3.interpolate("white", "blue")(p/897)};
+            color:d3.interpolate("white", "black")(p/897)};
         }
 
       });
