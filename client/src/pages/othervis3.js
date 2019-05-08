@@ -319,7 +319,7 @@ const data = [
 				<div>
 					
 					<div id='container'>
-							<h5 style={{paddingTop:'1rem', paddingLeft:'30rem',color:'white'} }>Population Density</h5>
+							<h5 style={{paddingTop:'1rem', paddingLeft:'30rem',color:'white'} }></h5>
 							<svg id="bar-chart"></svg>
 					</div>
 				</div>
