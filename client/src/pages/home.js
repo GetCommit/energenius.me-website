@@ -154,14 +154,14 @@ export default class Home extends Component {
 
 
           </Carousel.Item>
-
+{/* 
           <Carousel.Item>
             <Visual1/>
           </Carousel.Item>
 
           <Carousel.Item>
             <Visual3/>
-          </Carousel.Item>
+          </Carousel.Item> */}
 
         </Carousel>;
 
