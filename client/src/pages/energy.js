@@ -176,7 +176,7 @@ class Energy extends Component {
 
     componentDidMount() {
       document.title = "Energy";
-      fetch('https://www.energenius.me/api/energy?name=all')
+      fetch('/api/energy?name=all')
           .then(response => response.json())
           .then(data => this.setState({info: data}));
     }
@@ -238,7 +238,7 @@ class Energy extends Component {
             api += checkedCountry.join("|");
         }
 
-        fetch("https://www.energenius.me/api/filter/energy?" + api)
+        fetch("/api/filter/energy?" + api)
             .then(response => response.json())
             .then(data => this.setState({info: data}));
     }

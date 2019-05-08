@@ -124,7 +124,7 @@ class Country extends Component {
 
     componentDidMount() {
       document.title = "Country";
-      fetch('https://www.energenius.me/api/country?name=all')
+      fetch('/api/country?name=all')
           .then(response => response.json())
           .then(data => this.setState({info: data}));
     }
@@ -186,7 +186,7 @@ class Country extends Component {
             api += checkedProd.join("|");
         }
 
-        fetch("https://www.energenius.me/api/filter/country?" + api)
+        fetch("/api/filter/country?" + api)
             .then(response => response.json())
             .then(data => this.setState({info: data}));
     }

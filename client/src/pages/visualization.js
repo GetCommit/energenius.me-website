@@ -26,12 +26,12 @@
 // 		}
 
 //     componentDidMount() {
-// 			fetch('https://www.energenius.me/api/production?name=all')
+// 			fetch('/api/production?name=all')
 // 					.then(response => response.json())
 // 					.then(data => this.setState({vis1: data}));
 
 
-// 			fetch('https://www.energenius.me/api/country?name=all')
+// 			fetch('/api/country?name=all')
 // 					.then(response => response.json())
 // 					.then(data => this.setState({vis2: data}));
 // 	}

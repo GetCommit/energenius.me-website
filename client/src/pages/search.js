@@ -62,7 +62,7 @@ export default class search extends Component {
         async componentDidMount (){
             document.title = this.img;
             fetch(
-                'https://www.energenius.me/api/energy?name=all'
+                '/api/energy?name=all'
             )
                 .then(response => response.json())
                 .then(data => {
@@ -128,7 +128,7 @@ export default class search extends Component {
 
 
             fetch(
-                'https://www.energenius.me/api/production?name=all'
+                '/api/production?name=all'
             )
                 .then(response => response.json())
                 .then(data => {
@@ -189,7 +189,7 @@ export default class search extends Component {
                 })
 
             fetch(
-                'https://www.energenius.me/api/country?name=all'
+                '/api/country?name=all'
             )
                 .then(response => response.json())
                 .then(data => {

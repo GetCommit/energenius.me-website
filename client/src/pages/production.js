@@ -125,7 +125,7 @@ class Production extends Component {
 
     componentDidMount() {
       document.title = "Production and Usage";
-      fetch('https://www.energenius.me/api/production?name=all')
+      fetch('/api/production?name=all')
           .then(response => response.json())
           .then(data => this.setState({info: data}));
     }
@@ -187,7 +187,7 @@ class Production extends Component {
             api += checkedUse.join("|");
         }
 
-        fetch("https://www.energenius.me/api/filter/production?" + api)
+        fetch("/api/filter/production?" + api)
             .then(response => response.json())
             .then(data => this.setState({info: data}));
     }

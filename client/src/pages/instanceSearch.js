@@ -57,7 +57,7 @@ export default class instanceSearch extends Component {
         componentDidMount (){
             document.title = this.img;
             fetch(
-                'https://www.energenius.me/api/'+this.id['type']+'?name=all'
+                '/api/'+this.id['type']+'?name=all'
                 )
                 .then(response => response.json())
                 .then(data => {

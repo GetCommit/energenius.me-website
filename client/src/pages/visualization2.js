@@ -17,7 +17,7 @@ export default class Visualization2 extends Component {
 
 
     componentDidMount() {
-        fetch('https://www.energenius.me/api/country?name=all')
+        fetch('/api/country?name=all')
             .then(response => response.json())
             .then(data => this.setState({vis2: data}));
 

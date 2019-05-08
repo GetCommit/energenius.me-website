@@ -14,7 +14,7 @@ class ProductionInstance extends Component {
         document.title = this.img;
 
         fetch(
-            'https://www.energenius.me/api/production?name=' + this.img
+            '/api/production?name=' + this.img
         )
             .then(response => response.json())
             .then(data => {
