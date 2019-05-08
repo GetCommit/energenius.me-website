@@ -14,7 +14,7 @@ class othervis2 extends Component {
    componentDidMount() {
 
       fetch(
-        'http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/cities'
+        'https://d1u00tbnbhznv0.cloudfront.net/api/cities'
         )
         .then(response => response.json())
         .then(data => {

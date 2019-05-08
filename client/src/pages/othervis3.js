@@ -19,7 +19,7 @@ class othervis3 extends Component {
 	}
 
     componentDidMount() {
-        fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/events')
+        fetch('https://d1u00tbnbhznv0.cloudfront.net/api/events')
             .then(response => response.json())
             .then(data => this.setState({vis: data}));
 

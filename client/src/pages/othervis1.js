@@ -18,7 +18,7 @@ export default class othervis1 extends Component {
 
 
     componentDidMount() {
-        fetch('http://perfectfitforme-env.bdibh8r7gh.us-east-2.elasticbeanstalk.com/api/jobs')
+        fetch('https://d1u00tbnbhznv0.cloudfront.net/api/jobs')
             .then(response => response.json())
             .then(data => this.setState({vis: data.Jobs}));
 

@@ -80,25 +80,6 @@ class Navigation extends Component {
 
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-              <Nav className="justify-content-end">
-
-                  <Form.Control
-                    id="searchbar"
-                    type="text"
-                    placeholder="Search"
-                    className="mr-sm-2"
-                    ref={ref => {
-                      this.searchParam = ref;
-                    }}
-                    onKeyPress={event => {
-                      if (event.key === "Enter") {
-                        this.globalSearch();
-                      }
-                    }}
-                  />
-              </Nav>
-              <Button variant="outline-primary" className="mt-2 mt-sm-0" onClick={()=>this.globalSearch()}>Global Search</Button>
-
 
 
 
